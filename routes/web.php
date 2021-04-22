@@ -27,6 +27,8 @@ use Illuminate\Support\Facades\Route;
             Route::get('users/team', 'UserController@team')->name('users.team');
             Route::resource('users','UserController');
 
+            Route::resource('companies','CompanyController');
+
         });
 
 

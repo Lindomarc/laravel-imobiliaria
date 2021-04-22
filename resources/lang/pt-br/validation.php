@@ -132,11 +132,11 @@ return [
 
     'values' => [
         'civil_status' => [
-            'married' => 'casado',
-            'separated' => 'separado',
-            'single' => 'solteiro',
-            'divorced' => 'divorciado',
-            'widower' => 'viúvo',
+            '1' => 'casado',
+            '2' => 'separado',
+            '3' => 'solteiro',
+            '4' => 'divorciado',
+            '5' => 'viúvo',
         ]
     ],
 
@@ -216,6 +216,13 @@ return [
         'spouse_occupation' => 'profissão do cônjuje',
         'spouse_income' => 'renda do cônjuje',
         'spouse_company_work' => 'empresa do cônjuje',
+
+        // Company
+        'user_id' => 'usuário',
+        'social_name' => 'razão social',
+        'alias_name' => 'nome fantasia',
+        'document_company' => 'CNPJ',
+        'document_company_secondary' => 'inscrição estatual'
     ]
 
 ];

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\User as UserRequest;
+use App\Http\Requests\Admin\UserRequest;
 use App\Illuminate\Http\Response;
+use App\Models\User;
 use App\Models\User as UserModel;
 use App\Support\Cropper;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -38,7 +40,6 @@ class UserController extends Controller
     public function index()
     {
         $users = UserModel::all();
-
         return view('admin.users.index', [
             'users' => $users,
         ]);
@@ -109,7 +110,6 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-
         $user = UserModel::where('id', $id)->first();
 
         return view('admin.users.edit', [

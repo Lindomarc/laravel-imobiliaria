@@ -78,6 +78,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+    public function companies()
+    {
+        return $this->hasMany(Company::class,'user_id','id');
+    }
+
     public function setLessorAttribute($value)
     {
         $this->attributes['lessor'] = ($value === true || $value === 'on' ) ? 1 : 0;

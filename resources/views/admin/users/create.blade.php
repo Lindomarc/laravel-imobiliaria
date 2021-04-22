@@ -20,15 +20,6 @@
 
     <div class="dash_content_app_box">
         <div class="nav">
-            @if ($errors->any())
-                @foreach($errors->all() as $message)
-                    <x-messages-error type="error" :message="$message" class="mt-4"/>
-                @endforeach
-            @endif
-
-            @if (session()->exists('message'))
-                <x-flash-message :message="session()->get('message')" class="mt-4"></x-flash-message>
-            @endif
             <ul class="nav_tabs">
                 <li class="nav_tabs_item">
                     <a href="#data" class="nav_tabs_item_link active">Dados Cadastrais</a>

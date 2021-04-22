@@ -42,10 +42,10 @@
             <li class="dash_sidebar_nav_item {{ isActive('admin.home') }}">
                 <a class="icon-tachometer" href="{{ route('admin.home') }}">Dashboard</a>
             </li>
-            <li class="dash_sidebar_nav_item {{ isActive('admin.users') }}"><a class="icon-users" href="{{ route('admin.users.index') }}">Clientes</a>
+            <li class="dash_sidebar_nav_item {{ isActive('admin.users') }}{{ isActive('admin.companies') }}"><a class="icon-users" href="{{ route('admin.users.index') }}">Clientes</a>
                 <ul class="dash_sidebar_nav_submenu">
                     <li class="{{ isActive('admin.users.index') }}"><a href="{{ route('admin.users.index') }}">Ver Todos</a></li>
-                    <li class=""><a href="dashboard.php?app=companies/index">Empresas</a></li>
+                    <li class="{{ isActive('admin.companies.index') }}"><a href="{{ route('admin.companies.index') }}">Empresas</a></li>
                     <li class="{{ isActive('admin.users.team') }}"><a href="{{ route('admin.users.team') }}">Time</a></li>
                     <li class="{{ isActive('admin.users.create') }}"><a href="{{ route('admin.users.create') }}">Criar Novo</a></li>
                 </ul>
@@ -83,6 +83,16 @@
                 </div>
             </div>
         </div>
+
+        @if ($errors->any())
+            @foreach($errors->all() as $message)
+                <x-messages-error type="error" :message="$message" class="mt-4"/>
+            @endforeach
+        @endif
+
+        @if (session()->exists('message'))
+            <x-flash-message :message="session()->get('message')" class="mt-4"></x-flash-message>
+        @endif
 
         <div class="dash_content_box">
 {{--            @include('flash-message')--}}
