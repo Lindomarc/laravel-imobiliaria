@@ -10,6 +10,8 @@
         use HasFactory;
 
         protected $fillable = [
+            'sale',
+            'rent',
             'user_id',
             'social_name',
             'alias_name',

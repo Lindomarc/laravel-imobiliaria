@@ -222,7 +222,20 @@ return [
         'social_name' => 'razão social',
         'alias_name' => 'nome fantasia',
         'document_company' => 'CNPJ',
-        'document_company_secondary' => 'inscrição estatual'
+        'document_company_secondary' => 'inscrição estatual',
+
+        // Property
+        'sale' => 'venda',
+        'sale_price' => 'valor de venda',
+        'tribute' => 'IPTU',
+        'condominium' => 'condomínio',
+        'bedrooms' => 'dormitórios',
+        'suites' => 'suítes',
+        'bathrooms' => 'banheiros',
+        'garage' => 'garagem',
+        'garage_covered' => 'garagem coberta',
+        'area_total' => 'área total',
+        'area_util' => 'área útil',
     ]
 
 ];

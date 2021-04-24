@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
 use App\Illuminate\Http\Response;
-use App\Models\User;
 use App\Models\User as UserModel;
 use App\Support\Cropper;
 use Illuminate\Http\Request;
@@ -112,10 +111,14 @@ class UserController extends Controller
     {
         $user = UserModel::where('id', $id)->first();
 
+        $property = new \App\Models\Property();
+
         return view('admin.users.edit', [
             'user' => $user,
             'list_type_of_communion' => $this->list_type_of_communion,
-            'list_civil_status' => $this->list_civil_status
+            'list_civil_status' => $this->list_civil_status,
+            'list_category' => $property->list_category,
+            'list_type' => $property->list_type,
         ]);
     }
 

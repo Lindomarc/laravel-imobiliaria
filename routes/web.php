@@ -24,10 +24,17 @@ use Illuminate\Support\Facades\Route;
             //** Dashboard Home */
             Route::get('home', 'AuthController@home')->name('home');
 
+            //** usuários */
             Route::get('users/team', 'UserController@team')->name('users.team');
             Route::resource('users','UserController');
 
+            /** Empresas */
             Route::resource('companies','CompanyController');
+
+            /** imóveis */
+            Route::post('properties/image-get-cover','PropertyController@imageSetCover')->name('properties.imageSetCover');
+            Route::delete('properties/image-remove','PropertyController@imageRemove')->name('properties.imageRemove');
+            Route::resource('properties','PropertyController');
 
         });
 

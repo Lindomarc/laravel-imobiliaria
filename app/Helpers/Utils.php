@@ -20,11 +20,10 @@
     if (!function_exists('fixDouble')) {
         function fixDouble($value, $type = 'us', $decimal = 2)
         {
-
             if (!!$value) {
                 if ($type == 'us') {
                     $valueReplace = str_replace('.', '', $value);
-                    $value = str_replace(',', '.', $valueReplace);
+                    $value = floatval(str_replace(',', '.', $valueReplace));
                 } else {
                     $value = number_format((float)$value, $decimal, ',', '.');
                 }
