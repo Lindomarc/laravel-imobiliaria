@@ -134,4 +134,48 @@
 
             return response()->json($json);
         }
+
+        public function getDataAcquirer(Request $request)
+        {
+            $lessee = UserModel::where('id', $request->id)->first([
+                'id',
+                'civil_status',
+                'spouse_name',
+                'spouse_document'
+            ]);
+
+            $spouse = [];
+            $companies = [];
+            $success = false;
+            if (!empty($lessee->civil_status)) {
+                $civilStatusSpouseRequired = [
+                    '1',// married
+                    '2' // separated
+                ];
+
+                if (in_array($lessee->civil_status, $civilStatusSpouseRequired)) {
+                    $spouse = [
+                        'spouse_name' => $lessee->spouse_name,
+                        'spouse_document' => $lessee->spouse_document
+                    ];
+                }
+
+                $companies = $lessee->companies()->get([
+                    'id',
+                    'alias_name',
+                    'document_company'
+                ]);
+                $success = true;
+
+            }
+
+
+            $json = [
+                'spouse' => $spouse,
+                'companies' => $companies,
+                'success' => $success
+            ];
+
+            return response()->json($json);
+        }
     }

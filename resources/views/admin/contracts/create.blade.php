@@ -59,10 +59,11 @@
                                                 @foreach($lessors->get() as $lessor)
                                                     <option value="{{ $lessor->id }}">{{ $lessor->name }} ({{ $lessor->document }})</option>
                                                 @endforeach
-                                            </select> </label>
+                                            </select>
+                                        </label>
 
                                         <label class="label"> <span class="legend">Conjuge Proprietário:</span>
-                                            <select class="select2" name="owner_spouse">
+                                            <select class="select2" name="owner_spouse_id">
                                                 <option value="" selected>Não informado</option>
                                             </select>
                                         </label>
@@ -83,7 +84,7 @@
                                 <div class="app_collapse_content">
                                     <div class="label_g2">
                                         <label class="label"> <span class="legend">Adquirente:</span>
-                                            <select name="acquirer" class="select2">
+                                            <select name="acquirer_id" class="select2" onchange="changeAcquirer(this)"  data-action="{{ route('admin.contracts.getDataAcquirer') }}">
                                                 <option value="" selected>Informe um Cliente</option>
                                                 @foreach($lessees->get() as $lessee)
                                                     <option value="{{ $lessee->id }}">{{ $lessee->name }} ({{ $lessee->document }})</option>
@@ -97,7 +98,7 @@
                                             </select> </label>
                                     </div>
 
-                                    <label class="label"> <span class="legend">Empresa:</span> <select name="acquirer_company" class="select2">
+                                    <label class="label"> <span class="legend">Empresa:</span> <select name="acquirer_company_id" class="select2">
                                             <option value="" selected>Não informado</option>
                                         </select> </label>
                                 </div>
@@ -218,7 +219,7 @@
             $.post(action,{id:owner_id},(response)=>{
 
                 /** Spouse     */
-                let owner_spouse = $('select[name="owner_spouse"]')
+                let owner_spouse = $('select[name="owner_spouse_id"]')
                 owner_spouse.html('')
                 if (!!response.spouse.spouse_name){
                     owner_spouse.append($('<option>',{
@@ -252,6 +253,57 @@
 
                 }else{
                     owner_company.append($('<option>',{
+                        value: '',
+                        text: 'Não informado'
+                    }))
+                }
+            },'json')
+        }
+
+
+        function changeAcquirer(element) {
+            let acquirer = $(element)
+            let acquirer_id = acquirer.val()
+            let action = acquirer.data('action')
+
+
+            $.post(action,{id:acquirer_id},(response)=>{
+
+                /** Spouse     */
+                let acquirer_spouse = $('select[name="acquirer_spouse_id"]')
+                acquirer_spouse.html('')
+                if (!!response.spouse.spouse_name){
+                    acquirer_spouse.append($('<option>',{
+                        value: 0,
+                        text: 'Não informar'
+                    }))
+                    acquirer_spouse.append($('<option>',{
+                        value: response.spouse.spouse_name,
+                        text: `${response.spouse.spouse_name} - (${response.spouse.spouse_document})`
+                    }))
+                }else{
+                    acquirer_spouse.append($('<option>',{
+                        value: 0,
+                        text: 'Não informado'
+                    }))
+                }
+                /** Companies     */
+                let acquirer_company = $('select[name="acquirer_company_id"]')
+                acquirer_company.html('')
+                if (!!response.companies.length){
+                    acquirer_company.append($('<option>',{
+                        value: 0,
+                        text: 'Não informar'
+                    }))
+                    $.each(response.companies, (key, company)=>{
+                        acquirer_company.append($('<option>',{
+                            value: company.id,
+                            text: `${company.alias_name} - (${company.document_company})`
+                        }))
+                    })
+
+                }else{
+                    acquirer_company.append($('<option>',{
                         value: '',
                         text: 'Não informado'
                     }))
