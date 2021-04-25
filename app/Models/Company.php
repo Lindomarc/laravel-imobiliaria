@@ -35,5 +35,9 @@
         {
             $this->attributes['document_company'] = onlyNumber($value);
         }
+        public function getDocumentCompanyAttribute($value)
+        {
+            return mask($value, '##.###.###/####-##');
+        }
 
     }

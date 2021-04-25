@@ -36,6 +36,10 @@ use Illuminate\Support\Facades\Route;
             Route::delete('properties/image-remove','PropertyController@imageRemove')->name('properties.imageRemove');
             Route::resource('properties','PropertyController');
 
+            /** Contratos */
+            Route::post('contracts/get-data-owner','ContractController@getDataOwner')->name('contracts.getDataOwner');
+            Route::resource('contracts','ContractController');
+
         });
 
 

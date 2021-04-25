@@ -80,8 +80,6 @@ class CompanyController extends Controller
         $item = CompanyModel::where('id',$id)->first();
         $users = UserModel::orderBy('name')->get();
 
-        $item->document_company = onlyNumber($item->document_company);
-
         return view('admin.companies.edit',[
             'item' => $item,
             'users' => $users

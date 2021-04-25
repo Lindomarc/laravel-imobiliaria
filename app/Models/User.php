@@ -104,6 +104,15 @@ class User extends Authenticatable
         return  $url_cover;
     }
 
+    public function scopeLessors($query)
+    {
+        return $query->where('lessor',true);
+    }
+    public function scopeLessees($query)
+    {
+        return $query->where('lessee',true);
+    }
+
     public function setLesseeAttribute($value)
     {
         $this->attributes['lessee'] = ($value === true || $value === 'on' ) ? 1 : 0;

@@ -296,7 +296,7 @@
                                                     <p><b>Razão Social:</b> {{ $company->social_name }}</p>
                                                     <p><b>Nome Fantasia:</b> {{ $company->alias_name }}</p>
                                                     <p>
-                                                        <b>CNPJ:</b> {{ mask($company->document_company,'##.###.###/####-##') }} -
+                                                        <b>CNPJ:</b> {{ $company->document_company }} -
                                                         <b>Inscrição Estadual:</b>{{ $company->document_company_secondary }}
                                                     </p>
                                                     <p>

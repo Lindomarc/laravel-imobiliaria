@@ -44,7 +44,7 @@
                                 <a href="{{ route('admin.companies.edit',$result->id) }}" class="text-orange">{{ $result->social_name }}</a>
                             </td>
                             <td>{{ $result->social_name }}</td>
-                            <td>{{ mask($result->document_company,'##.###.###/####-##') }}</td>
+                            <td>{{ $result->document_company }}</td>
                             <td>{{ $result->document_company_secondary }}</td>
                             <td>
                                 <a href="{{ route('admin.users.edit',$result->user_id) }}" class="text-orange">{{ $result->user()->first()['name']  }}</a>
