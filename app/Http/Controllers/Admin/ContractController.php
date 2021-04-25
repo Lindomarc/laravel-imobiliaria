@@ -3,7 +3,7 @@
     namespace App\Http\Controllers\Admin;
 
     use App\Http\Controllers\Controller;
-    use App\Models\User;
+    use App\Models\Property as PropertyModel;
     use App\Models\User as UserModel;
     use Illuminate\Http\Request;
 
@@ -100,8 +100,7 @@
                 'spouse_document'
             ]);
 
-            $spouse = [];
-            $companies = [];
+            $spouse = $companies = $properties = [];
             $success = false;
             if (!empty($lessor->civil_status)) {
                 $civilStatusSpouseRequired = [
@@ -121,14 +120,28 @@
                     'alias_name',
                     'document_company'
                 ]);
+
+                $getProperties = $lessor->properties()->get([
+                    'id', 'street', 'number', 'complement', 'neighborhood', 'city', 'state', 'zipcode'
+                ]);
+
+                foreach ($getProperties as $property) {
+                    $properties[] = [
+                        'id' => $property->id,
+                        'description' => "#{$property->id} {$property->street}, {$property->number}
+                        {$property->complement} - {$property->neighborhood} - {$property->city}/{$property->state}
+                        ({$property->zipcode})"
+                    ];
+                }
+
                 $success = true;
 
             }
 
-
             $json = [
                 'spouse' => $spouse,
                 'companies' => $companies,
+                'properties' => $properties,
                 'success' => $success
             ];
 
@@ -146,6 +159,7 @@
 
             $spouse = [];
             $companies = [];
+            $properties = [];
             $success = false;
             if (!empty($lessee->civil_status)) {
                 $civilStatusSpouseRequired = [
@@ -176,6 +190,28 @@
                 'success' => $success
             ];
 
+            return response()->json($json);
+        }
+
+        public function getDataProperty(Request $request)
+        {
+            $property = PropertyModel::where('id', $request->id)->first([
+                'id',
+                'sale_price',
+                'rent_price',
+                'tribute',
+                'condominium'
+            ]);
+            $success = false;
+
+            if ($property) {
+                $success = true;
+            }
+
+            $json = [
+                'property' => $property,
+                'success' => $success
+            ];
             return response()->json($json);
         }
     }

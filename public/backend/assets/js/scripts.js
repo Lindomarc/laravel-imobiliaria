@@ -201,6 +201,33 @@ $(function () {
             changeCivilStatus()
         })
     }
+
+    // ENABLE INPUT CHECKBOX PRICE
+    if ($('input[type="checkbox"][name="sale"]').val() !== undefined){
+        let inputSalePrice = $('input[name="sale_price"]')
+        let checkboxSale =$('input[type="checkbox"][name="sale"]')
+        let testCheckboxSale = ()=>{
+            inputSalePrice.prop('disabled',!checkboxSale[0].checked)
+        }
+        checkboxSale.change(()=>{
+            testCheckboxSale()
+        })
+        testCheckboxSale()
+    }
+
+    // ENABLE INPUT CHECKBOX RENT
+    if ($('input[type="checkbox"][name="rent"]').val() !== undefined){
+        let inputRentPrice = $('input[name="rent_price"]')
+        let checkboxRent =$('input[type="checkbox"][name="rent"]')
+        let testCheckboxRent = ()=>{
+            inputRentPrice.prop('disabled',!checkboxRent[0].checked)
+        }
+        checkboxRent.change(()=>{
+            testCheckboxRent()
+        })
+        testCheckboxRent()
+    }
+
 });
 
 // TINYMCE INIT

@@ -124,17 +124,33 @@
         {
             $this->attributes['sale_price'] = fixDouble($value);
         }
+        public function getSalePriceAttribute($value)
+        {
+            return fixDouble($value,'br');
+        }
         public function setRentPriceAttribute($value)
         {
             $this->attributes['rent_price'] = fixDouble($value);
+        }
+        public function getRentPriceAttribute($value)
+        {
+            return fixDouble($value,'br');
         }
         public function setTributeAttribute($value)
         {
             $this->attributes['tribute'] = fixDouble($value);
         }
+        public function getTributeAttribute($value)
+        {
+            return fixDouble($value,'br');
+        }
         public function setCondominiumAttribute($value)
         {
             $this->attributes['condominium'] = fixDouble($value);
+        }
+        public function getCondominiumAttribute($value)
+        {
+            return fixDouble($value,'br');
         }
         public function setAirConditioningAttribute($value)
         {

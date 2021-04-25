@@ -195,7 +195,6 @@
 
                     $defaultImageProperty = PropertiesImage::where('property_id', $currentImageProperty->property_id)->first();
                     if ($defaultImageProperty) {
-
                         $defaultImageProperty->cover = true;
                         $defaultImageProperty->save();
                     }

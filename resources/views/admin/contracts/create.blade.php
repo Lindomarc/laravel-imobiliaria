@@ -111,7 +111,8 @@
                                 </div>
 
                                 <div class="app_collapse_content">
-                                    <label class="label"> <span class="legend">Imóvel:</span> <select name="property" class="select2">
+                                    <label class="label"> <span class="legend">Imóvel:</span>
+                                        <select name="property_id" class="select2" onchange="changeProperty(this)" data-action="{{ route('admin.contracts.getDataProperty') }}">
                                             <option value="">Não informado</option>
                                         </select> </label>
 
@@ -215,14 +216,14 @@
             let owner_id = owner.val()
             let action = owner.data('action')
 
+            zeroPrices()
 
-            $.post(action,{id:owner_id},(response)=>{
-
+            $.post(action, {id: owner_id}, (response) => {
                 /** Spouse     */
                 let owner_spouse = $('select[name="owner_spouse_id"]')
                 owner_spouse.html('')
-                if (!!response.spouse.spouse_name){
-                    owner_spouse.append($('<option>',{
+                if (!!response.spouse.spouse_name) {
+                    owner_spouse.append($('<option>', {
                         value: 0,
                         text: 'Não informar'
                     }))
@@ -251,13 +252,36 @@
                         }))
                     })
 
-                }else{
-                    owner_company.append($('<option>',{
+                } else {
+                    owner_company.append($('<option>', {
                         value: '',
                         text: 'Não informado'
                     }))
                 }
-            },'json')
+
+                /** Properties     */
+                let select_property = $('select[name="property_id"]')
+                select_property.html('')
+
+                if (!!response.properties.length) {
+                    select_property.append($('<option>', {
+                        value: 0,
+                        text: 'Não informar'
+                    }))
+                    $.each(response.properties, (key, property) => {
+                        select_property.append($('<option>', {
+                            value: property.id,
+                            text: `${property.description})`
+                        }))
+                    })
+
+                } else {
+                    select_property.append($('<option>', {
+                        value: '',
+                        text: 'Não informado'
+                    }))
+                }
+            }, 'json')
         }
 
 
@@ -266,8 +290,7 @@
             let acquirer_id = acquirer.val()
             let action = acquirer.data('action')
 
-
-            $.post(action,{id:acquirer_id},(response)=>{
+            $.post(action, {id: acquirer_id}, (response) => {
 
                 /** Spouse     */
                 let acquirer_spouse = $('select[name="acquirer_spouse_id"]')
@@ -302,13 +325,44 @@
                         }))
                     })
 
-                }else{
-                    acquirer_company.append($('<option>',{
+                } else {
+                    acquirer_company.append($('<option>', {
                         value: '',
                         text: 'Não informado'
                     }))
                 }
-            },'json')
+            }, 'json')
+        }
+
+        function zeroPrices() {
+            $('input[name="sale_price"]').val('R$ 0,00')
+            $('input[name="rent_price"]').val('R$ 0,00')
+            $('input[name="tribute"]').val('R$ 0,00')
+            $('input[name="condominium"]').val('R$ 0,00')
+        }
+
+        function changeProperty(element) {
+            let property = $(element)
+            let property_id = property.val()
+            let action = property.data('action')
+
+            zeroPrices()
+
+            $.post(action, {id: property_id}, (response) => {
+
+                if (!!response.success) {
+
+                    let sale_price = $('input[name="sale_price"]')
+                    let rent_price = $('input[name="rent_price"]')
+                    let tribute = $('input[name="tribute"]')
+                    let condominium = $('input[name="condominium"]')
+
+                    sale_price.val(`R$ ${response.property.sale_price}`)
+                    rent_price.val(`R$ ${response.property.rent_price}`)
+                    tribute.val(`R$ ${response.property.tribute}`)
+                    condominium.val(`R$ ${response.property.condominium}`)
+                }
+            }, 'json')
         }
     </script>
 @endsection
