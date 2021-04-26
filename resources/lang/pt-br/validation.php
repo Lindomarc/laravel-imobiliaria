@@ -236,6 +236,12 @@ return [
         'garage_covered' => 'garagem coberta',
         'area_total' => 'área total',
         'area_util' => 'área útil',
+
+        // Contract
+        'owner_id' => 'proprietário',
+        'acquirer_id' => 'adquirente',
+        'property_id' => 'imóvel',
+        'start_at' => 'data de início'
     ]
 
 ];

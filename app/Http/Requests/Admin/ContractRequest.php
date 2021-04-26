@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ContractRequest extends FormRequest
 {
@@ -25,12 +26,12 @@ class ContractRequest extends FormRequest
     {
         return [
             'owner_id' => 'required',
-            'acquirer' => 'required|different:owner_id',
-            'sale_price' => 'required_if:sale:on',
-            'rent_price' => 'required_if:rent:on',
-            'property' => 'required|integer',
+            'acquirer_id' => 'required|different:owner_id',
+            'sale_price' => 'required_if:sale,on',
+            'rent_price' => 'required_if:rent,on',
+            'property_id' => 'required|integer',
             'due_date' => 'required|integer|min:1|max:28',
-            'deadine' => 'required|integer|min:12|max:48',
+            'deadline' => 'required|integer|min:12|max:48',
             'start_at' => 'required'
         ];
     }

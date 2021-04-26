@@ -3,12 +3,53 @@
     namespace App\Http\Controllers\Admin;
 
     use App\Http\Controllers\Controller;
+    use App\Http\Requests\Admin\ContractRequest;
+    use App\Models\Contract as ContractModel;
     use App\Models\Property as PropertyModel;
     use App\Models\User as UserModel;
     use Illuminate\Http\Request;
 
     class ContractController extends Controller
     {
+
+        public $listDueDate = [
+            1 => '1º',
+            2 => '2/mês',
+            3 => '3/mês',
+            4 => '4/mês',
+            5 => '5/mês',
+            6 => '6/mês',
+            7 => '7/mês',
+            8 => '8/mês',
+            9 => '9/mês',
+            10 => '10/mês',
+            11 => '11/mês',
+            12 => '12/mês',
+            13 => '13/mês',
+            14 => '14/mês',
+            15 => '15/mês',
+            16 => '16/mês',
+            17 => '17/mês',
+            18 => '18/mês',
+            19 => '19/mês',
+            20 => '20/mês',
+            21 => '21/mês',
+            22 => '22/mês',
+            23 => '23/mês',
+            24 => '24/mês',
+            25 => '25/mês',
+            26 => '26/mês',
+            27 => '27/mês',
+            28 => '28/mês',
+        ];
+
+        public $listDeadline = [
+            12 => '12 meses',
+            24 => '24 meses',
+            36 => '36 meses',
+            46 => '48 meses',
+        ];
+
         /**
          * Display a listing of the resource.
          *
@@ -18,6 +59,7 @@
         {
             return view('admin.contracts.index');
         }
+
 
         /**
          * Show the form for creating a new resource.
@@ -31,7 +73,9 @@
 
             return view('admin.contracts.create', [
                 'lessors' => $lessors,
-                'lessees' => $lessees
+                'lessees' => $lessees,
+                'list_due_date' => $this->listDueDate,
+                'list_deadline' => $this->listDeadline
             ]);
         }
 
@@ -41,9 +85,9 @@
          * @param \Illuminate\Http\Request $request
          * @return \Illuminate\Http\Response
          */
-        public function store(Request $request)
+        public function store(ContractRequest $request)
         {
-            //
+            dd($request->all());
         }
 
         /**

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use mysql_xdevapi\Session;
 
 class Contract extends Model
 {
@@ -11,13 +12,13 @@ class Contract extends Model
     protected $fillable = [
         'sale',
         'rent',
-        'owner',
+        'owner_id',
         'owner_spouse',
-        'owner_company',
-        'acquirer',
-        'acquirer_spouse',
-        'acquirer_company',
-        'property',
+        'owner_company_id',
+        'acquirer_id',
+        'acquirer_spouse_id',
+        'acquirer_company_id',
+        'property_id',
         'sale_price',
         'rent_price',
         'price',
