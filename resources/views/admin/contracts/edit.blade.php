@@ -36,18 +36,25 @@
 
                 <div class="nav_tabs_content">
                     <div id="parts">
-                        <form action="{{ route('admin.contracts.store') }}" method="post" class="app_form">
+                        <form action="{{ route('admin.contracts.update',$contract->id) }}" method="post" class="app_form">
                             @csrf
-                            <input type="hidden" name="owner_spouse_persist" value="{{ old('owner_spouse') }}">
-                            <input type="hidden" name="owner_company_id_persist" value="{{ old('owner_company_id') }}">
-                            <input type="hidden" name="acquirer_spouse_persist" value="{{ old('acquirer_spouse') }}">
-                            <input type="hidden" name="acquirer_company_id_persist" value="{{ old('acquirer_company_id') }}">
-                            <input type="hidden" name="property_id_persist" value="{{ old('property_id') }}">
+                            @method('put')
+                            <input type="hidden" name="owner_spouse_persist" value="{{ old('owner_spouse')??$contract->owner_spouse }}">
+                            <input type="hidden" name="owner_company_id_persist" value="{{ old('owner_company_id')??$contract->owner_company_id }}">
+                            <input type="hidden" name="acquirer_spouse_persist" value="{{ old('acquirer_spouse')??$contract->acquirer_spouse }}">
+                            <input type="hidden" name="acquirer_company_id_persist" value="{{ old('acquirer_company_id')??$contract->acquirer_company_id }}">
+                            <input type="hidden" name="property_id_persist" value="{{ old('property_id')??$contract->property_id }}">
+
+                            <input type="hidden" name="sale_price_persist" value="{{ old('sale_price')??$contract->sale_price }}">
+                            <input type="hidden" name="rent_price_persist" value="{{ old('rent_price')??$contract->rent_price }}">
+                            <input type="hidden" name="tribute_persist" value="{{ old('tribute')??$contract->tribute }}">
+                            <input type="hidden" name="condominium_persist" value="{{ old('condominium')??$contract->condominium_price }}">
+
                             <div class="label_gc">
                                 <span class="legend">Finalidade:</span> <label class="label">
-                                    <input type="checkbox" name="sale" {{ (old('sale'))?'checked':'' }}><span>Venda</span>
+                                    <input type="checkbox" name="sale" {{ (old('sale'))?'checked':($contract->sale?'checked':'') }}><span>Venda</span>
                                 </label> <label class="label">
-                                    <input type="checkbox" name="rent" {{ (old('rent'))?'checked':'' }}><span>Locação</span>
+                                    <input type="checkbox" name="rent" {{ (old('rent'))?'checked':($contract->rent?'checked':'') }}><span>Locação</span>
                                 </label>
                             </div>
 
@@ -63,19 +70,21 @@
                                             <select class="select2" name="owner_id" onchange="changeOwner()" data-action="{{ route('admin.contracts.getDataOwner') }}">
                                                 <option value="">Informe um Cliente</option>
                                                 @foreach($lessors->get() as $lessor)
-                                                    <option value="{{ $lessor->id }}" {{ (old('owner_id')== $lessor->id)?'selected':'' }}>{{ $lessor->name }} ({{ $lessor->document }})</option>
+                                                    <option value="{{ $lessor->id }}" {{ (old('owner_id') == $lessor->id)?'selected':($contract->owner_id == $lessor->id?'selected':'')}}>{{ $lessor->name }} ({{ $lessor->document }})</option>
                                                 @endforeach
-                                            </select> </label>
+                                            </select>
+                                        </label>
 
                                         <label class="label"> <span class="legend">Conjuge Proprietário:</span>
                                             <select class="select2" name="owner_spouse">
-                                                <option value="" selected>Não informado</option>
-                                            </select> </label>
+                                                <option value="0" selected>Não informado</option>
+                                            </select>
+                                        </label>
                                     </div>
 
                                     <label class="label"> <span class="legend">Empresa:</span>
                                         <select class="select2" name="owner_company_id">
-                                            <option value="" selected>Não informado</option>
+                                            <option value="0" selected>Não informado</option>
                                         </select> </label>
                                 </div>
                             </div>
@@ -94,7 +103,7 @@
                                                 <option value="0" selected>Informe um Cliente</option>
                                                 @foreach($lessees->get() as $lessee)
                                                     <option
-                                                        value="{{ $lessee->id }}" {{ (old('acquirer_id')== $lessee->id)?'selected':'' }}>{{ $lessee->name }} ({{ $lessee->document }})</option>
+                                                        value="{{ $lessee->id }}" {{ (old('acquirer_id')== $lessee->id)?'selected':($contract->acquirer_id==$lessee->id?'selected':'') }}>{{ $lessee->name }} ({{ $lessee->document }})</option>
                                                 @endforeach
                                             </select>
                                         </label>
@@ -128,21 +137,21 @@
 
                                     <div class="label_g2">
                                         <label class="label"> <span class="legend">Valor de Venda:</span>
-                                            <input type="tel" name="sale_price" class="mask-money" placeholder="Valor de Venda" value="{{ old('sale_price') }}" disabled/>
+                                            <input type="tel" name="sale_price" class="mask-money" placeholder="Valor de Venda" value="{{ old('sale_price')??$contract->sale_price }}" disabled/>
                                         </label>
 
                                         <label class="label"> <span class="legend">Valor de Locação:</span>
-                                            <input type="text" name="rent_price" class="mask-money" placeholder="Valor de Locação" value="{{ old('rent_price') }}" disabled/>
+                                            <input type="text" name="rent_price" class="mask-money" placeholder="Valor de Locação" value="{{ old('rent_price')??$contract->rent_price }}" disabled/>
                                         </label>
                                     </div>
 
                                     <div class="label_g2">
                                         <label class="label"> <span class="legend">IPTU:</span>
-                                            <input type="text" name="tribute" class="mask-money" placeholder="IPTU" value="{{ old('tribute') }}"/>
+                                            <input type="text" name="tribute" class="mask-money" placeholder="IPTU" value="{{ old('tribute')??$contract->tribute }}"/>
                                         </label>
 
                                         <label class="label"> <span class="legend">Condomínio:</span>
-                                            <input type="text" name="condominium" class="mask-money" placeholder="Valor do Condomínio" value="{{ old('condominium') }}"/>
+                                            <input type="text" name="condominium" class="mask-money" placeholder="Valor do Condomínio" value="{{ old('condominium')??$contract->condominium}}"/>
                                         </label>
                                     </div>
 
@@ -152,19 +161,20 @@
 
                                             <select name="due_date" class="select2">
                                                 @foreach($list_due_date as $key => $value)
-                                                    <option value="{{ $key }}" {{ old('due_date')==$key?'selected':'' }}>{{ $value }}</option>
+                                                    <option value="{{ $key }}" {{ old('due_date')==$key?'selected':($contract->due_date==$key?'selected':'') }}>{{ $value }}</option>
                                                 @endforeach
                                             </select> </label> <label class="label">
                                             <span class="legend">Prazo do Contrato (Em meses)</span>
+
                                             <select name="dateline" class="select2">
                                                 @foreach($list_dateline as $key => $value)
-                                                    <option value="{{ $key }}" {{ old('dateline')==$key?'selected':'' }}>{{ $value }}</option>
+                                                    <option value="{{ $key }}" {{  old('dateline') == $key ?'selected': ($contract->dateline==$key ?'selected':'') }}>{{ $value }}</option>
                                                 @endforeach
                                             </select> </label>
                                     </div>
 
                                     <label class="label"> <span class="legend">Data de Início:</span>
-                                        <input type="tel" name="start_at" class="mask-date" placeholder="Data de Início" value="{{ old('start_at') }}"/>
+                                        <input type="tel" name="start_at" class="mask-date" placeholder="Data de Início" value="{{ old('start_at') ?? $contract->start_at }}"/>
                                     </label>
                                 </div>
                             </div>
@@ -213,7 +223,7 @@
                 owner_spouse.append($('<option>', {
                     value: 1,
                     text: `${response.spouse.spouse_name} - (${response.spouse.spouse_document})`,
-                    selected: ($('input[name="owner_spouse_persist"]').val() == 1 ? 'selected' : false)
+                    selected: ($('input[name="owner_spouse_persist"]').val() == 1  ? 'selected' : false)
                 }))
             } else {
                 owner_spouse.append($('<option>', {
@@ -334,7 +344,6 @@
                 setFieldAcquirer(response)
             }, 'json')
 
-
         }
 
         function setFieldProperty(response) {
@@ -344,16 +353,21 @@
             let tribute = $('input[name="tribute"]')
             let condominium = $('input[name="condominium"]')
 
+            let sale_price_persist = $('input[name="sale_price_persist"]').val()
+            let rent_price_persist = $('input[name="rent_price_persist"]').val()
+            let tribute_persist = $('input[name="tribute_persist"]').val()
+            let condominium_persist = $('input[name="condominium_persist"]').val()
+
             sale_price.val('0,00')
             rent_price.val('0,00')
             tribute.val('0,00')
             condominium.val('0,00')
 
             if (!!response.success) {
-                sale_price.val(response.property.sale_price)
-                rent_price.val(response.property.rent_price)
-                tribute.val(response.property.tribute)
-                condominium.val(response.property.condominium)
+                sale_price.val(sale_price_persist ? sale_price_persist : response.property.sale_price)
+                rent_price.val(rent_price_persist ? rent_price_persist : response.property.rent_price)
+                tribute.val(tribute_persist ? tribute_persist : response.property.tribute)
+                condominium.val(condominium_persist ? condominium_persist : response.property.condominium)
             }
         }
 

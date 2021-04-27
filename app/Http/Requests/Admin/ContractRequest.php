@@ -31,8 +31,8 @@ class ContractRequest extends FormRequest
             'rent_price' => 'required_if:rent,on',
             'property_id' => 'required|integer',
             'due_date' => 'required|integer|min:1|max:28',
-            'deadline' => 'required|integer|min:12|max:48',
-            'start_at' => 'required'
+            'dateline' => 'required|integer|min:12|max:48',
+            'start_at' => 'required|date_format:d/m/Y'
         ];
     }
 }

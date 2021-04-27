@@ -15,14 +15,14 @@ class CreateContractsTable extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->increments('id');
-            $table->boolean('sale');
-            $table->boolean('rent');
-            $table->unsignedInteger('owner_id');
-            $table->boolean('owner_spouse')->nullable();
-            $table->unsignedInteger('owner_company_id')->nullable();
-            $table->unsignedInteger('acquirer_id');
-            $table->boolean('acquirer_spouse')->nullable();
-            $table->unsignedInteger('acquirer_company_id')->nullable();
+            $table->boolean('sale')->default(false);
+            $table->boolean('rent')->default(false);
+            $table->unsignedBigInteger('owner_id');
+            $table->boolean('owner_spouse')->default(false);
+            $table->unsignedBigInteger('owner_company_id')->nullable();
+            $table->unsignedBigInteger('acquirer_id');
+            $table->boolean('acquirer_spouse')->default(false);
+            $table->unsignedBigInteger('acquirer_company_id')->nullable();
             $table->unsignedInteger('property_id');
             $table->double('price');
             $table->double('tribute');
@@ -37,6 +37,8 @@ class CreateContractsTable extends Migration
             $table->foreign('acquirer_company_id')->references('id')->on('companies')->onDelete('CASCADE');
             $table->foreign('property_id')->references('id')->on('properties')->onDelete('CASCADE');
         });
+        Schema::enableForeignKeyConstraints();
+
     }
 
     /**
@@ -46,6 +48,9 @@ class CreateContractsTable extends Migration
      */
     public function down()
     {
+
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('contracts');
+        Schema::enableForeignKeyConstraints();
     }
 }

@@ -205,10 +205,15 @@ $(function () {
     // ENABLE INPUT CHECKBOX PRICE
     if ($('input[type="checkbox"][name="sale"]').val() !== undefined){
         let inputSalePrice = $('input[name="sale_price"]')
-        let checkboxSale =$('input[type="checkbox"][name="sale"]')
+        let checkboxSale = $('input[type="checkbox"][name="sale"]')
+        let checkboxRent =$('input[type="checkbox"][name="rent"]')
+
         let testCheckboxSale = ()=>{
             inputSalePrice.prop('disabled',!checkboxSale[0].checked)
+            $('input[name="rent_price"]').prop('disabled',checkboxSale[0].checked)
+            checkboxRent.prop('checked',!checkboxSale[0].checked)
         }
+
         checkboxSale.change(()=>{
             testCheckboxSale()
         })
@@ -219,8 +224,13 @@ $(function () {
     if ($('input[type="checkbox"][name="rent"]').val() !== undefined){
         let inputRentPrice = $('input[name="rent_price"]')
         let checkboxRent =$('input[type="checkbox"][name="rent"]')
+        let checkboxSale = $('input[type="checkbox"][name="sale"]')
+
         let testCheckboxRent = ()=>{
             inputRentPrice.prop('disabled',!checkboxRent[0].checked)
+            $('input[name="sale_price"]').prop('disabled',checkboxRent[0].checked)
+
+            checkboxSale.prop('checked',!checkboxRent[0].checked);
         }
         checkboxRent.change(()=>{
             testCheckboxRent()

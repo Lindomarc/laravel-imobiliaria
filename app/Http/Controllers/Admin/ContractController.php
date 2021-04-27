@@ -43,11 +43,11 @@
             28 => '28/mês',
         ];
 
-        public $listDeadline = [
+        public $listDateline = [
             12 => '12 meses',
             24 => '24 meses',
             36 => '36 meses',
-            46 => '48 meses',
+            48 => '48 meses',
         ];
 
         /**
@@ -75,7 +75,7 @@
                 'lessors' => $lessors,
                 'lessees' => $lessees,
                 'list_due_date' => $this->listDueDate,
-                'list_deadline' => $this->listDeadline
+                'list_dateline' => $this->listDateline
             ]);
         }
 
@@ -87,7 +87,16 @@
          */
         public function store(ContractRequest $request)
         {
-            dd($request->all());
+            $contract = ContractModel::create($request->all());
+
+            return redirect()->route('admin.contracts.edit', [
+                'contract' => $contract->id
+            ])->with(
+                [
+                    'color' => 'green',
+                    'message' => 'Saved successfully'
+                ]
+            );
         }
 
         /**
@@ -109,7 +118,18 @@
          */
         public function edit($id)
         {
-            return view('admin.contracts.edit');
+            $contract = ContractModel::where('id', $id)->first();
+
+            $lessors = UserModel::lessors();
+            $lessees = UserModel::lessees();
+
+            return view('admin.contracts.edit', [
+                'contract' => $contract,
+                'lessors' => $lessors,
+                'lessees' => $lessees,
+                'list_due_date' => $this->listDueDate,
+                'list_dateline' => $this->listDateline
+            ]);
         }
 
         /**
@@ -119,9 +139,27 @@
          * @param int $id
          * @return \Illuminate\Http\Response
          */
-        public function update(Request $request, $id)
+        public function update(ContractRequest $request,  $id)
         {
-            //
+
+            $contract = ContractModel::where('id', $id)->first();
+            $contract->fill($request->all());
+            if ($contract->save()) {
+                $with = [
+                    'color' => 'green',
+                    'message' => 'Saved'
+                ];
+            } else {
+                $with = [
+                    'color' => 'orange',
+                    'message' => 'Not saved'
+                ];
+            }
+
+            return redirect()->route('admin.contracts.edit', [
+                'contract' => $contract->id
+            ])->with($with);
+
         }
 
         /**
