@@ -42,7 +42,8 @@
             <li class="dash_sidebar_nav_item {{ isActive('admin.home') }}">
                 <a class="icon-tachometer" href="{{ route('admin.home') }}">Dashboard</a>
             </li>
-            <li class="dash_sidebar_nav_item {{ isActive('admin.users') }}{{ isActive('admin.companies') }}"><a class="icon-users" href="{{ route('admin.users.index') }}">Clientes</a>
+            <li class="dash_sidebar_nav_item {{ isActive('admin.users') }}{{ isActive('admin.companies') }}">
+                <a class="icon-users" href="{{ route('admin.users.index') }}">Clientes</a>
                 <ul class="dash_sidebar_nav_submenu">
                     <li class="{{ isActive('admin.users.index') }}"><a href="{{ route('admin.users.index') }}">Ver Todos</a></li>
                     <li class="{{ isActive('admin.companies.index') }}"><a href="{{ route('admin.companies.index') }}">Empresas</a></li>
@@ -50,13 +51,15 @@
                     <li class="{{ isActive('admin.users.create') }}"><a href="{{ route('admin.users.create') }}">Criar Novo</a></li>
                 </ul>
             </li>
-            <li class="dash_sidebar_nav_item" {{ isActive('admin.properties') }}><a class="icon-home" href="{{ route('admin.properties.index') }}">Imóveis</a>
+            <li class="dash_sidebar_nav_item {{ isActive('admin.properties') }}" >
+                <a class="icon-home" href="{{ route('admin.properties.index') }}">Imóveis</a>
                 <ul class="dash_sidebar_nav_submenu">
                     <li class="{{ isActive('admin.properties.index') }}"><a href="{{ route('admin.properties.index') }}">Ver Todos</a></li>
                     <li class="{{ isActive('admin.properties.create') }}"><a href="{{ route('admin.properties.create') }}">Criar Novo</a></li>
                 </ul>
             </li>
-            <li class="dash_sidebar_nav_item" {{ isActive('admin.contracts') }}><a class="icon-file-text" href="{{ route('admin.contracts.index') }}">Contratos</a>
+            <li class="dash_sidebar_nav_item {{ isActive('admin.contracts') }}" >
+                <a class="icon-file-text" href="{{ route('admin.contracts.index') }}">Contratos</a>
                 <ul class="dash_sidebar_nav_submenu">
                     <li class="{{ isActive('admin.contracts.index') }}"><a href="{{ route('admin.contracts.index') }}">Ver Todos</a></li>
                     <li class="{{ isActive('admin.contracts.create') }}"><a href="{{ route('admin.contracts.create') }}">Criar Novo</a></li>

@@ -57,7 +57,10 @@
          */
         public function index()
         {
-            return view('admin.contracts.index');
+            $contracts = ContractModel::with(['owner','acquirer'])->orderBy('id','DESC')->get();
+            return view('admin.contracts.index',[
+                'contracts' => $contracts
+            ]);
         }
 
 
@@ -296,4 +299,5 @@
             ];
             return response()->json($json);
         }
+
     }

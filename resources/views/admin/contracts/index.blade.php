@@ -22,24 +22,42 @@
         @include('admin.contracts.filter')
         <div class="dash_content_app_box">
             <div class="dash_content_app_box_stage">
-                <table id="dataTable" class="nowrap hover stripe"  style="width: 100% !important;">
+                <table id="dataTable" class="nowrap hover stripe" style="width: 100% !important;">
                     <thead>
                     <tr>
+                        <th>#</th>
                         <th>Locador</th>
                         <th>Locatário</th>
                         <th>Negócio</th>
                         <th>Início</th>
                         <th>Vigência</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><a href="" class="text-orange">Robson V. Leite</a></td>
-                        <td><a href="" class="text-orange">Gustavo Web</a></td>
-                        <td>Locação</td>
-                        <td>{{ date('d/m/Y') }}</td>
-                        <td>12 meses</td>
-                    </tr>
+                    @foreach($contracts as $contract)
+                        <tr>
+                            <td>
+                                <a href="{{ route('admin.contracts.edit', $contract->id) }}" class="text-orange">{{ $contract->id }}</a>
+                            </td>
+                            <td>
+                                <a href="{{ route('admin.users.edit',$contract->owner->id ) }}" class="text-orange" target="_blank">
+                                {{ $contract->owner->name }}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ route('admin.users.edit',$contract->acquirer->id ) }}" class="text-orange" target="_blank">
+                                {{ $contract->acquirer->name }}
+                                </a>
+                            </td>
+                            <td>{{ $contract->sale?'Venda':'Locação' }}</td>
+                            <td>{{ $contract->start_at }}</td>
+                            <td>{{ $contract->dateline }}</td>
+                            <td>
+                                <a href="{{ route('admin.contracts.edit', $contract->id) }}" class="btn btn-small btn-green">Editar</a>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

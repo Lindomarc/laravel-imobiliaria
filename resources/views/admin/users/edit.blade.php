@@ -287,8 +287,6 @@
                                 <div class="app_collapse_content">
 
                                     <div class="companies_list">
-
-
                                         @if (!!$user->companies()->get())
                                             @foreach($user->companies()->get() as $company)
 
