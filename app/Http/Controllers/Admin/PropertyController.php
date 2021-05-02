@@ -11,6 +11,7 @@
     use App\Support\Cropper;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Storage;
+    use Illuminate\Support\Facades\Validator;
     use Illuminate\Support\Str;
 
     class PropertyController extends Controller
@@ -23,12 +24,20 @@
          */
         public function index()
         {
-            $property = new PropertyModel();
-            $properties = $property->orderBy('id', 'DESC')->get();
+            $propertyModel = new PropertyModel();
+            $properties = $propertyModel->orderBy('id', 'DESC')->get();
+
+            $list_type_simple = [];
+            foreach ($propertyModel->list_type as $types){
+                foreach ($types as $key => $type) {
+                    $list_type_simple[$key] = $type;
+                }
+            }
             return view('admin.properties.index', [
                 'properties' => $properties,
-                'list_category' => $property->list_category,
-                'list_type' => $property->list_type,
+                'list_category' => $propertyModel->list_category,
+                'list_type' => $propertyModel->list_type,
+                'list_type_simple' => $list_type_simple
             ]);
         }
 
@@ -110,6 +119,8 @@
             $property = PropertyModel::where('id', $id)->first();
             $property->setSaleAttribute($request->sale);
             $property->setRentAttribute($request->rent);
+            $property->setTypeAttribute($request->type);
+            $property->setCategoryAttribute($request->category);
             $property->setAirConditioningAttribute($request->air_conditioning);
             $property->setBarAttribute($request->bar);
             $property->setLibraryAttribute($request->library);
@@ -126,9 +137,18 @@
             $property->setPoolAttribute($request->pool);
             $property->setSteamRoomAttribute($request->steam_room);
             $property->setViewOfTheSeaAttribute($request->view_of_the_sea);
+            $property->setStatusAttribute($request->status);
             $property->fill($request->all());
             $property->save();
 
+            $validator = Validator::make($request->only('files'), ['files.*' => 'image']);
+
+            if (!!$validator->fails()) {
+                return redirect()->back()->withInput()->with([
+                    'color' => 'orange',
+                    'message' => 'Todas as imagens devem ser dos tipos: jpg, jpeg ou png'
+                ]);
+            }
             if ($request->allFiles()) {
                 foreach ($request->allFiles()['files'] as $file) {
                     $propertyImage = new PropertiesImage();

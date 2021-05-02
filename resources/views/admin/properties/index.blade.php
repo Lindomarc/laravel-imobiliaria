@@ -32,13 +32,17 @@
                                 <div class="realty_list_item_actions_stats">
                                     <img src="{{ $item->default_cover }}" alt="">
                                     <ul>
-                                        <li>Venda: R$ {{ fixDouble($item->sale_price,'br') }}</li>
-                                        <li>Aluguel: R$ {{ fixDouble($item->rent_price,'br') }}</li>
+                                        @if (!!$item->sale && !!$item->sale_price)
+                                            <li>Venda: R$ {{ $item->sale_price }}</li>
+                                        @endif
+                                        @if (!!$item->rent && !!$item->rent_price)
+                                            <li>Aluguel: R$ {{$item->rent_price }}</li>
+                                        @endif
+
                                     </ul>
                                 </div>
-
                                 <div class="realty_list_item_content">
-                                    <h4>{{ $list_category[$item->category] }} - {{ $list_category[$item->type] }}</h4>
+                                    <h4>{{ $list_category[$item->category] }} - {{ $list_type_simple[$item->type] }}</h4>
 
                                     <div class="realty_list_item_card">
                                         <div class="realty_list_item_card_image">

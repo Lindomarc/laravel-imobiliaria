@@ -28,13 +28,22 @@
 
 <div class="ajax_response"></div>
 
+@php
+    $userName = \Illuminate\Support\Facades\Auth::user()->name;
+    if (\Illuminate\Support\Facades\File::exists(public_path('/storage/'.\Illuminate\Support\Facades\Auth::user()->cover))) {
+        $cover = '/storage/'.\Illuminate\Support\Facades\Auth::user()->cover;
+    } else {
+        $cover = '/backend/assets/images/avatar.jpg';
+    }
+@endphp
+
 <div class="dash">
     <aside class="dash_sidebar">
         <article class="dash_sidebar_user">
-            <img class="dash_sidebar_user_thumb" src="{{ url(mix('backend/assets/images/avatar.jpg')) }}" alt="" title=""/>
+            <img class="dash_sidebar_user_thumb" src="{{ url($cover) }}" alt="" title=""/>
 
             <h1 class="dash_sidebar_user_name">
-                <a href="">Gustavo Web</a>
+                <a href="">{{ $userName }}</a>
             </h1>
         </article>
 

@@ -111,14 +111,19 @@ class UserController extends Controller
     {
         $user = UserModel::where('id', $id)->first();
 
-        $property = new \App\Models\Property();
-
+        $propertyModel = new \App\Models\Property();
+        $list_type_simple = [];
+        foreach ($propertyModel->list_type as $types){
+            foreach ($types as $key => $type) {
+                $list_type_simple[$key] = $type;
+            }
+        }
         return view('admin.users.edit', [
             'user' => $user,
             'list_type_of_communion' => $this->list_type_of_communion,
             'list_civil_status' => $this->list_civil_status,
-            'list_category' => $property->list_category,
-            'list_type' => $property->list_type,
+            'list_category' => $propertyModel->list_category,
+            'list_type_simple' => $list_type_simple,
         ]);
     }
 

@@ -52,7 +52,8 @@
             'furnished',
             'pool',
             'steam_room',
-            'view_of_the_sea'
+            'view_of_the_sea',
+            'status'
         ];
 
         public $list_category = [
@@ -104,6 +105,15 @@
             return $value;
         }
 
+        public function scopeAvailable($query)
+        {
+            return $query->where('status',true);
+        }
+        public function scopeUnavailable($query)
+        {
+            return $query->where('status',false);
+        }
+
         public function setSaleAttribute($value)
         {
             $this->attributes['sale'] = (!!$value) ? 1 : 0;
@@ -114,11 +124,15 @@
         }
         public function setTypeAttribute($value)
         {
-            $this->attributes['type'] =  (!!$value) ? 1 : 0;
+            $this->attributes['type'] =  $value;
+        }
+        public function getTypeAttribute($value)
+        {
+            return $value;
         }
         public function setCategoryAttribute($value)
         {
-            $this->attributes['category'] =  (!!$value) ? 1 : 0;
+            $this->attributes['category'] =  $value;
         }
         public function setSalePriceAttribute($value)
         {
@@ -215,5 +229,13 @@
         public function setEdiculeAttribute($value)
         {
             $this->attributes['edicule'] = (!!$value) ? 1 : 0;
+        }
+        public function setStatusAttribute($value)
+        {
+            $this->attributes['status'] = !!$value;
+        }
+        public function getStatusAttribute($value)
+        {
+            return !!$value;
         }
     }

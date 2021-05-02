@@ -47,7 +47,7 @@
                             <td>{{ $result->document_company }}</td>
                             <td>{{ $result->document_company_secondary }}</td>
                             <td>
-                                <a href="{{ route('admin.users.edit',$result->user_id) }}" class="text-orange">{{ $result->user()->first()['name']  }}</a>
+                                <a href="{{ route('admin.users.edit',$result->user_id) }}" class="text-orange">{{ $result->owner->id }}</a>
                             </td>
                         </tr>
                     @endforeach

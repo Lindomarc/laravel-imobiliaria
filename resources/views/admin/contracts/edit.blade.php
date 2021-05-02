@@ -58,6 +58,14 @@
                                 </label>
                             </div>
 
+                            <label class="label"> <span class="legend">Status do Contrato</span>
+                                <select name="status" class="select2">
+                                    <option value="pending" {{ old('status')=='pending'?'selected':($contract->status=='pending'?'selected':'') }}>Pendente</option>
+                                    <option value="active" {{ old('status')=='active'?'selected':($contract->status=='active'?'selected':'') }}>Ativo</option>
+                                    <option value="canceled" {{ old('status')=='canceled'?'selected':($contract->status=='canceled'?'selected':'') }}>Cancelado</option>
+                                </select>
+                            </label>
+
                             <div class="app_collapse">
                                 <div class="app_collapse_header mt-2 collapse">
                                     <h3>Proprietário</h3>
@@ -72,19 +80,17 @@
                                                 @foreach($lessors->get() as $lessor)
                                                     <option value="{{ $lessor->id }}" {{ (old('owner_id') == $lessor->id)?'selected':($contract->owner_id == $lessor->id?'selected':'')}}>{{ $lessor->name }} ({{ $lessor->document }})</option>
                                                 @endforeach
-                                            </select>
-                                        </label>
+                                            </select> </label>
 
                                         <label class="label"> <span class="legend">Conjuge Proprietário:</span>
                                             <select class="select2" name="owner_spouse">
-                                                <option value="0" selected>Não informado</option>
-                                            </select>
-                                        </label>
+                                                <option value="" selected>Não informado</option>
+                                            </select> </label>
                                     </div>
 
                                     <label class="label"> <span class="legend">Empresa:</span>
                                         <select class="select2" name="owner_company_id">
-                                            <option value="0" selected>Não informado</option>
+                                            <option value="" selected>Não informado</option>
                                         </select> </label>
                                 </div>
                             </div>
@@ -98,28 +104,23 @@
                                 <div class="app_collapse_content">
                                     <div class="label_g2">
                                         <label class="label"> <span class="legend">Adquirente:</span>
-                                            <select name="acquirer_id" class="select2" onchange="changeAcquirer()"
-                                                data-action="{{ route('admin.contracts.getDataAcquirer') }}">
-                                                <option value="0" selected>Informe um Cliente</option>
+                                            <select name="acquirer_id" class="select2" onchange="changeAcquirer()" data-action="{{ route('admin.contracts.getDataAcquirer') }}">
+                                                <option value="" selected>Informe um Cliente</option>
                                                 @foreach($lessees->get() as $lessee)
-                                                    <option
-                                                        value="{{ $lessee->id }}" {{ (old('acquirer_id')== $lessee->id)?'selected':($contract->acquirer_id==$lessee->id?'selected':'') }}>{{ $lessee->name }} ({{ $lessee->document }})</option>
+                                                    <option value="{{ $lessee->id }}" {{ (old('acquirer_id')== $lessee->id)?'selected':($contract->acquirer_id==$lessee->id?'selected':'') }}>{{ $lessee->name }} ({{ $lessee->document }})</option>
                                                 @endforeach
-                                            </select>
-                                        </label>
+                                            </select> </label>
 
                                         <label class="label"> <span class="legend">Conjuge Adquirente:</span>
                                             <select class="select2" name="acquirer_spouse">
                                                 <option value="" selected>Não informado</option>
-                                            </select>
-                                        </label>
+                                            </select> </label>
                                     </div>
 
                                     <label class="label"> <span class="legend">Empresa:</span>
                                         <select name="acquirer_company_id" class="select2">
                                             <option value="" selected>Não informado</option>
-                                        </select>
-                                    </label>
+                                        </select> </label>
                                 </div>
                             </div>
 
@@ -225,7 +226,7 @@
                 owner_spouse.append($('<option>', {
                     value: 1,
                     text: `${response.spouse.spouse_name} - (${response.spouse.spouse_document})`,
-                    selected: ($('input[name="owner_spouse_persist"]').val() == 1  ? 'selected' : false)
+                    selected: ($('input[name="owner_spouse_persist"]').val() == 1 ? 'selected' : false)
                 }))
             } else {
                 owner_spouse.append($('<option>', {

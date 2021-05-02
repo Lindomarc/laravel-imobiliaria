@@ -44,11 +44,20 @@
                     <div class="nav_tabs_content">
                         <div id="data">
                             <div class="label_gc">
-                                <span class="legend">Finalidade:</span> <label class="label">
+                                <span class="legend">Finalidade:</span>
+                                <label class="label">
                                     <input type="checkbox" name="sale" {{ (!!old('sale'))?'checked':($property->sale?'checked':'') }}>
-                                    <span>Venda</span> </label> <label class="label">
+                                    <span>Venda</span>
+                                </label>
+                                <label class="label">
                                     <input type="checkbox" name="rent" {{ (!!old('rent'))?'checked': ($property->rent?'checked':'') }}>
-                                    <span>Locação</span> </label>
+                                    <span>Locação</span>
+                                </label>
+
+                                <label class="label">
+                                    <input type="checkbox" name="status" {{ (!!old('status'))?'checked': ($property->status?'checked':'') }}>
+                                    <span>Disponível</span>
+                                </label>
                             </div>
                             <div class="label_g2">
                                 <label class="label"> <span class="legend">Categoria:</span>
@@ -76,7 +85,8 @@
                                     @foreach($users as $user)
                                         <option value="{{ $user->id }}" {{ old('user_id') == $user->id?'selected': ($property->user_id == $user->id ? 'selected' : '') }}>{{ $user->name }} ({{ $user->document }})</option>
                                     @endforeach
-                                </select> </label>
+                                </select>
+                            </label>
 
                             <div class="app_collapse">
                                 <div class="app_collapse_header mt-2 collapse">

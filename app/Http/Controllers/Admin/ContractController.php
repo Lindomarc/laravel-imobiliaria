@@ -144,10 +144,15 @@
          */
         public function update(ContractRequest $request,  $id)
         {
-
             $contract = ContractModel::where('id', $id)->first();
             $contract->fill($request->all());
             if ($contract->save()) {
+                if (!!$contract->property_id) {
+                    $propertyModel = PropertyModel::where('id',$request->property_id)->first();
+                    $propertyModel->status = ($request->status === 'active');
+                    $propertyModel->save();
+                }
+
                 $with = [
                     'color' => 'green',
                     'message' => 'Saved'

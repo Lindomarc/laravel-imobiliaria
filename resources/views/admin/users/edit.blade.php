@@ -341,7 +341,7 @@
                                                     </div>
 
                                                     <div class="realty_list_item_content">
-                                                        <h4>{{ $list_category[$item->category] }} - {{ $list_category[$item->type] }}</h4>
+                                                        <h4>{{ $list_category[$item->category] }} - {{ $list_type_simple[$item->type] }}</h4>
 
                                                         <div class="realty_list_item_card">
                                                             <div class="realty_list_item_card_image">

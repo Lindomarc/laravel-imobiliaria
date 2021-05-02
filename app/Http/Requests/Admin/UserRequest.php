@@ -47,6 +47,7 @@ class UserRequest extends FormRequest
             'document_secondary_complement' => 'required',
             'date_of_birth' => 'required',
             'place_of_birth' => 'required',
+            'cover' => 'image',
 
             'civil_status' => 'required|in:1,2,3,4,5',
 

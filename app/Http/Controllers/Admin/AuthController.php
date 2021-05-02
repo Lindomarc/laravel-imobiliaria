@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User as UserModel;
+use App\Models\Property as PropertyModel;
+use App\Models\Contract as ContractModel;
 
 class AuthController extends Controller
 {
@@ -19,7 +22,51 @@ class AuthController extends Controller
 
     public function home()
     {
-        return view('admin.dashboard');
+        $lessors = UserModel::lessors()->count();
+        $lessees = UserModel::lessees()->count();
+        $team = UserModel::where('admin',1)->count();
+
+        $propertiesAvailable = PropertyModel::available()->count();
+        $propertiesUnavailable = PropertyModel::unavailable()->count();
+        $propertiesTotal = PropertyModel::all()->count();
+
+        $contractsPending = ContractModel::pendent()->count();
+        $contractsActive = ContractModel::active()->count();
+        $contractsCanceled = ContractModel::canceled()->count();
+        $contractsLeased = ContractModel::leased()->count();
+
+        $contractsTotal = ContractModel::all()->count();
+
+        $contracts = ContractModel::orderBy('id','desc')->limit(10)->get();
+        $properties = PropertyModel::orderBy('id','desc')->limit(10)->get();
+        $propertyModel = new PropertyModel();
+        $list_category = $propertyModel->list_category;
+        $list_type_simple = [];
+        foreach ($propertyModel->list_type as $types){
+            foreach ($types as $key => $type) {
+                $list_type_simple[$key] = $type;
+            }
+        }
+
+        return view('admin.dashboard',[
+            'lessors' => $lessors,
+            'lessees' => $lessees,
+            'team' => $team,
+
+            'propertyAvailable' => $propertiesAvailable,
+            'propertyUnavailable' => $propertiesUnavailable,
+            'propertyTotal' => $propertiesTotal,
+
+            'contractsPending' => $contractsPending,
+            'contractsActive' => $contractsActive,
+            'contractsCanceled' => $contractsCanceled,
+            'contractsLeased' => $contractsLeased,
+            'contractsTotal' => $contractsTotal,
+            'contracts' => $contracts,
+            'properties' => $properties,
+            'list_category' => $list_category,
+            'list_type_simple' => $list_type_simple
+        ]);
     }
 
     public function login(Request $request)

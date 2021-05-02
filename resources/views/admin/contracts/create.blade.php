@@ -50,6 +50,13 @@
                                     <input type="checkbox" name="rent" {{ (old('rent'))?'checked':'' }}><span>Locação</span>
                                 </label>
                             </div>
+                            <label class="label"> <span class="legend">Status do Contrato</span>
+                                <select name="status" class="select2">
+                                    <option value="pending" {{ old('status')=='pending'?'selected':'' }}>Pendente</option>
+                                    <option value="active" {{ old('status')=='active'?'selected':'' }}>Ativo</option>
+                                    <option value="canceled" {{ old('status')=='canceled'?'selected':'' }}>Cancelado</option>
+                                </select>
+                            </label>
 
                             <div class="app_collapse">
                                 <div class="app_collapse_header mt-2 collapse">

@@ -51,6 +51,10 @@
                                     <input type="checkbox" name="rent" {{ (!!old('rent'))?'checked':'' }}>
                                     <span>Locação</span>
                                 </label>
+                                <label class="label">
+                                    <input type="checkbox" name="status" {{ (!!old('status'))?'checked': '' }}>
+                                    <span>Disponível</span>
+                                </label>
                             </div>
                             <div class="label_g2">
                                 <label class="label">
@@ -167,7 +171,7 @@
                                 <div class="app_collapse_content d-none">
                                     <div class="label_g2">
                                         <label class="label"> <span class="legend">CEP:</span>
-                                            <input type="text" name="zipcode" class="zip_code_search" placeholder="Digite o CEP" value="{{ old('zip_code_search') }}"/>
+                                            <input type="text" name="zipcode" class="zip_code_search" placeholder="Digite o CEP" value="{{ old('zipcode') }}"/>
                                         </label>
                                     </div>
 
