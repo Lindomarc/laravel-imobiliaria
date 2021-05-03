@@ -42,6 +42,30 @@ mix
 
     .copyDirectory('resources/views/admin/assets/images','public/backend/assets/images')
 
+
+    /**
+     *  web
+     */
+    .sass('resources/views/web/assets/scss/bootstrap_custom.scss', 'public/assets/css/bootstrap_custom.css')
+    .sass('resources/views/web/assets/scss/app.scss', 'public/assets/css/app.css')
+
+    .scripts([
+        'node_modules/jquery/dist/jquery.min.js'
+    ],'public/assets/js/jquery.min.js')
+
+    .scripts([
+        'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'
+    ],'public/assets/js/bootstrap.bundle.min.js')
+
+    .scripts([
+        'node_modules/bootstrap-select/dist/js/bootstrap-select.min.js',
+        'node_modules/bootstrap-select/dist/js/i18n/defaults-pt_BR.min.js'
+    ],'public/assets/js/bootstrap-select-defaults-pt_BR.min.js')
+
+    .copyDirectory('resources/views/web/assets/images','public/assets/images')
+    .copyDirectory('resources/views/web/assets/css/fonts','public/assets/css/fonts')
+
+
     .options({
         processCssUrls: false
     })

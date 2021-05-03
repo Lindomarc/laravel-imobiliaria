@@ -13,6 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+    Route::group([
+        'namespace' => 'Web', 'as' => 'web.'
+    ],function (){
+        // Home Page
+        Route::get('/', 'WebController@home')->name('home');
+        Route::get('/quero-alugar', 'WebController@rent')->name('rent');
+        Route::get('/quero-alugar/{slug}', 'WebController@rentProperty')->name('rentProperty');
+        Route::get('/quero-comprar', 'WebController@buy')->name('buy');
+        Route::get('/quero-comprar/{slug}', 'WebController@buyProperty')->name('buyProperty');
+        Route::get('/filtro', 'WebController@filter')->name('filter');
+        Route::get('/contato', 'WebController@contact')->name('contact');
+    });
+
     Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function () {
 
         /** Formulário de Login*/

@@ -1,4 +1,6 @@
 {
+    "/assets/css/app.css": "/assets/css/app.css?id=acb86985e9c05b700db7",
+    "/assets/css/bootstrap_custom.css": "/assets/css/bootstrap_custom.css?id=484bac168cb1ae2e407b",
     "/backend/assets/css/style.css": "/backend/assets/css/style.css?id=ece6a863495d41db8717",
     "/backend/assets/css/login.css": "/backend/assets/css/login.css?id=f3d59518a164f9dccc5e",
     "/backend/assets/css/boot.css": "/backend/assets/css/boot.css?id=1ef6aa1ee573b85176c2",
@@ -26,5 +28,16 @@
     "/backend/assets/images/sort_asc_disabled.png": "/backend/assets/images/sort_asc_disabled.png?id=dde02cb2db0bb7d0ea3d",
     "/backend/assets/images/sort_both.png": "/backend/assets/images/sort_both.png?id=bc49bc0e8d14db8eea8c",
     "/backend/assets/images/sort_desc.png": "/backend/assets/images/sort_desc.png?id=05c21435c466423cffa5",
-    "/backend/assets/images/sort_desc_disabled.png": "/backend/assets/images/sort_desc_disabled.png?id=05e94135bbbe0f7028e7"
+    "/backend/assets/images/sort_desc_disabled.png": "/backend/assets/images/sort_desc_disabled.png?id=05e94135bbbe0f7028e7",
+    "/assets/js/jquery.min.js": "/assets/js/jquery.min.js?id=8fb8fee4fcc3cc86ff6c",
+    "/assets/js/bootstrap.bundle.min.js": "/assets/js/bootstrap.bundle.min.js?id=f81d0a1705048649befc",
+    "/assets/js/bootstrap-select-defaults-pt_BR.min.js": "/assets/js/bootstrap-select-defaults-pt_BR.min.js?id=26188d7d3b2ad40637f8",
+    "/assets/images/favicon.png": "/assets/images/favicon.png?id=73b5d9195fb6e720d16c",
+    "/assets/images/footer.png": "/assets/images/footer.png?id=ed4069f918a789ef4528",
+    "/assets/images/front1.jpg": "/assets/images/front1.jpg?id=1a08ac2f5044c36e82e6",
+    "/assets/images/logo.png": "/assets/images/logo.png?id=ab0169e7da1bf9bde3c3",
+    "/assets/css/fonts/upadmin.eot": "/assets/css/fonts/upadmin.eot?id=617e80ca572dad0d4945",
+    "/assets/css/fonts/upadmin.svg": "/assets/css/fonts/upadmin.svg?id=c9ade46ba8ea8c45d06e",
+    "/assets/css/fonts/upadmin.ttf": "/assets/css/fonts/upadmin.ttf?id=68ee2c98472a00c771e7",
+    "/assets/css/fonts/upadmin.woff": "/assets/css/fonts/upadmin.woff?id=ac00790af767408dff6b"
 }

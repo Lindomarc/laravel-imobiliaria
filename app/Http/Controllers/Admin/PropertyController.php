@@ -67,7 +67,7 @@
         {
 
             $property = PropertyModel::create($request->all());
-
+            $property->setSlug();
             return redirect()->route('admin.properties.edit', [
                 'property' => $property->id
             ])->with([
@@ -140,6 +140,8 @@
             $property->setStatusAttribute($request->status);
             $property->fill($request->all());
             $property->save();
+
+            $property->setSlug();
 
             $validator = Validator::make($request->only('files'), ['files.*' => 'image']);
 

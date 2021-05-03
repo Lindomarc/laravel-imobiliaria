@@ -6,6 +6,8 @@
     use Illuminate\Database\Eloquent\Factories\HasFactory;
     use Illuminate\Database\Eloquent\Model;
     use Illuminate\Support\Facades\Storage;
+    use Illuminate\Support\Str;
+    use phpDocumentor\Reflection\Types\Object_;
 
     class Property extends Model
     {
@@ -53,7 +55,11 @@
             'pool',
             'steam_room',
             'view_of_the_sea',
-            'status'
+            'status',
+            'title',
+            'slug',
+            'headline',
+            'experience'
         ];
 
         public $list_category = [
@@ -82,14 +88,14 @@
 
         public function images()
         {
-            return $this->hasMany(PropertiesImage::class,'property_id','id')
-                ->orderBy('cover','desc');
+            return $this->hasMany(PropertiesImage::class, 'property_id', 'id')
+                ->orderBy('cover', 'desc');
         }
 
 
         public function getDefaultCoverAttribute($value)
         {
-            $image = $this->images()->where('cover',1)->first();
+            $image = $this->images()->where('cover', 1)->first();
             if(!!$image){
                 $value = Storage::url(Cropper::thumb($image->path,1366,768)); ;
             } else {
@@ -97,31 +103,61 @@
             }
             return $value;
         }
+
+        public function getCoversAttribute()
+        {
+            $images = $this->images()->get();
+
+            foreach ($images as $key => $image){
+                 $covers[$key] = new \stdClass();
+                 $covers[$key]->url = Storage::url(Cropper::thumb($image->path,1366,768));
+                 $covers[$key]->cover = $image->cover;
+            }
+//            $value = url('backend/assets/images/realty.jpeg');
+            return $covers;
+
+        }
+
         public function getCoverAttribute($value)
         {
             if(isset($this->images()->get()[0]['path'])){
                 $value = Storage::url(Cropper::thumb($this->images()->get()[0]['path'],1366,768)); ;
+            }else {
+                $value = 'backend/assets/images/realty.jpeg';
             }
             return $value;
         }
 
         public function scopeAvailable($query)
         {
-            return $query->where('status',true);
+            return $query->where('status', true);
         }
+
         public function scopeUnavailable($query)
         {
-            return $query->where('status',false);
+            return $query->where('status', false);
+        }
+
+        public function scopeRent($query)
+        {
+            return $query->where('rent', true);
+        }
+
+        public function scopeSale($query)
+        {
+            return $query->where('sale', true);
         }
 
         public function setSaleAttribute($value)
         {
             $this->attributes['sale'] = (!!$value) ? 1 : 0;
         }
+
         public function setRentAttribute($value)
         {
             $this->attributes['rent'] = (!!$value) ? 1 : 0;
         }
+
         public function setTypeAttribute($value)
         {
             $this->attributes['type'] =  $value;
@@ -230,12 +266,33 @@
         {
             $this->attributes['edicule'] = (!!$value) ? 1 : 0;
         }
+
         public function setStatusAttribute($value)
         {
             $this->attributes['status'] = !!$value;
         }
+
         public function getStatusAttribute($value)
         {
             return !!$value;
+        }
+
+        public function setSlug()
+        {
+            if (!!$this->title) {
+                $this->attributes['slug'] = Str::slug($this->title) . '-' . $this->id;
+                $this->save();
+            }
+        }
+
+        public function getTypeTextAttribute($value){
+            foreach ($this->list_type as $types){
+                foreach ($types as $key => $type) {
+                    if ($this->type == $key) {
+                        return $type;
+                    }
+                }
+            }
+            return  '';
         }
     }
