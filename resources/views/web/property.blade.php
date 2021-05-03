@@ -176,7 +176,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Sua mensagem</label>
-                                    <textarea name="" id="" rows="5" class="form-control">Quero ter mais informações sobre esse imóvel, Residencial, Casa, Campeche,Florianópolis! (#01)</textarea>
+                                    <textarea name="" id="" rows="5" class="form-control">Quero ter mais informações sobre esse imóvel, {{ $property->title }}, {{ $property->type_text }},{{ $property->city }}/{{ $property->state }}! (#{{ $property->id }})</textarea>
                                 </div>
                                 <div class="form-group">
                                     <button class="btn btn-front btn-block form-control">Enviar</button>
