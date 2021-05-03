@@ -1,0 +1,12 @@
+@import "variables";
+
+$theme-colors: (
+  'front':$color-front-default
+);
+
+@import "../../../../../node_modules/bootstrap/scss/bootstrap";
+
+
+b, strong {
+  font-weight: bold;
+}

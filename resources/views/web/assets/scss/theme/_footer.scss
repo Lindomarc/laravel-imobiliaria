@@ -1,0 +1,24 @@
+.main_footer {
+  h1 {
+    font-size: 1.4em;
+    border-bottom: 1px solid #ccc;
+    font-weight: bolder;
+  }
+
+  ul {
+    padding-left: 0;
+    li {
+      list-style: none;
+      margin-bottom: 4px;
+      a {
+        color: #665
+      }
+    }
+  }
+  
+}
+.main_copyright{
+  p{
+    font-size: 0.775em;
+  }
+}

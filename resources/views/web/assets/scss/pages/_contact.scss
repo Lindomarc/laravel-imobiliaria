@@ -1,0 +1,24 @@
+.main_contact{
+  form{
+    max-width: calc( 100% - 40px);
+    width: 600px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+
+    h2{
+      font-size: 1.2em;
+    }
+    textarea{
+      height: 150px;
+    }
+  }
+}
+.main_contact_type{
+  h2{
+    font-size: 1.4em;
+  }
+  p{
+    font-size: 0.875em;
+  }
+}
