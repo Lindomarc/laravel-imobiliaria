@@ -82,7 +82,7 @@
     </article>
 </section>
 
-<section class="main_footer bg-light" style="background: url('assets/images/footer.png') repeat-x bottom center; background-size: 10%">
+<section class="main_footer bg-light" style="background: url('{{ asset('assets/images/footer.png') }}') repeat-x bottom center; background-size: 10%">
     <div class="container  pt-5" style="padding-bottom: 120px">
         <div class="row justify-content-around text-muted">
             <div class="col-12 col-sm-6 col-md-3 col-lg-3 ">
