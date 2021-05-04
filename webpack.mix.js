@@ -62,6 +62,10 @@ mix
         'node_modules/bootstrap-select/dist/js/i18n/defaults-pt_BR.min.js'
     ],'public/assets/js/bootstrap-select-defaults-pt_BR.min.js')
 
+    .scripts([
+        'resources/views/web/assets/js/script.js'
+    ],'public/assets/js/script.js')
+
     .copyDirectory('resources/views/web/assets/images','public/assets/images')
     .copyDirectory('resources/views/web/assets/css/fonts','public/assets/css/fonts')
 

@@ -26,6 +26,12 @@ use Illuminate\Support\Facades\Route;
         Route::get('/contato', 'WebController@contact')->name('contact');
     });
 
+    Route::group(['prefix' => 'component','namespace' => 'Web', 'as' => 'component.'],function (){
+
+        Route::post('main-filter/search','FilterController@search')->name('main-filter.search');
+
+    });
+
     Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function () {
 
         /** Formulário de Login*/
