@@ -31,9 +31,9 @@ $(function () {
         let nextIndex = search.data('index') + 1;
 
         $.post(search.data('action'), {search: search.val()}, (response) => {
+
             if (response.status === 'success') {
                 let select = $(`select[data-index="${nextIndex}"`);
-
                 select.empty();
                 $.each(response.data, function (key, value) {
                     select.append($('<option>', {
@@ -43,9 +43,32 @@ $(function () {
                     );
                 });
 
+                $.each($('select[name*="filter_"]'),function (index, element) {
+                    if ($(element).data('index') >= (nextIndex + 1)){
+                        $(element).append($('<option>', {
+                                text: 'Selecione o filtro anterior',
+                                disabled: true
+                            })
+                        );
+                    }
+                })
+
                 $('.selectpicker').selectpicker('refresh')
             }
-        }, 'json');
+
+            if (response.status === 'fail') {
+                if ($(element).data('index') >= (nextIndex)){
+                    $(element).append($('<option>', {
+                            text: 'Selecione o filtro anterior',
+                            disabled: true
+                        })
+                    );
+                }
+                $('.selectpicker').selectpicker('refresh')
+
+            }
+
+            }, 'json');
     });
 
 });
