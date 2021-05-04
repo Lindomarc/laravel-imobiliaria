@@ -38,7 +38,7 @@
                                 <span class="sr-only">Next</span> </a>
                         </div>
                         <div class="main_property_content_price text-muted">
-                            <p class="small">IPTU: R$ {{ $property->tribute??'0,00'  }} | Condominio: R$ {{ $property->condominium??'0,00' }}</p>
+                            <p class="small">IPTU: R$ {{ $property->tribute??'0,00'  }} | Condomínio: R$ {{ $property->condominium??'0,00' }}</p>
                             <p class="text-muted font-weight-bold">Valor do imóvel: R$ {{ $property->sale_price  }}</p>
                         </div>
                         <div class="main_property_content_description">
@@ -154,7 +154,7 @@
                         </div>
                         <div class="main_property_content_location py-5">
                             <h2 class="text-front font-weight-bold">Localização</h2>
-                            <img src="https://maps.googleapis.com/maps/api/staticmap?center={{ $property->street }},{{ $property->number }},{{ $property->city }},{{ $property->state }}&zoom=15&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:C%7C40.718217,-73.998284&key={{ getenv('GOOGLE_MAPS_API_KEY') }}">
+                            <img src="https://maps.googleapis.com/maps/api/staticmap?center={{ $property->street }},{{ $property->number }},{{ $property->city }},{{ $property->state }}&zoom=15&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:C%7C40.718217,-73.998284&key={{ getenv('GOOGLE_MAPS_API_KEY') }}" alt="google maps">
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
