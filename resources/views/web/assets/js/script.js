@@ -58,6 +58,7 @@ $(function () {
 
             if (response.status === 'fail') {
                 if ($(element).data('index') >= (nextIndex)){
+                    $(element).empty();
                     $(element).append($('<option>', {
                             text: 'Selecione o filtro anterior',
                             disabled: true
