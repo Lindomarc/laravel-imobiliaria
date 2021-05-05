@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group col-12 col-sm-6 col-lg-3">
                         <label for="category" class="mb-2"><b>O que você quer?</b></label>
-                        <select class="selectpicker" id="category" name="filter_category" title="Escolha..." data-index="2">
+                        <select class="selectpicker" id="category" name="filter_category" title="Escolha..." data-action="{{ route('component.main-filter.category') }}" data-index="2">
                             <option value="">Imóvel Residencial</option>
                             <option value="">Comercial/Industrial</option>
                             <option value="">Terreno</option>
@@ -35,12 +35,12 @@
 
                     <div class="form-group col-12 col-sm-6 mt-sm-2 mt col-lg-3 mt-lg-0">
                         <label for="type" class="mb-2 d-block"><b>Qual o tipo do imóvel?</b></label>
-                        <select class="selectpicker input-large" id="type" name="filter_type" multiple data-actions-box="true" data-index="3">
+                        <select class="selectpicker input-large" id="type" name="filter_type" multiple data-actions-box="true" data-action="{{ route('component.main-filter.type') }}" data-index="3">
                         </select>
                     </div>
                     <div class="form-group col-12 col-sm-6 mt-sm-2 col-lg-3 mt-lg-0">
                         <label for="search_locale" class="mb-2"><b>Onde você quer?</b></label>
-                        <select class="selectpicker" name="filter_neighborhood" id="neighborhood" title="Escolha..." multiple data-actions-box="true" data-index="4">
+                        <select class="selectpicker" name="filter_neighborhood" id="neighborhood" title="Escolha..." multiple data-actions-box="true" data-action="{{ route('component.main-filter.neighborhood') }}" data-index="4">
                         </select>
                     </div>
 
@@ -49,7 +49,7 @@
                         <div class="row">
                             <div class="form-group col-12 col-sm-6 mt-sm-2 col-lg-3 mt-lg-0">
                                 <label for="bedrooms" class="mb-2"><b>Quartos</b></label>
-                                <select class="selectpicker" name="filter_bedrooms" id="bedrooms" title="Escolha..." data-index="5">
+                                <select class="selectpicker" name="filter_bedrooms" id="bedrooms" title="Escolha..." data-action="{{ route('component.main-filter.bedrooms') }}" data-index="5">
                                     <option value="">1</option>
                                     <option value="">2</option>
                                     <option value="">3</option>

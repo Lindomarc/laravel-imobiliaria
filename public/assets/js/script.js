@@ -34,6 +34,7 @@ $(function () {
 
             if (response.status === 'success') {
                 let select = $(`select[data-index="${nextIndex}"`);
+
                 select.empty();
                 $.each(response.data, function (key, value) {
                     select.append($('<option>', {
@@ -57,16 +58,18 @@ $(function () {
             }
 
             if (response.status === 'fail') {
-                if ($(element).data('index') >= (nextIndex)){
-                    $(element).empty();
-                    $(element).append($('<option>', {
-                            text: 'Selecione o filtro anterior',
-                            disabled: true
-                        })
-                    );
-                }
-                $('.selectpicker').selectpicker('refresh')
 
+                $.each($('select[name*="filter_"]'), function (index, element) {
+                    if ($(element).data('index') >= (nextIndex)) {
+                        $(element).empty();
+                        $(element).append($('<option>', {
+                                text: 'Selecione o filtro anterior',
+                                disabled: true
+                            })
+                        );
+                    }
+                    $('.selectpicker').selectpicker('refresh')
+                })
             }
 
             }, 'json');
