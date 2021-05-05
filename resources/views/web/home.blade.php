@@ -59,7 +59,7 @@
 
                             <div class="form-group col-12 col-sm-6 mt-sm-2 col-lg-3 mt-lg-0">
                                 <label for="bedrooms" class="mb-2"><b>Suítes</b></label>
-                                <select class="selectpicker" name="filter_suites" id="suites" title="Escolha..." data-index="6">
+                                <select class="selectpicker" name="filter_suites" id="suites" title="Escolha..." data-action="{{ route('component.main-filter.suites') }}" data-index="6">
                                     <option value="">0</option>
                                     <option value="">1</option>
                                     <option value="">2</option>
