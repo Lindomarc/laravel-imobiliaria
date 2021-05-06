@@ -34,7 +34,6 @@ class WebController extends Controller
         return view('web.property',[
             'property'=>$property
         ]);
-        return view('web.property');
     }
 
     public function buy()
