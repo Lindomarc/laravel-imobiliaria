@@ -244,11 +244,10 @@ $(function () {
 
 tinyMCE.init({
     selector: "textarea.mce",
-    language: 'pt_BR',
+    // language: 'pt_BR',
     menubar: false,
-    theme: "modern",
-    height: 132,
-    skin: 'light',
+    branding: false,
+    height: 252,
     entity_encoding: "raw",
     theme_advanced_resizing: true,
     plugins: [
@@ -272,7 +271,7 @@ tinyMCE.init({
         {title: 'Botão Vermelho', value: 'btn btn-red'}
     ],
     setup: function (editor) {
-        editor.addButton('laradevimage', {
+        editor.ui.registry.addButton('laradevimage', {
             title: 'Enviar Imagem',
             icon: 'image',
             onclick: function () {
