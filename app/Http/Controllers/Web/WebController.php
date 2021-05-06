@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\PropertyRequest;
 use App\Models\Property as PropertyModel;
 use Illuminate\Http\Request;
 
@@ -53,6 +52,22 @@ class WebController extends Controller
 
     public function filter()
     {
-        return view('web.filter');
+        $filter = new FilterController();
+        $itensProperties = $filter->createQuery('id');
+
+        $listIds = [];
+        foreach ($itensProperties as $property){
+            $listIds[] = $property->id;
+        }
+
+
+        $properties = [];
+        if ($listIds) {
+            $properties = PropertyModel::whereIn('id',$listIds)->get();
+        }
+
+        return view('web.filter',[
+            'properties' => $properties
+        ]);
     }
 }
