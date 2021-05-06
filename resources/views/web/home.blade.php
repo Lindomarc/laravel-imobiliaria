@@ -19,8 +19,8 @@
                 <form action="" class="form-inline w-100">
                     <div class="form-group col-12 col-sm-6 col-lg-3">
                         <label for="search" class="mb-2"><b>Comprar ou Alugar?</b></label>
-                        <select class="selectpicker" id="search" name="filter_search" title="Escolha..." data-action="{{ route('component.main-filter.search') }}" data-index="1">
-                            <option value="buy">Comprar</option>
+                        <select class="selectpicker" id="search" name="filter_trade" title="Escolha..." data-action="{{ route('component.main-filter.search') }}" data-index="1">
+                            <option value="sale">Comprar</option>
                             <option value="rent">Alugar</option>
                         </select>
                     </div>
@@ -93,7 +93,7 @@
                         <div class="row mt-3">
                             <div class="form-group col-12 col-sm-6 mt-sm-2 col-lg-6 mt-lg-0">
                                 <label for="base" class="mb-2"><b>Preço Base</b></label>
-                                <select class="selectpicker" name="filter_base" id="base" title="Escolha..." data-index="9">
+                                <select class="selectpicker" name="filter_price_base" id="price_base" title="Escolha..." data-action="{{ route('component.main-filter.priceBase') }}" data-index="9">
                                     <option value="">A partir de R$ 100.000,00</option>
                                     <option value="">2</option>
                                     <option value="">3</option>
@@ -103,7 +103,7 @@
 
                             <div class="form-group col-12 col-sm-6 mt-sm-2 col-lg-6 mt-lg-0">
                                 <label for="limit" class="mb-2"><b>Preço Limite</b></label>
-                                <select class="selectpicker" name="filter_limit" id="limit" title="Escolha..." data-index="10">
+                                <select class="selectpicker" name="filter_limit" id="limit" title="Escolha..."  data-action="{{ route('component.main-filter.priceLimit') }}"  data-index="10">
                                     <option value="">Até R$ 1.000.000,00</option>
                                     <option value="">2</option>
                                     <option value="">3</option>
@@ -207,15 +207,16 @@
                                 <article>
                                     <div class="card main_properties_item">
                                         <div class="img-responsive-16by9">
-                                            <a href="{{route('web.buyProperty',$property->slug)}}"> <img src="{{ $property->cover }}" class="card-img-top" alt="">
-                                            </a>
+                                            <a href="{{route('web.buyProperty',$property->slug)}}">
+                                                <img src="{{ $property->cover }}" class="card-img-top" alt=""> </a>
                                         </div>
                                         <div class="card-body">
                                             <h2>
                                                 <a href="{{ url($property->slug) }}" class="text-front">{{ $property->title }}</a>
                                             </h2>
                                             <p class="main_properties_item_category">{{ $property->list_category[$property->category] }}</p>
-                                            <p class="main_properties_item_type">{{ $property->type_text }} - {{ $property->neighborhood }}
+                                            <p class="main_properties_item_type">
+                                                {{ $property->type_text }} - {{ $property->neighborhood }}
                                                 <i class="icon-location-arrow"></i></p>
                                             <p class="main_properties_item_price text-front">{{ $property->sale_price }}</p>
                                             <a href="#" class="btn btn-front btn-block">Ver imóvel</a>

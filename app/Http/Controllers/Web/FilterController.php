@@ -36,20 +36,12 @@
             session()->remove('bedrooms');
             session()->remove('suites');
             session()->remove('garage');
+            session()->remove('price_base');
+            session()->remove('price_limit');
 
+            session()->put('trade', $request->search);
 
-            if (isset($request->search)) {
-                if ($request->search === 'buy') {
-                    session()->put('sale', true);
-                    session()->remove('rent');
-                    $properties = $this->createQuery('category');
-                }
-                if ($request->search === 'rent') {
-                    session()->put('rent', true);
-                    session()->remove('sale');
-                    $properties = $this->createQuery('category');
-                }
-            }
+            $properties = $this->createQuery('category');
 
             if (isset($properties) && $properties->count()) {
 
@@ -80,6 +72,8 @@
             session()->remove('bedrooms');
             session()->remove('suites');
             session()->remove('garage');
+            session()->remove('price_base');
+            session()->remove('price_limit');
 
             session()->put('category', $request->search);
 
@@ -112,6 +106,8 @@
             session()->remove('bedrooms');
             session()->remove('suites');
             session()->remove('garage');
+            session()->remove('price_base');
+            session()->remove('price_limit');
 
             session()->put('type', $request->search);
 
@@ -141,6 +137,8 @@
             session()->remove('bedrooms');
             session()->remove('suites');
             session()->remove('garage');
+            session()->remove('price_base');
+            session()->remove('price_limit');
 
 
             session()->put('neighborhood', $request->search);
@@ -178,6 +176,8 @@
 
             session()->remove('suites');
             session()->remove('garage');
+            session()->remove('price_base');
+            session()->remove('price_limit');
 
             session()->put('bedrooms', $request->search);
 
@@ -213,6 +213,8 @@
             ];
 
             session()->remove('garage');
+            session()->remove('price_base');
+            session()->remove('price_limit');
 
             session()->put('suites', $request->search);
 
@@ -244,6 +246,7 @@
 
             session()->remove('suites');
             session()->remove('garage');
+            session()->remove('price_base');
 
             session()->put('bathrooms', $request->search);
 
@@ -274,28 +277,70 @@
                 'message' => 'Não há registros nesta pesquisa.'
             ];
             session()->remove('bathrooms');
-            session()->put('garage', $request->search);
-            $base = '';
+            session()->remove('price_base');
 
-            if (!session('sale')) {
-                $base = 'sale_price as price';
-            }
-            if (!session('rend')) {
-                $base = 'rent_price as price';
-            }
+            session()->put('garage', $request->search);
+
+            $base = session('trade') . '_price as price';
 
             $properties = $this->createQuery($base);
+
             if ($properties->count()) {
                 $prices = array('' => 'Todos');
                 foreach ($properties as $property) {
-                    $prices[$property->price] = 'À partir de R$ '.fixDouble($property->price,'br');
+                    if (isset($property->price)) {
+                        $prices[$property->price] = 'À partir de R$ ' . fixDouble($property->price, 'br');
+                    }
                 }
                 $collect = collect($prices)->unique()->toArray();
-                sort($collect);
                 $json = $this->setResponse('success', $collect, '');
             }
 
             return response()->json($json);
+        }
+
+        public function priceBase(Request $request)
+        {
+            $json = [
+                'status' => 'fail',
+                'data' => '',
+                'message' => 'Não há registros nesta pesquisa.'
+            ];
+
+            session()->remove('garage');
+            session()->put('price_base', $request->search);
+
+            $base = session('trade') . '_price as price';
+            $properties = $this->createQuery($base);
+
+            if ($properties->count()) {
+                $limit = array('' => 'Todos');
+
+                foreach ($properties as $property) {
+                    $limit[$property->price] = 'Até R$ ' . fixDouble($property->price, 'br');
+                }
+
+                $collect = collect($limit)->unique()->toArray();
+                $json = $this->setResponse('success', $collect, '');
+            }
+
+            return response()->json($json);
+        }
+
+        public function priceLimit(Request $request)
+        {
+
+            $json = [
+                'status' => 'fail',
+                'data' => '',
+                'message' => 'Não há registros nesta pesquisa.'
+            ];
+
+            session('price_limit', $request->search);
+
+            $json = $this->setResponse('success', $json, '');
+            return response()->json($json);
+
         }
 
         private function setResponse(string $status, array $data, string $message)
@@ -309,8 +354,10 @@
 
         private function createQuery($field)
         {
-            $sale = session('sale');
-            $rent = session('rent');
+            $sale = session('trade') === 'sale' ?? '';
+            $rent = session('trade') === 'rent' ?? '';
+
+
             $category = session('category');
             $type = session('type');
             $neighborhood = session('neighborhood');
@@ -318,6 +365,7 @@
             $suites = session('suites');
             $bathrooms = session('bathrooms');
             $garage = session('garage');
+            $priceBase = session('price_base');
 
             return DB::table('properties')
                 ->when($sale, function ($query, $sale) {
@@ -348,9 +396,14 @@
                     return $query->where('bathrooms', $bathrooms);
                 })
                 ->when($garage, function ($query, $garage) {
+                    $garage = $garage !== 'no_garage' ? $garage : 0;
                     return $query->whereRaw('garage + garage_covered = ? OR garage = ? OR garage_covered = ?', [
-                        $garage,$garage,$garage
+                        $garage, $garage, $garage
                     ]);
+                })
+                ->when($priceBase, function ($query, $priceBase) {
+                    $field = session('trade') . '_price';
+                    return $query->where($field, '>=', $priceBase);
                 })
                 ->get(explode(',', $field));
         }
