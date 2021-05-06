@@ -58,7 +58,7 @@
                             </div>
 
                             <div class="form-group col-12 col-sm-6 mt-sm-2 col-lg-3 mt-lg-0">
-                                <label for="bedrooms" class="mb-2"><b>Suítes</b></label>
+                                <label for="suites" class="mb-2"><b>Suítes</b></label>
                                 <select class="selectpicker" name="filter_suites" id="suites" title="Escolha..." data-action="{{ route('component.main-filter.suites') }}" data-index="6">
                                     <option value="">0</option>
                                     <option value="">1</option>
@@ -69,7 +69,7 @@
                             </div>
 
                             <div class="form-group col-12 col-sm-6 mt-sm-2 col-lg-3 mt-lg-0">
-                                <label for="bedrooms" class="mb-2"><b>Banheiros</b></label>
+                                <label for="bathrooms" class="mb-2"><b>Banheiros</b></label>
                                 <select class="selectpicker" name="filter_bathrooms" id="bathrooms" title="Escolha..." data-action="{{ route('component.main-filter.bathrooms') }}"  data-index="7">
                                     <option value="">1</option>
                                     <option value="">2</option>
@@ -79,7 +79,7 @@
                             </div>
 
                             <div class="form-group col-12 col-sm-6 mt-sm-2 col-lg-3 mt-lg-0">
-                                <label for="bedrooms" class="mb-2"><b>Garagem</b></label>
+                                <label for="garage" class="mb-2"><b>Garagem</b></label>
                                 <select class="selectpicker" name="filter_garage" id="garage" title="Escolha..." data-action="{{ route('component.main-filter.garage') }}" data-index="8">
                                     <option value="">0</option>
                                     <option value="">1</option>
@@ -92,7 +92,7 @@
 
                         <div class="row mt-3">
                             <div class="form-group col-12 col-sm-6 mt-sm-2 col-lg-6 mt-lg-0">
-                                <label for="bedrooms" class="mb-2"><b>Preço Base</b></label>
+                                <label for="base" class="mb-2"><b>Preço Base</b></label>
                                 <select class="selectpicker" name="filter_base" id="base" title="Escolha..." data-index="9">
                                     <option value="">A partir de R$ 100.000,00</option>
                                     <option value="">2</option>
@@ -102,7 +102,7 @@
                             </div>
 
                             <div class="form-group col-12 col-sm-6 mt-sm-2 col-lg-6 mt-lg-0">
-                                <label for="bedrooms" class="mb-2"><b>Preço Limite</b></label>
+                                <label for="limit" class="mb-2"><b>Preço Limite</b></label>
                                 <select class="selectpicker" name="filter_limit" id="limit" title="Escolha..." data-index="10">
                                     <option value="">Até R$ 1.000.000,00</option>
                                     <option value="">2</option>
