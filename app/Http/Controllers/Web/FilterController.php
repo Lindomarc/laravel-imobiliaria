@@ -317,7 +317,9 @@
                 $limit = array('' => 'Todos');
 
                 foreach ($properties as $property) {
-                    $limit[$property->price] = 'Até R$ ' . fixDouble($property->price, 'br');
+                    if ($property->price) {
+                        $limit[$property->price] = 'Até R$ ' . fixDouble($property->price, 'br');
+                    }
                 }
 
                 $collect = collect($limit)->unique()->toArray();
