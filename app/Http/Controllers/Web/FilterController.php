@@ -247,6 +247,7 @@
             session()->remove('suites');
             session()->remove('garage');
             session()->remove('price_base');
+            session()->remove('price_limit');
 
             session()->put('bathrooms', $request->search);
 
@@ -278,6 +279,7 @@
             ];
             session()->remove('bathrooms');
             session()->remove('price_base');
+            session()->remove('price_limit');
 
             session()->put('garage', $request->search);
 
@@ -308,6 +310,8 @@
             ];
 
             session()->remove('garage');
+            session()->remove('price_limit');
+
             session()->put('price_base', $request->search);
 
             $base = session('trade') . '_price as price';
@@ -315,7 +319,6 @@
 
             if ($properties->count()) {
                 $limit = array('' => 'Todos');
-
                 foreach ($properties as $property) {
                     if ($property->price) {
                         $limit[$property->price] = 'Até R$ ' . fixDouble($property->price, 'br');
@@ -337,10 +340,10 @@
                 'message' => 'Não há registros nesta pesquisa.'
             ];
 
+            session()->remove('price_base');
             session('price_limit', $request->search);
-
-            $json = $this->setResponse('success', $json, '');
             return response()->json($json);
+
         }
 
         private function setResponse(string $status, array $data, string $message)
@@ -352,7 +355,7 @@
             ];
         }
 
-        private function createQuery($field)
+        public function createQuery($field)
         {
             $sale = session('trade') === 'sale' ?? '';
             $rent = session('trade') === 'rent' ?? '';
@@ -366,6 +369,8 @@
             $bathrooms = session('bathrooms');
             $garage = session('garage');
             $priceBase = session('price_base');
+            $priceLimit = session('price_limit');
+
 
             return DB::table('properties')
                 ->when($sale, function ($query, $sale) {
@@ -404,6 +409,10 @@
                 ->when($priceBase, function ($query, $priceBase) {
                     $field = session('trade') . '_price';
                     return $query->where($field, '>=', $priceBase);
+                })
+                ->when($priceLimit, function ($query, $priceLimit) {
+                    $field = session('trade') . '_price';
+                    return $query->where($field, '<=', $priceLimit);
                 })
                 ->get(explode(',', $field));
         }
