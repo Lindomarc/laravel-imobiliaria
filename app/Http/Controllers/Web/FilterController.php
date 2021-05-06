@@ -329,7 +329,6 @@
 
         public function priceLimit(Request $request)
         {
-
             $json = [
                 'status' => 'fail',
                 'data' => '',
@@ -340,7 +339,6 @@
 
             $json = $this->setResponse('success', $json, '');
             return response()->json($json);
-
         }
 
         private function setResponse(string $status, array $data, string $message)

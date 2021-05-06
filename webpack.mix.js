@@ -34,7 +34,7 @@ mix
         'resources/views/admin/assets/js/scripts.js'
     ],'public/backend/assets/js/scripts.js')
 
-    .copyDirectory('resources/views/admin/assets/js/tinymce','public/backend/assets/js/tinymce')
+    .copyDirectory('node_modules/tinymce','public/assets/js/tinymce')
     .copyDirectory('resources/views/admin/assets/js/datatables','public/backend/assets/js/datatables')
     .copyDirectory('resources/views/admin/assets/js/select2','public/backend/assets/js/select2')
 
