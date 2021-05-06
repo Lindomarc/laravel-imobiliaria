@@ -35,6 +35,7 @@
             session()->remove('neighborhood');
             session()->remove('bedrooms');
             session()->remove('suites');
+            session()->remove('garage');
 
 
             if (isset($request->search)) {
@@ -78,6 +79,7 @@
             session()->remove('neighborhood');
             session()->remove('bedrooms');
             session()->remove('suites');
+            session()->remove('garage');
 
             session()->put('category', $request->search);
 
@@ -109,6 +111,7 @@
             session()->remove('neighborhood');
             session()->remove('bedrooms');
             session()->remove('suites');
+            session()->remove('garage');
 
             session()->put('type', $request->search);
 
@@ -137,8 +140,7 @@
             ];
             session()->remove('bedrooms');
             session()->remove('suites');
-
-            session()->remove('suites');
+            session()->remove('garage');
 
 
             session()->put('neighborhood', $request->search);
@@ -175,6 +177,8 @@
             ];
 
             session()->remove('suites');
+            session()->remove('garage');
+
             session()->put('bedrooms', $request->search);
 
 
@@ -208,6 +212,7 @@
                 'message' => 'Não há registros nesta pesquisa.'
             ];
 
+            session()->remove('garage');
 
             session()->put('suites', $request->search);
 
@@ -217,7 +222,7 @@
                 $bathrooms = array('' => 'Todos');
                 foreach ($properties as $property) {
                     if ($property->bathrooms === 0) {
-                        $bathrooms['no_bathrooms'] = "Sem banheiro";
+                        $bathrooms['no_bathrooms'] = 'Sem banheiro';
                     } else {
                         $plural = ($property->bathrooms > 1) ? 'banheiros' : 'banheiro';
                         $bathrooms[$property->bathrooms] = "{$property->bathrooms} {$plural}";
@@ -236,7 +241,10 @@
                 'data' => '',
                 'message' => 'Não há registros nesta pesquisa.'
             ];
+
             session()->remove('suites');
+            session()->remove('garage');
+
             session()->put('bathrooms', $request->search);
 
             $properties = $this->createQuery('garage,garage_covered');
@@ -252,6 +260,38 @@
                     }
                 }
                 $collect = collect($garage)->unique()->toArray();
+                $json = $this->setResponse('success', $collect, '');
+            }
+
+            return response()->json($json);
+        }
+
+        public function garage(Request $request)
+        {
+            $json = [
+                'status' => 'fail',
+                'data' => '',
+                'message' => 'Não há registros nesta pesquisa.'
+            ];
+            session()->remove('bathrooms');
+            session()->put('garage', $request->search);
+            $base = '';
+
+            if (!session('sale')) {
+                $base = 'sale_price as price';
+            }
+            if (!session('rend')) {
+                $base = 'rent_price as price';
+            }
+
+            $properties = $this->createQuery($base);
+            if ($properties->count()) {
+                $prices = array('' => 'Todos');
+                foreach ($properties as $property) {
+                    $prices[$property->price] = 'À partir de R$ '.fixDouble($property->price,'br');
+                }
+                $collect = collect($prices)->unique()->toArray();
+                sort($collect);
                 $json = $this->setResponse('success', $collect, '');
             }
 
@@ -277,6 +317,8 @@
             $bedrooms = session('bedrooms');
             $suites = session('suites');
             $bathrooms = session('bathrooms');
+            $garage = session('garage');
+
             return DB::table('properties')
                 ->when($sale, function ($query, $sale) {
                     return $query->where('sale', $sale);
@@ -302,9 +344,13 @@
                     return $query->where('suites', $suites);
                 })
                 ->when($bathrooms, function ($query, $bathrooms) {
-
                     $bathrooms = $bathrooms !== 'no_bathrooms' ? $bathrooms : 0;
                     return $query->where('bathrooms', $bathrooms);
+                })
+                ->when($garage, function ($query, $garage) {
+                    return $query->whereRaw('garage + garage_covered = ? OR garage = ? OR garage_covered = ?', [
+                        $garage,$garage,$garage
+                    ]);
                 })
                 ->get(explode(',', $field));
         }
