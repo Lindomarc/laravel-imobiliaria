@@ -34,6 +34,8 @@ use Illuminate\Support\Facades\Route;
         Route::post('main-filter/neighborhood','FilterController@neighborhood')->name('main-filter.neighborhood');
         Route::post('main-filter/bedrooms','FilterController@bedrooms')->name('main-filter.bedrooms');
         Route::post('main-filter/suites','FilterController@suites')->name('main-filter.suites');
+        Route::post('main-filter/bathrooms','FilterController@bathrooms')->name('main-filter.bathrooms');
+        Route::post('main-filter/garage','FilterController@garage')->name('main-filter.garage');
 
     });
 

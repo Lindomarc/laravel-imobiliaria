@@ -70,7 +70,7 @@
 
                             <div class="form-group col-12 col-sm-6 mt-sm-2 col-lg-3 mt-lg-0">
                                 <label for="bedrooms" class="mb-2"><b>Banheiros</b></label>
-                                <select class="selectpicker" name="filter_bathrooms" id="bathrooms" title="Escolha..." data-index="7">
+                                <select class="selectpicker" name="filter_bathrooms" id="bathrooms" title="Escolha..." data-action="{{ route('component.main-filter.bathrooms') }}"  data-index="7">
                                     <option value="">1</option>
                                     <option value="">2</option>
                                     <option value="">3</option>
@@ -80,7 +80,7 @@
 
                             <div class="form-group col-12 col-sm-6 mt-sm-2 col-lg-3 mt-lg-0">
                                 <label for="bedrooms" class="mb-2"><b>Garagem</b></label>
-                                <select class="selectpicker" name="filter_garage" id="garage" title="Escolha..." data-index="8">
+                                <select class="selectpicker" name="filter_garage" id="garage" title="Escolha..." data-action="{{ route('component.main-filter.garage') }}" data-index="8">
                                     <option value="">0</option>
                                     <option value="">1</option>
                                     <option value="">2</option>
