@@ -34,6 +34,8 @@
             session()->remove('type');
             session()->remove('neighborhood');
             session()->remove('bedrooms');
+            session()->remove('suites');
+
 
             if (isset($request->search)) {
                 if ($request->search === 'buy') {
@@ -75,6 +77,7 @@
             session()->remove('type');
             session()->remove('neighborhood');
             session()->remove('bedrooms');
+            session()->remove('suites');
 
             session()->put('category', $request->search);
 
@@ -105,6 +108,7 @@
             session()->remove('category');
             session()->remove('neighborhood');
             session()->remove('bedrooms');
+            session()->remove('suites');
 
             session()->put('type', $request->search);
 
@@ -132,6 +136,10 @@
                 'message' => 'Não há registros nesta pesquisa.'
             ];
             session()->remove('bedrooms');
+            session()->remove('suites');
+
+            session()->remove('suites');
+
 
             session()->put('neighborhood', $request->search);
 
@@ -166,8 +174,9 @@
                 'message' => 'Não há registros nesta pesquisa.'
             ];
 
+            session()->remove('suites');
             session()->put('bedrooms', $request->search);
-            session()->remove('neighborhood');
+
 
             $properties = $this->createQuery('suites');
 
@@ -199,31 +208,27 @@
                 'message' => 'Não há registros nesta pesquisa.'
             ];
 
+
             session()->put('suites', $request->search);
-            session()->remove('bedrooms');
 
             $properties = $this->createQuery('bathrooms');
 
             if ($properties->count()) {
-
                 $bathrooms = array('' => 'Todos');
                 foreach ($properties as $property) {
                     if ($property->bathrooms === 0) {
-                        $bathrooms['no_suites'] = "Sem banheiro";
+                        $bathrooms['no_bathrooms'] = "Sem banheiro";
                     } else {
                         $plural = ($property->bathrooms > 1) ? 'banheiros' : 'banheiro';
                         $bathrooms[$property->bathrooms] = "{$property->bathrooms} {$plural}";
                     }
                 }
-
                 $collect = collect($bathrooms)->unique()->toArray();
-
                 $json = $this->setResponse('success', $collect, '');
             }
-
             return response()->json($json);
         }
-/*
+
         public function bathrooms(Request $request)
         {
             $json = [
@@ -231,32 +236,28 @@
                 'data' => '',
                 'message' => 'Não há registros nesta pesquisa.'
             ];
-
-            session()->put('garage', $request->search);
             session()->remove('suites');
+            session()->put('bathrooms', $request->search);
 
-            $properties = $this->createQuery('bathrooms');
-
+            $properties = $this->createQuery('garage,garage_covered');
             if ($properties->count()) {
-
-                $bathrooms = array('' => 'Todos');
+                $garage = array('' => 'Todos');
                 foreach ($properties as $property) {
-                    if ($property->bathrooms === 0) {
-                        $bathrooms['no_suites'] = "Sem banheiro";
+                    if ($property->garage === 0) {
+                        $garage['no_garage'] = "Sem garagem";
                     } else {
-                        $plural = ($property->bathrooms > 1) ? 'banheiros' : 'banheiro';
-                        $bathrooms[$property->bathrooms] = "{$property->bathrooms} {$plural}";
+                        $property->garage += $property->garage_covered;
+                        $plural = ($property->garage > 1) ? 'garagens' : 'garagem';
+                        $garage[$property->garage] = "{$property->garage} {$plural}";
                     }
                 }
-
-                $collect = collect($bathrooms)->unique()->toArray();
-
+                $collect = collect($garage)->unique()->toArray();
                 $json = $this->setResponse('success', $collect, '');
             }
 
             return response()->json($json);
         }
-*/
+
         private function setResponse(string $status, array $data, string $message)
         {
             return [
@@ -276,7 +277,6 @@
             $bedrooms = session('bedrooms');
             $suites = session('suites');
             $bathrooms = session('bathrooms');
-
             return DB::table('properties')
                 ->when($sale, function ($query, $sale) {
                     return $query->where('sale', $sale);
@@ -302,9 +302,10 @@
                     return $query->where('suites', $suites);
                 })
                 ->when($bathrooms, function ($query, $bathrooms) {
+
                     $bathrooms = $bathrooms !== 'no_bathrooms' ? $bathrooms : 0;
                     return $query->where('bathrooms', $bathrooms);
                 })
-                ->get([$field]);
+                ->get(explode(',', $field));
         }
     }
