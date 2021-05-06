@@ -49,7 +49,7 @@
                     <div class="row">
                         @if (!!$properties)
                             @foreach($properties as $property)
-                                <div class="mb-4 col-12 col-md-6 col-lg-4">
+                                <div class="mb-4 col-12 col-md-6">
                                     <article>
                                         <div class="card main_properties_item">
                                             <div class="img-responsive-16by9">
