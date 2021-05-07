@@ -49,7 +49,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('web.home') }}">Home</a></li>
                     <li class="nav-item"><a class="nav-link text-front" href="javascript:void(0)">Destaque</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('web.rent') }}">Alugar</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('web.buy') }}">Comprar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('web.sale') }}">Comprar</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('web.contact') }}">Contato</a></li>
                 </ul>
             </div>
@@ -92,7 +92,7 @@
                     <li><a href="{{ route('web.home') }}">Home</a></li>
                     <li><a href="#" class="text-front">Destaque</a></li>
                     <li><a href="#">{{ route('web.rent') }}Alugar</a></li>
-                    <li><a href="#">{{ route('web.buy') }}</a></li>
+                    <li><a href="#">{{ route('web.sale') }}</a></li>
                     <li><a href="{{ route('web.contact') }}">Contato</a></li>
                 </ul>
             </div>

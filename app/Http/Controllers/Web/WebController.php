@@ -35,11 +35,11 @@ class WebController extends Controller
         ]);
     }
 
-    public function buy()
+    public function sale()
     {
         return view('web.filter');
     }
-    public function buyProperty(Request $request)
+    public function saleProperty(Request $request)
     {
         $property = PropertyModel::where([
                 'slug' => $request->slug
