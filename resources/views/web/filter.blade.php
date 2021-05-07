@@ -14,6 +14,7 @@
                             <div class="form-group col-12">
                                 <label for="search" class="mb-2 text-front">Comprar ou Alugar?</label>
                                 <select class="selectpicker" id="search" name="filter_trade" title="Escolha..." data-action="{{ route('component.main-filter.search') }}" data-index="1" required>
+
                                     <option value="sale">Comprar</option>
                                     <option value="rent">Alugar</option>
                                 </select>
@@ -109,7 +110,7 @@
                                                 <p class="main_properties_item_type">
                                                     {{ $property->type_text }} - {{ $property->neighborhood }}
                                                     <i class="icon-location-arrow"></i></p>
-                                                <p class="main_properties_item_price text-front">{{ $property->sale_price }}</p>
+                                                <p class="main_properties_item_price text-front">{{ $property->sale_price }}{{ (session('trade') === 'rent'?'/mês':'') }}</p>
                                                 <a href="{{route('web.'.session('trade').'Property',$property->slug)}} " class="btn btn-front btn-block">Ver imóvel</a>
                                             </div>
                                             <div class="card-footer align-items-center  text-center text-muted d-flex">
