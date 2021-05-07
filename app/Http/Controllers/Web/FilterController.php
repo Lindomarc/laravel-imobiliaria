@@ -355,6 +355,18 @@
             ];
         }
 
+        public function clearAllData(){
+            session()->remove('trade');
+            session()->remove('category');
+            session()->remove('type');
+            session()->remove('neighborhood');
+            session()->remove('bedrooms');
+            session()->remove('suites');
+            session()->remove('garage');
+            session()->remove('price_base');
+            session()->remove('price_limit');
+
+        }
         public function createQuery($field)
         {
             $sale = session('trade') === 'sale' ?? '';

@@ -25,7 +25,14 @@ class WebController extends Controller
 
     public function rent()
     {
-        return view('web.filter');
+        $filter = new FilterController();
+        $filter->clearAllData();
+
+        $properties = PropertyModel::rent()->available()->get();
+
+        return view('web.filter',[
+            'properties' => $properties
+        ]);
     }
     public function rentProperty(Request $request)
     {
@@ -37,8 +44,18 @@ class WebController extends Controller
 
     public function sale()
     {
-        return view('web.filter');
+        $filter = new FilterController();
+        $filter->clearAllData();
+
+        $properties = PropertyModel::sale()->available()->get();
+
+        return view('web.filter',[
+            'properties' => $properties
+        ]);
     }
+
+
+
     public function saleProperty(Request $request)
     {
         $property = PropertyModel::where([
