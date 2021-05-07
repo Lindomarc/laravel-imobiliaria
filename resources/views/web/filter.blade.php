@@ -14,6 +14,7 @@
                             <div class="form-group col-12">
                                 <label for="search" class="mb-2 text-front">Comprar ou Alugar?</label>
                                 <select class="selectpicker" id="search" name="filter_trade" title="Escolha..." data-action="{{ route('component.main-filter.search') }}" data-index="1" required>
+
                                     <option value="sale">Comprar</option>
                                     <option value="rent">Alugar</option>
                                 </select>

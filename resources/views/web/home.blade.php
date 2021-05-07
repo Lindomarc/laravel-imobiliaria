@@ -201,6 +201,7 @@
                                                 <i class="icon-location-arrow"></i></p>
                                             <p class="main_properties_item_price text-front">{{ $property->sale_price }}</p>
                                             <a href="{{route('web.saleProperty',$property->slug)}}" class="btn btn-front btn-block">Ver imóvel</a>
+
                                         </div>
                                         <div class="card-footer align-items-center  text-center text-muted d-flex">
                                             <div class="col-4 main_properties_item_features">

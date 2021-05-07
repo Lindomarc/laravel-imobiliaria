@@ -54,8 +54,6 @@ class WebController extends Controller
         ]);
     }
 
-
-
     public function saleProperty(Request $request)
     {
         $property = PropertyModel::where([

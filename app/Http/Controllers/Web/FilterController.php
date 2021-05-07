@@ -367,6 +367,7 @@
             session()->remove('price_limit');
 
         }
+
         public function createQuery($field)
         {
             $sale = session('trade') === 'sale' ?? '';
