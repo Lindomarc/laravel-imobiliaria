@@ -7,7 +7,6 @@
     use Illuminate\Database\Eloquent\Model;
     use Illuminate\Support\Facades\Storage;
     use Illuminate\Support\Str;
-    use phpDocumentor\Reflection\Types\Object_;
 
     class Property extends Model
     {
@@ -107,13 +106,18 @@
         public function getCoversAttribute()
         {
             $images = $this->images()->get();
-
-            foreach ($images as $key => $image){
-                 $covers[$key] = new \stdClass();
-                 $covers[$key]->url = Storage::url(Cropper::thumb($image->path,1366,768));
-                 $covers[$key]->cover = $image->cover;
+            $covers = [];
+            if ($images->count()) {
+                foreach ($images as $key => $image){
+                    $covers[$key] = new \stdClass();
+                    $covers[$key]->url = Storage::url(Cropper::thumb($image->path,1366,768));
+                    $covers[$key]->cover = $image->cover;
+                }
+            }else{
+                $covers[0] = new \stdClass();
+                $covers[0]->url = url('backend/assets/images/realty.jpeg');
+                $covers[0]->cover = url('backend/assets/images/realty.jpeg');
             }
-//            $value = url('backend/assets/images/realty.jpeg');
             return $covers;
 
         }

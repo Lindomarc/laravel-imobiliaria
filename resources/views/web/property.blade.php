@@ -39,7 +39,9 @@
                         </div>
                         <div class="main_property_content_price text-muted">
                             <p class="small">IPTU: R$ {{ $property->tribute??'0,00'  }} | Condomínio: R$ {{ $property->condominium??'0,00' }}</p>
-                            <p class="text-muted font-weight-bold">Valor do imóvel: R$ {{ $property->sale_price  }}</p>
+
+                            <p class="text-muted font-weight-bold">Valor do imóvel: {{ $property->sale_price?'R$ '.$property->sale_price:''  }}{{ (session('trade') === 'rent'?(!!$property->sale_price)?'/mês':'Entre em contato com suporte':'') }}</p>
+
                         </div>
                         <div class="main_property_content_description">
                             <h2 class="text-front font-weight-bold">Conheça mais o imóvel</h2>

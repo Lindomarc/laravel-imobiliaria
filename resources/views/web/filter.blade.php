@@ -110,7 +110,7 @@
                                                 <p class="main_properties_item_type">
                                                     {{ $property->type_text }} - {{ $property->neighborhood }}
                                                     <i class="icon-location-arrow"></i></p>
-                                                <p class="main_properties_item_price text-front">{{ $property->sale_price }}{{ (session('trade') === 'rent'?'/mês':'') }}</p>
+                                                <p class="main_properties_item_price text-front">{{ $property->sale_price?'R$ '.$property->sale_price:''  }}{{ (session('trade') === 'rent'?(!!$property->sale_price)?'/mês':'Entre em contato com suporte':'') }}</p>
                                                 <a href="{{route('web.'.session('trade').'Property',$property->slug)}} " class="btn btn-front btn-block">Ver imóvel</a>
                                             </div>
                                             <div class="card-footer align-items-center  text-center text-muted d-flex">

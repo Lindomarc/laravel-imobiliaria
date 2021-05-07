@@ -27,6 +27,7 @@ class WebController extends Controller
     {
         $filter = new FilterController();
         $filter->clearAllData();
+        session()->put('trade', 'rent');
 
         $properties = PropertyModel::rent()->available()->get();
 
@@ -37,6 +38,8 @@ class WebController extends Controller
     public function rentProperty(Request $request)
     {
         $property = PropertyModel::where('slug',$request->slug)->first();
+        session('trader','rent');
+
         return view('web.property',[
             'property'=>$property
         ]);
@@ -46,6 +49,7 @@ class WebController extends Controller
     {
         $filter = new FilterController();
         $filter->clearAllData();
+        session()->put('trade', 'sale');
 
         $properties = PropertyModel::sale()->available()->get();
 
