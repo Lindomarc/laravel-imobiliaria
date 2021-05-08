@@ -99,19 +99,28 @@
                                     <article>
                                         <div class="card main_properties_item">
                                             <div class="img-responsive-16by9">
-                                                <a href="{{route('web.'.session('trade').'Property',$property->slug)}}">
+                                                @php
+                                                    $trade = session('trade')??'';
+                                                    if (!$trade && $property->sale){
+                                                        $trade  =	'sale';
+                                                    }
+                                                    if (!$trade && $property->rent){
+                                                        $trade  =	'rent';
+                                                    }
+                                                @endphp
+                                                <a href="{{route('web.'.$trade.'Property',$property->slug)}}">
                                                     <img src="{{ $property->cover }}" class="card-img-top" alt=""> </a>
                                             </div>
                                             <div class="card-body">
                                                 <h2>
-                                                    <a href="{{route('web.'.session('trade').'Property',$property->slug)}}" class="text-front">{{ $property->title }}</a>
+                                                    <a href="{{route('web.'.$trade.'Property',$property->slug)}}" class="text-front">{{ $property->title }}</a>
                                                 </h2>
                                                 <p class="main_properties_item_category">{{ $property->list_category[$property->category] }}</p>
                                                 <p class="main_properties_item_type">
                                                     {{ $property->type_text }} - {{ $property->neighborhood }}
                                                     <i class="icon-location-arrow"></i></p>
                                                 <p class="main_properties_item_price text-front">{{ $property->sale_price?'R$ '.$property->sale_price:''  }}{{ (session('trade') === 'rent'?(!!$property->sale_price)?'/mês':'Entre em contato com suporte':'') }}</p>
-                                                <a href="{{route('web.'.session('trade').'Property',$property->slug)}} " class="btn btn-front btn-block">Ver imóvel</a>
+                                                <a href="{{route('web.'.$trade.'Property',$property->slug)}} " class="btn btn-front btn-block">Ver imóvel</a>
                                             </div>
                                             <div class="card-footer align-items-center  text-center text-muted d-flex">
                                                 <div class="col-4 main_properties_item_features">
