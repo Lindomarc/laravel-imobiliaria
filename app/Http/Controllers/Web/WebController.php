@@ -84,11 +84,44 @@ class WebController extends Controller
 
         $properties = [];
         if ($listIds) {
-            $properties = PropertyModel::whereIn('id',$listIds)->get();
+            $properties = PropertyModel::whereIn('id', $listIds)->get();
         }
 
-        return view('web.filter',[
+        return view('web.filter', [
             'properties' => $properties
+        ]);
+    }
+
+    public function experiences()
+    {
+        $filter = new FilterController();
+        $filter->clearAllData();
+
+        $properties = PropertyModel::whereNotNull('experience')->get();
+
+        return view('web.filter', [
+            'properties' => $properties
+        ]);
+    }
+
+    public function experiencesCategory(Request $request)
+    {
+        $filter = new FilterController();
+        $filter->clearAllData();
+
+
+        $properties = new PropertyModel();
+        if (isset($request->slug)) {
+
+            $slug = str_replace('-', ' ', $request->slug);
+            $results = $properties->where('experience', $slug)->get();
+
+        } else {
+            $results = $properties->whereNotNull('experience')->get();
+        }
+
+        return view('web.filter', [
+            'properties' => $results
         ]);
     }
 }
