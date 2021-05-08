@@ -92,7 +92,7 @@
         }
 
 
-        public function getDefaultCoverAttribute($value)
+        public function getDefaultCoverAttribute()
         {
             $image = $this->images()->where('cover', 1)->first();
             if(!!$image){
@@ -122,7 +122,7 @@
 
         }
 
-        public function getCoverAttribute($value)
+        public function getCoverAttribute()
         {
             if(isset($this->images()->get()[0]['path'])){
                 $value = Storage::url(Cropper::thumb($this->images()->get()[0]['path'],1366,768)); ;
@@ -276,9 +276,20 @@
             $this->attributes['status'] = !!$value;
         }
 
+
         public function getStatusAttribute($value)
         {
             return !!$value;
+        }
+
+        public function setExperienceAttribute($value)
+        {
+            $this->attributes['experience'] = $value;
+        }
+
+        public function getExperienceSlugAttribute()
+        {
+            return Str::slug($this->experience);
         }
 
         public function setSlug()
@@ -289,7 +300,7 @@
             }
         }
 
-        public function getTypeTextAttribute($value){
+        public function getTypeTextAttribute(){
             foreach ($this->list_type as $types){
                 foreach ($types as $key => $type) {
                     if ($this->type == $key) {

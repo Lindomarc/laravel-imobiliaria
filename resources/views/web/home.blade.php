@@ -114,27 +114,27 @@
                 </div>
                 <div class="main_list_group_items">
                     <div class="row">
-                        <div class="col-12 col-md-6 col-lg-4">
+                               <div class="col-12 col-md-6 col-lg-4">
+                                <article class=" main_list_group_item pt-4">
+                                    <a href="{{ route('web.experiencesCategory',['slug'=> 'cobertura']) }}">
+                                        <div class="d-flex align-items-center justify-content-center" style="background: url('/assets/images/home/cobertura_oto_1.jpg') no-repeat; background-size: cover;">
+                                            <h2>Cobertura</h2>
+                                        </div>
+                                    </a>
+                                </article>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <article class=" main_list_group_item pt-4">
+                                    <a href="{{ route('web.experiencesCategory',['slug'=> 'alto-padrao']) }}">
+                                        <div class="d-flex align-items-center justify-content-center" style="background: url('/assets/images/home/alto_padrao_1.jpg') no-repeat; background-size: cover;">
+                                            <h2>Alto Padrão</h2>
+                                        </div>
+                                    </a>
+                                </article>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
                             <article class=" main_list_group_item pt-4">
-                                <a href="#">
-                                    <div class="d-flex align-items-center justify-content-center" style="background: url('/assets/images/home/cobertura_oto_1.jpg') no-repeat; background-size: cover;">
-                                        <h2>Cobertura</h2>
-                                    </div>
-                                </a>
-                            </article>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-4">
-                            <article class=" main_list_group_item pt-4">
-                                <a href="#">
-                                    <div class="d-flex align-items-center justify-content-center" style="background: url('/assets/images/home/alto_padrao_1.jpg') no-repeat; background-size: cover;">
-                                        <h2>Alto Padrão</h2>
-                                    </div>
-                                </a>
-                            </article>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-4">
-                            <article class=" main_list_group_item pt-4">
-                                <a href="#">
+                                <a href="{{ route('web.experiencesCategory',['slug'=> 'de-frente-para-o-Mar']) }}">
                                     <div class="d-flex align-items-center justify-content-center" style="background: url('/assets/images/home/de_frente_pro_mar_original.jpg') no-repeat; background-size: cover;">
                                         <h2>De frente para o Mar</h2>
                                     </div>
@@ -143,7 +143,7 @@
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <article class=" main_list_group_item pt-4">
-                                <a href="#">
+                                <a href="{{ route('web.experiencesCategory',['slug'=> 'condominio-fechado']) }}">
                                     <div class="d-flex align-items-center justify-content-center" style="background: url('/assets/images/home/condominio_fechado_1.jpg') no-repeat; background-size: cover;">
                                         <h2>Condomínio Fechado</h2>
                                     </div>
@@ -152,7 +152,7 @@
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <article class=" main_list_group_item pt-4">
-                                <a href="#">
+                                <a href="{{ route('web.experiencesCategory',['slug'=> 'compacto']) }}">
                                     <div class="d-flex align-items-center justify-content-center" style="background: url('/assets/images/home/compacto_1.jpg') no-repeat; background-size: cover;">
                                         <h2>Compacto</h2>
                                     </div>
@@ -161,7 +161,7 @@
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <article class=" main_list_group_item pt-4">
-                                <a href="#">
+                                <a href="{{ route('web.experiencesCategory',['slug'=> 'lojas-e-salas']) }}">
                                     <div class="d-flex align-items-center justify-content-center" style="background: url('/assets/images/home/sala_comercial_original.jpg') no-repeat; background-size: cover;">
                                         <h2>Lojas e Salas</h2>
                                     </div>
