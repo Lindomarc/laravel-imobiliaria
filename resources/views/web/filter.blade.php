@@ -93,7 +93,7 @@
                 <div class="col-12 col-md-8">
 
                     <div class="row">
-                        @if (!!$properties)
+                        @if ($properties->count())
                             @foreach($properties as $property)
                                 <div class="mb-4 col-12 col-lg-6">
                                     <article>
@@ -140,6 +140,11 @@
                                     </article>
                                 </div>
                             @endforeach
+                        @else
+                            <div class="mb-4 col-12 bg-white">
+                                <h2 class="text-front icon-info text-center font-weight-bold">Ooops, não encontramos nenhum imóvel para você comprar ou alugar. </h2>
+                                <p class="text-center m-3">Utilize filtro avançado para encontrar o lar dos seus sonhos.</p>
+                            </div>
                         @endif
                     </div>
                 </div>
