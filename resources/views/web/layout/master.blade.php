@@ -91,8 +91,8 @@
                 <ul>
                     <li><a href="{{ route('web.home') }}">Home</a></li>
                     <li><a href="#" class="text-front">Destaque</a></li>
-                    <li><a href="#">{{ route('web.rent') }}Alugar</a></li>
-                    <li><a href="#">{{ route('web.sale') }}</a></li>
+                    <li><a href="{{ route('web.rent') }}">Alugar</a></li>
+                    <li><a href="{{ route('web.sale') }}">Comprar</a></li>
                     <li><a href="{{ route('web.contact') }}">Contato</a></li>
                 </ul>
             </div>
