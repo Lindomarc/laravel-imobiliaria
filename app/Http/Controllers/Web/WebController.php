@@ -35,6 +35,7 @@ class WebController extends Controller
             'properties' => $properties
         ]);
     }
+
     public function rentProperty(Request $request)
     {
         $property = PropertyModel::where('slug',$request->slug)->first();
@@ -57,8 +58,6 @@ class WebController extends Controller
             'properties' => $properties
         ]);
     }
-
-
 
     public function saleProperty(Request $request)
     {
