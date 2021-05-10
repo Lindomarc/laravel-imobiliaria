@@ -71,8 +71,16 @@ class WebController extends Controller
 
         $properties = PropertyModel::sale()->available()->get();
 
+        $headSeo = $this->seo->render(
+            getenv('APP_NAME') . ' - Para Comprar',
+            'lorem ipsum',
+            route('web.sale'),
+            asset('assets/images/front1.jpg')
+        );
+
         return view('web.filter',[
-            'properties' => $properties
+            'properties' => $properties,
+            'headSeo' => $headSeo
         ]);
     }
 
