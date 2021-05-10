@@ -130,8 +130,16 @@ class WebController extends Controller
             $properties = PropertyModel::whereIn('id', $listIds)->get();
         }
 
+        $headSeo = $this->seo->render(
+            getenv('APP_NAME'),
+            'lorem ipsum',
+            route('web.filter'),
+            asset('assets/images/front1.jpg')
+        );
+
         return view('web.filter', [
-            'properties' => $properties
+            'properties' => $properties,
+            'headSeo' => $headSeo
         ]);
     }
 
