@@ -8,14 +8,23 @@ use Illuminate\Http\Request;
 
 class WebController extends Controller
 {
+
     public function home()
     {
+        $headSeo = $this->seo->render(
+            getenv('APP_NAME') . ' - Home',
+            'lorem ipsum',
+            url('/'),
+            asset('images/img_bg_1.jpg')
+        );
+
         $propertiesForSales = PropertyModel::sale()->available()->limit(3)->get();
         $propertiesForRents = PropertyModel::rent()->available()->limit(3)->get();
 
-        return view('web.home',[
+        return view('web.home', [
             'propertiesForSales' => $propertiesForSales,
-            'propertiesForRents' => $propertiesForRents
+            'propertiesForRents' => $propertiesForRents,
+            'headSeo' => $headSeo
         ]);
     }
     public function contact()

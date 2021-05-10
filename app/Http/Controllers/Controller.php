@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\App;
 use App\Support\Message;
+use App\Support\Seo;
 
 class Controller extends BaseController
 {
@@ -18,5 +19,7 @@ class Controller extends BaseController
     public function __construct()
     {
         $this->message = new Message();
+        $this->seo = new Seo();
+
     }
 }
