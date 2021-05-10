@@ -40,8 +40,16 @@ class WebController extends Controller
 
         $properties = PropertyModel::rent()->available()->get();
 
+        $headSeo = $this->seo->render(
+            getenv('APP_NAME') . ' - Para Alugar',
+            'lorem ipsum',
+            route('web.rent'),
+            asset('assets/images/front1.jpg')
+        );
+
         return view('web.filter',[
-            'properties' => $properties
+            'properties' => $properties,
+            'headSeo' => $headSeo
         ]);
     }
 
