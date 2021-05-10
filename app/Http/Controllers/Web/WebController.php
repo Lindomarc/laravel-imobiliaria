@@ -15,7 +15,7 @@ class WebController extends Controller
             getenv('APP_NAME') . ' - Home',
             'lorem ipsum',
             url('/'),
-            asset('images/img_bg_1.jpg')
+            asset('assets/images/front1.jpg')
         );
 
         $propertiesForSales = PropertyModel::sale()->available()->limit(3)->get();
