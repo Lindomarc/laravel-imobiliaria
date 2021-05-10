@@ -15,7 +15,7 @@ class WebController extends Controller
             getenv('APP_NAME') . ' - Home',
             'lorem ipsum',
             url('/'),
-            asset('images/img_bg_1.jpg')
+            asset('assets/images/front1.jpg')
         );
 
         $propertiesForSales = PropertyModel::sale()->available()->limit(3)->get();
@@ -40,18 +40,35 @@ class WebController extends Controller
 
         $properties = PropertyModel::rent()->available()->get();
 
+        $headSeo = $this->seo->render(
+            getenv('APP_NAME') . ' - Para Alugar',
+            'lorem ipsum',
+            route('web.rent'),
+            asset('assets/images/front1.jpg')
+        );
+
         return view('web.filter',[
-            'properties' => $properties
+            'properties' => $properties,
+            'headSeo' => $headSeo
         ]);
     }
 
     public function rentProperty(Request $request)
     {
-        $property = PropertyModel::where('slug',$request->slug)->first();
-        session('trader','rent');
+        $property = PropertyModel::where('slug', $request->slug)->first();
 
-        return view('web.property',[
-            'property'=>$property
+        session('trader', 'rent');
+
+        $headSeo = $this->seo->render(
+            getenv('APP_NAME') . ' - Para Alugar',
+            'lorem ipsum',
+            route('web.rent').'/'.$request->slug,
+            $property->cover
+        );
+
+        return view('web.property', [
+            'property' => $property,
+            'headSeo' => $headSeo
         ]);
     }
 
@@ -63,8 +80,16 @@ class WebController extends Controller
 
         $properties = PropertyModel::sale()->available()->get();
 
+        $headSeo = $this->seo->render(
+            getenv('APP_NAME') . ' - Para Comprar',
+            'lorem ipsum',
+            route('web.sale'),
+            asset('assets/images/front1.jpg')
+        );
+
         return view('web.filter',[
-            'properties' => $properties
+            'properties' => $properties,
+            'headSeo' => $headSeo
         ]);
     }
 
@@ -74,8 +99,18 @@ class WebController extends Controller
                 'slug' => $request->slug
             ]
         )->first();
+
+        $headSeo = $this->seo->render(
+            getenv('APP_NAME') . ' - Para Comprar',
+            'lorem ipsum',
+            route('web.sale').'/'.$request->slug,
+            $property->cover
+        );
+
+
         return view('web.property',[
-            'property'=>$property
+            'property'=>$property,
+            'headSeo' => $headSeo
         ]);
     }
 
@@ -95,8 +130,16 @@ class WebController extends Controller
             $properties = PropertyModel::whereIn('id', $listIds)->get();
         }
 
+        $headSeo = $this->seo->render(
+            getenv('APP_NAME'),
+            'lorem ipsum',
+            route('web.filter'),
+            asset('assets/images/front1.jpg')
+        );
+
         return view('web.filter', [
-            'properties' => $properties
+            'properties' => $properties,
+            'headSeo' => $headSeo
         ]);
     }
 
@@ -107,20 +150,35 @@ class WebController extends Controller
 
         $properties = PropertyModel::whereNotNull('experience')->get();
 
+        $headSeo = $this->seo->render(
+            getenv('APP_NAME'),
+            'lorem ipsum',
+            route('web.filter'),
+            asset('assets/images/front1.jpg')
+        );
+
         return view('web.filter', [
-            'properties' => $properties
+            'properties' => $properties,
+            'headSeo' => $headSeo
         ]);
     }
 
     public function experiencesCategory(Request $request)
     {
+
+
         $filter = new FilterController();
         $filter->clearAllData();
 
 
         $properties = new PropertyModel();
         if (isset($request->slug)) {
-
+            $headSeo = $this->seo->render(
+                getenv('APP_NAME'),
+                'lorem ipsum' ,
+                route('web.filter'),
+                asset('assets/images/front1.jpg')
+            );
             $slug = str_replace('-', ' ', $request->slug);
             $results = $properties->where('experience', $slug)->get();
 
@@ -128,8 +186,11 @@ class WebController extends Controller
             $results = $properties->whereNotNull('experience')->get();
         }
 
+
+
         return view('web.filter', [
-            'properties' => $results
+            'properties' => $results,
+            'headSeo' => $headSeo
         ]);
     }
 }
