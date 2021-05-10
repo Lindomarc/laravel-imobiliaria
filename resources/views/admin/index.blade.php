@@ -45,7 +45,7 @@
                 <p class="dash_login_left_box_support">
                     <a target="_blank"
                        class="icon-whatsapp transition text-green"
-                       href="https://api.whatsapp.com/send?phone=DDI+DDD+TELEFONE&text=Olá, preciso de ajuda com o login."
+                       href="https://api.whatsapp.com/send?phone={{ getenv('PHONE_WHATSAPP') }}&text=Olá, preciso de ajuda com o login."
                     >Precisa de Suporte?</a>
                 </p>
             </footer>

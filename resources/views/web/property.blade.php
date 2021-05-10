@@ -160,7 +160,7 @@
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
-                        <a href="" class="btn btn-outline-success btn-lg btn-block icon-whatsapp">Converse com um Corretor</a>
+                        <a href="https://api.whatsapp.com/send?phone={{ getenv('PHONE_WHATSAPP') }}&text=Olá, preciso conversar com um corretor." class="btn btn-outline-success btn-lg btn-block icon-whatsapp">Converse com um Corretor</a>
                         <div class="main_property_contact">
                             <form action="" class="bg-light">
                                 <h2 class="text-white bg-front">Entre em contato</h2>
