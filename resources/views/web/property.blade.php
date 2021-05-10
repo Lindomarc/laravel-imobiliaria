@@ -182,7 +182,7 @@
                                 </div>
                                 <div class="form-group">
                                     <button class="btn btn-front btn-block form-control">Enviar</button>
-                                    <p class="text-front font-weight-bold text-center py-4">{{ getenv('APP_PHONE')??'' }}</p>
+                                    <p class="text-front font-weight-bold text-center py-4">{{ getenv('CLIENT_DATA_TELEPHONE')??'' }}</p>
                                 </div>
                             </form>
                         </div>
