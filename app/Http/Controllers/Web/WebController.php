@@ -150,20 +150,35 @@ class WebController extends Controller
 
         $properties = PropertyModel::whereNotNull('experience')->get();
 
+        $headSeo = $this->seo->render(
+            getenv('APP_NAME'),
+            'lorem ipsum',
+            route('web.filter'),
+            asset('assets/images/front1.jpg')
+        );
+
         return view('web.filter', [
-            'properties' => $properties
+            'properties' => $properties,
+            'headSeo' => $headSeo
         ]);
     }
 
     public function experiencesCategory(Request $request)
     {
+
+
         $filter = new FilterController();
         $filter->clearAllData();
 
 
         $properties = new PropertyModel();
         if (isset($request->slug)) {
-
+            $headSeo = $this->seo->render(
+                getenv('APP_NAME'),
+                'lorem ipsum' ,
+                route('web.filter'),
+                asset('assets/images/front1.jpg')
+            );
             $slug = str_replace('-', ' ', $request->slug);
             $results = $properties->where('experience', $slug)->get();
 
@@ -171,8 +186,11 @@ class WebController extends Controller
             $results = $properties->whereNotNull('experience')->get();
         }
 
+
+
         return view('web.filter', [
-            'properties' => $results
+            'properties' => $results,
+            'headSeo' => $headSeo
         ]);
     }
 }
