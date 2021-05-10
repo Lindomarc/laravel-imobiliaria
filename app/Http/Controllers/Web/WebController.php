@@ -90,8 +90,18 @@ class WebController extends Controller
                 'slug' => $request->slug
             ]
         )->first();
+
+        $headSeo = $this->seo->render(
+            getenv('APP_NAME') . ' - Para Comprar',
+            'lorem ipsum',
+            route('web.sale'),
+            $property->cover
+        );
+
+
         return view('web.property',[
-            'property'=>$property
+            'property'=>$property,
+            'headSeo' => $headSeo
         ]);
     }
 
