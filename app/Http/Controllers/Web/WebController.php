@@ -55,11 +55,20 @@ class WebController extends Controller
 
     public function rentProperty(Request $request)
     {
-        $property = PropertyModel::where('slug',$request->slug)->first();
-        session('trader','rent');
+        $property = PropertyModel::where('slug', $request->slug)->first();
 
-        return view('web.property',[
-            'property'=>$property
+        session('trader', 'rent');
+
+        $headSeo = $this->seo->render(
+            getenv('APP_NAME') . ' - Para Alugar',
+            'lorem ipsum',
+            route('web.rent').'/'.$request->slug,
+            $property->cover
+        );
+
+        return view('web.property', [
+            'property' => $property,
+            'headSeo' => $headSeo
         ]);
     }
 
@@ -94,7 +103,7 @@ class WebController extends Controller
         $headSeo = $this->seo->render(
             getenv('APP_NAME') . ' - Para Comprar',
             'lorem ipsum',
-            route('web.sale'),
+            route('web.sale').'/'.$request->slug,
             $property->cover
         );
 
