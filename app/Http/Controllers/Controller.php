@@ -15,6 +15,7 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     protected $message;
+    protected $seo;
 
     public function __construct()
     {
