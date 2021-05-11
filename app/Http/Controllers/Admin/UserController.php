@@ -6,7 +6,6 @@ use App\Http\Requests\Admin\UserRequest;
 use App\Illuminate\Http\Response;
 use App\Models\User as UserModel;
 use App\Support\Cropper;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
