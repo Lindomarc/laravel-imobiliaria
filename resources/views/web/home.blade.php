@@ -7,8 +7,8 @@
                 <div class="col-8">
                     <p class="main_slide_content">Encontre o <b>imóvel ideal</b> para você e
                         <b>sua família</b> morar na praia!</p>
-                    <a href="#" class="btn btn-front">Quero Alugar</a>
-                    <a href="#" class="btn btn-front">Quero Comprar</a>
+                    <a href="{{ route('web.rent') }}" class="btn btn-front">Quero Alugar</a>
+                    <a href="{{ route('web.sale') }}" class="btn btn-front">Quero Comprar</a>
                 </div>
             </div>
         </div>
