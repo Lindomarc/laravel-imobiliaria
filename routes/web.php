@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Route;
         Route::get('/quero-comprar/{slug}', 'WebController@saleProperty')->name('saleProperty');
         Route::match(['post','get'],'/filtro', 'WebController@filter')->name('filter');
         Route::get('/contato', 'WebController@contact')->name('contact');
+        Route::post('/contato/sendEmail', 'WebController@sendEmail')->name('sendEmail');
+        Route::get('/contato/sucesso', 'WebController@sendEmailSuccess')->name('sendEmailSuccess');
         Route::get('/experiencias', 'WebController@experiences')->name('experiences');
         Route::get('/experiencias/{slug}', 'WebController@experiencesCategory')->name('experiencesCategory');
     });
