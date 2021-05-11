@@ -46,6 +46,7 @@ $(function () {
 
                 $.each($('select[name*="filter_"]'),function (index, element) {
                     if ($(element).data('index') >= (nextIndex + 1)){
+                        $(element).empty();
                         $(element).append($('<option>', {
                                 text: 'Selecione o filtro anterior',
                                 disabled: true
