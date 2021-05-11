@@ -27,6 +27,12 @@ class WebController extends Controller
             'headSeo' => $headSeo
         ]);
     }
+
+    public function spotlight()
+    {
+        return view('web.spotlight');
+    }
+
     public function contact()
     {
         return view('web.contact');

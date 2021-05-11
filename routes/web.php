@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
     ],function (){
         // Home Page
         Route::get('/', 'WebController@home')->name('home');
+        Route::get('/destaque', 'WebController@spotlight')->name('spotlight');
         Route::get('/quero-alugar', 'WebController@rent')->name('rent');
         Route::get('/quero-alugar/{slug}', 'WebController@rentProperty')->name('rentProperty');
         Route::get('/quero-comprar', 'WebController@sale')->name('sale');
