@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Web\Contact;
 use App\Models\Property as PropertyModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class WebController extends Controller
 {
@@ -27,9 +29,34 @@ class WebController extends Controller
             'headSeo' => $headSeo
         ]);
     }
+
+    public function spotlight()
+    {
+        return view('web.spotlight');
+    }
+
     public function contact()
     {
         return view('web.contact');
+    }
+
+    public function sendEmail(Request $request)
+    {
+        $data = [
+            'replay_name' => $request->name,
+            'replay_email' => $request->email,
+            'phone' => $request->phone,
+            'message' => $request->message,
+        ];
+
+        Mail::send(new Contact($data));
+        return redirect()->route('web.sendEmailSuccess');
+
+    }
+
+    public function sendEmailSuccess()
+    {
+        return view('web.contact_success');
     }
 
     public function rent()

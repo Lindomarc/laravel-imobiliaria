@@ -165,23 +165,24 @@
                     <div class="col-12 col-md-4">
                         <a href="https://api.whatsapp.com/send?phone={{ getenv('PHONE_WHATSAPP') }}&text=Olá, preciso conversar com um corretor." class="btn btn-outline-success btn-lg btn-block icon-whatsapp">Converse com um Corretor</a>
                         <div class="main_property_contact">
-                            <form action="" class="bg-light">
+                            <form action="{{ route('web.sendEmail') }}" method="post" class="bg-light">
+                                @csrf
                                 <h2 class="text-white bg-front">Entre em contato</h2>
                                 <div class="form-group">
                                     <label for="">Seu nome:</label>
-                                    <input type="text" class="form-control" placeholder="Informe seu nome completo">
+                                    <input type="text" name="name" class="form-control" placeholder="Informe seu nome completo">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Seu telefone:</label>
-                                    <input type="text" class="form-control" placeholder="Informe seu telefone com DDD">
+                                    <input type="tel" name="phone" class="form-control" placeholder="Informe seu telefone com DDD">
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Seu nome:</label>
-                                    <input type="text" class="form-control" placeholder="Informe seu melhor e-mail">
+                                    <label for="">Seu email:</label>
+                                    <input type="email" name="email" class="form-control" placeholder="Informe seu melhor e-mail">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Sua mensagem</label>
-                                    <textarea name="" id="" rows="5" class="form-control">Quero ter mais informações sobre esse imóvel, {{ $property->title }}, {{ $property->type_text }},{{ $property->city }}/{{ $property->state }}! (#{{ $property->id }})</textarea>
+                                    <textarea name="message" id="" rows="5" class="form-control">Quero ter mais informações sobre esse imóvel, {{ $property->title }}, {{ $property->type_text }},{{ $property->city }}/{{ $property->state }}! (#{{ $property->id }})</textarea>
                                 </div>
                                 <div class="form-group">
                                     <button class="btn btn-front btn-block form-control">Enviar</button>

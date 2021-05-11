@@ -47,7 +47,7 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="{{ route('web.home') }}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link text-front" href="javascript:void(0)">Destaque</a></li>
+                    <li class="nav-item"><a class="nav-link text-front" href="{{ route('web.spotlight') }}">Destaque</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('web.rent') }}">Alugar</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('web.sale') }}">Comprar</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('web.contact') }}">Contato</a></li>
