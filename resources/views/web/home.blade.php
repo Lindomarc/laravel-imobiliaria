@@ -179,7 +179,7 @@
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center border-bottom border-front mb-5">
                     <h1 class="text-front">À Venda</h1>
-                    <a href="#" class="text-front">Ver mais</a>
+                    <a href="{{ route('web.sale') }}" class="text-front">Ver mais</a>
                 </div>
                 <div class="row">
                     @if (!!$propertiesForSales)
@@ -231,7 +231,7 @@
             <div class="container ">
                 <div class="d-flex justify-content-between align-items-center border-bottom border-front mb-5">
                     <h1 class="text-front">Para Alugar</h1>
-                    <a href="#" class="text-front">Ver mais</a>
+                    <a href="{{ route('web.rent') }}" class="text-front">Ver mais</a>
                 </div>
                 <div class="row">
                     @if (!!$propertiesForRents)
