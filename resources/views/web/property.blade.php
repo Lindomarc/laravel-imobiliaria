@@ -16,15 +16,15 @@
 
                             <ol class="carousel-indicators">
                                 @if ($property->covers)
-                                    @foreach($property->covers as $key => $cover)
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="{{ $key }}" class="{{ $cover->cover?'active':''}}"></li>
+                                    @foreach ($property->covers as $key => $cover)
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="{{ $key }}" class="{{ $cover->cover ? 'active' : '' }}"></li>
                                     @endforeach
                                 @endif
                             </ol>
                             @if ($property->covers)
                                 <div class="carousel-inner">
-                                    @foreach($property->covers as $key => $cover)
-                                        <div class="carousel-item {{ $cover->cover?'active':'' }}">
+                                    @foreach ($property->covers as $key => $cover)
+                                        <div class="carousel-item {{ $cover->cover ? 'active' : '' }}">
                                             <img src="{{ asset($cover->url) }}" class="d-block w-100" alt="...">
                                         </div>
                                     @endforeach
@@ -38,14 +38,17 @@
                                 <span class="sr-only">Next</span> </a>
                         </div>
                         <div class="main_property_content_price text-muted">
-                            <p class="small">IPTU: R$ {{ $property->tribute??'0,00'  }} | Condomínio: R$ {{ $property->condominium??'0,00' }}</p>
+                            <p class="small">IPTU: R$ {{ $property->tribute ?? '0,00' }} | Condomínio: R$
+                                {{ $property->condominium ?? '0,00' }}</p>
 
-                            <p class="text-muted font-weight-bold">Valor do imóvel: {{ $property->sale_price?'R$ '.$property->sale_price:''  }}{{ (session('trade') === 'rent'?(!!$property->sale_price)?'/mês':'Entre em contato com suporte':'') }}</p>
+                            <p class="text-muted font-weight-bold">Valor do imóvel:
+                                {{ $property->sale_price ? 'R$ ' . $property->sale_price : '' }}{{ session('trade') === 'rent' ? (!!$property->sale_price ? '/mês' : 'Entre em contato com suporte') : '' }}
+                            </p>
 
                         </div>
                         <div class="main_property_content_description">
                             <h2 class="text-front font-weight-bold">Conheça mais o imóvel</h2>
-                            <div>{!!  $property->description !!}</div>
+                            <div>{!! $property->description !!}</div>
                         </div>
                         <div class="main_property_content_features">
                             <h2 class="text-front font-weight-bold">Características</h2>
@@ -89,67 +92,67 @@
                         <div class="main_property_content_structure pt-5">
                             <h2 class="text-front font-weight-bold">Estrutura</h2>
                             <div class="row">
-                                @if($property->air_conditioning == true)
+                                @if ($property->air_conditioning == true)
                                     <span class="main_property_structure_item icon-check">Ar Condicionado</span>
                                 @endif
 
-                                @if($property->bar == true)
+                                @if ($property->bar == true)
                                     <span class="main_property_structure_item icon-check">Bar</span>
                                 @endif
 
-                                @if($property->library == true)
+                                @if ($property->library == true)
                                     <span class="main_property_structure_item icon-check">Biblioteca</span>
                                 @endif
 
-                                @if($property->barbecue_grill == true)
+                                @if ($property->barbecue_grill == true)
                                     <span class="main_property_structure_item icon-check">Churrasqueira</span>
                                 @endif
 
-                                @if($property->american_kitchen == true)
+                                @if ($property->american_kitchen == true)
                                     <span class="main_property_structure_item icon-check">Cozinha Americana</span>
                                 @endif
 
-                                @if($property->fitted_kitchen == true)
+                                @if ($property->fitted_kitchen == true)
                                     <span class="main_property_structure_item icon-check">Cozinha Planejada</span>
                                 @endif
 
-                                @if($property->pantry == true)
+                                @if ($property->pantry == true)
                                     <span class="main_property_structure_item icon-check">Despensa</span>
                                 @endif
 
-                                @if($property->edicule == true)
+                                @if ($property->edicule == true)
                                     <span class="main_property_structure_item icon-check">Edicula</span>
                                 @endif
 
-                                @if($property->office == true)
+                                @if ($property->office == true)
                                     <span class="main_property_structure_item icon-check">Escritório</span>
                                 @endif
 
-                                @if($property->bathtub == true)
+                                @if ($property->bathtub == true)
                                     <span class="main_property_structure_item icon-check">Banheira</span>
                                 @endif
 
-                                @if($property->fireplace == true)
+                                @if ($property->fireplace == true)
                                     <span class="main_property_structure_item icon-check">Lareira</span>
                                 @endif
 
-                                @if($property->lavatory == true)
+                                @if ($property->lavatory == true)
                                     <span class="main_property_structure_item icon-check">Lavabo</span>
                                 @endif
 
-                                @if($property->furnished == true)
+                                @if ($property->furnished == true)
                                     <span class="main_property_structure_item icon-check">Mobiliado</span>
                                 @endif
 
-                                @if($property->pool == true)
+                                @if ($property->pool == true)
                                     <span class="main_property_structure_item icon-check">Piscina</span>
                                 @endif
 
-                                @if($property->steam_room == true)
+                                @if ($property->steam_room == true)
                                     <span class="main_property_structure_item icon-check">Sauna</span>
                                 @endif
 
-                                @if($property->view_of_the_sea == true)
+                                @if ($property->view_of_the_sea == true)
                                     <span class="main_property_structure_item icon-check">Vista para o Mar</span>
                                 @endif
                             </div>
@@ -182,14 +185,18 @@
                                 </div>
                                 <div class="form-group">
                                     <button class="btn btn-front btn-block form-control">Enviar</button>
-                                    <p class="text-front font-weight-bold text-center py-4">{{ getenv('CLIENT_DATA_TELEPHONE')??'' }}</p>
+                                    <p class="text-front font-weight-bold text-center py-4">
+                                        {{ getenv('CLIENT_DATA_TELEPHONE') ?? '' }}</p>
                                 </div>
                             </form>
                         </div>
-                        <div class="main_property_share">
-                            <a href="#" class="btn btn-info icon-facebook icon-notext">Facebook</a>
-                            <a href="#" class="btn btn-info icon-twitter icon-notext">Twitter</a>
-                            <a href="#" class="btn btn-info icon-instagram icon-notext">instagram</a>
+                        <div class="main_property_share d-flex">
+                            <div class="fb-share-button" data-href="{{ url()->current() }}" data-layout="button" data-size="small">
+                                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ url()->current() }}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a>
+                            </div>
+                            <div class="pt-1">
+                                <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
+                            </div>
                         </div>
 
                     </div>
@@ -197,4 +204,12 @@
             </div>
         </div>
     </div>
+    <div id="fb-root"></div>
+@endsection
+
+@section('js_block')
+
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v10.0" nonce="nljJW4WV"></script>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 @endsection
