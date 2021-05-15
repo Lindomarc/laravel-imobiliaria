@@ -334,11 +334,11 @@
                                         <div class="property_image_item"  id="image-{{ $image->id }}">
                                             <img src="{{ $image->url_cropped }}"/>
                                             <div class="property_image_actions">
-                                                <span onclick="imageSetCover(this)" class="btn btn-small icon-check icon-notext {{ !!$image->cover?'btn-green':'' }}" data-action="{{ url(route('admin.properties.imageSetCover',['image'=>$image->id])) }}">
+                                                <span onclick="imageSetCover(this)" class="btn btn-small icon-check icon-notext {{ !!$image->cover?'btn-green':'' }}" data-action="{{ route('admin.properties.imageSetCover',['image'=>$image->id],false) }}">
 
                                                 </span>
 
-                                                <span onclick="imageRemove(this)" class="btn btn-red  btn-small icon-times icon-notext" data-action="{{ url(route('admin.properties.imageRemove',['image'=>$image->id])) }}">
+                                                <span onclick="imageRemove(this)" class="btn btn-red  btn-small icon-times icon-notext" data-action="{{ route('admin.properties.imageRemove',['image'=>$image->id],false) }}">
 
                                                 </span>
                                             </div>
