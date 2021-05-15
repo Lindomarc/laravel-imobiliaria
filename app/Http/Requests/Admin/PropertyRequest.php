@@ -49,6 +49,9 @@ class PropertyRequest extends FormRequest
             'state' => 'required',
             'city' => 'required',
 
+            // Structure
+            'title' => 'required',
+            'headline' => 'required'
 
         ];
     }
