@@ -15,7 +15,7 @@ class AlterUsersTableAddControlLogin extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dateTime('last_login_at')->nullable();
-            $table->string('ip')->nullable();
+            $table->string('last_login_ip')->nullable();
         });
     }
 
