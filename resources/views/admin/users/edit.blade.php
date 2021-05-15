@@ -35,7 +35,7 @@
                     </li>
                 </ul>
 
-                <form class="app_form" action="{{ url(route('admin.users.update',$user->id)) }}" method="post" enctype="multipart/form-data">
+                <form class="app_form" action="{{ url(route('admin.users.update',$user->id, false)) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="id" value="{{ $user->id }}">
