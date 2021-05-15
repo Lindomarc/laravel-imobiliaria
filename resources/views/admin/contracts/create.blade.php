@@ -36,7 +36,7 @@
 
                 <div class="nav_tabs_content">
                     <div id="parts">
-                        <form action="{{ route('admin.contracts.store') }}" method="post" class="app_form">
+                        <form action="{{ route('admin.contracts.store', null, false) }}" method="post" class="app_form">
                             @csrf
                             <input type="hidden" name="owner_spouse_persist" value="{{ old('owner_spouse') }}">
                             <input type="hidden" name="owner_company_id_persist" value="{{ old('owner_company_id') }}">

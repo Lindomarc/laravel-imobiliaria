@@ -37,7 +37,7 @@
                     </li>
                 </ul>
 
-                <form action="{{ route('admin.properties.store') }}" method="post" class="app_form" enctype="multipart/form-data">
+                <form action="{{ route('admin.properties.store', null, false) }}" method="post" class="app_form" enctype="multipart/form-data">
                     @csrf
                     <div class="nav_tabs_content">
                         <div id="data">

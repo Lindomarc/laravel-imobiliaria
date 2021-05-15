@@ -7,7 +7,7 @@
             <p class="">Preencha o formulário abaixo e vamos direcionalo para alguem que atende a sua necessidade!</p>
             <div class="row justify-content-center">
 
-                <form action="{{ route('web.sendEmail') }}" method="post" class="bg-white m-5 p-3">
+                <form action="{{ route('web.sendEmail', null, false) }}" method="post" class="bg-white m-5 p-3">
                     @csrf
                     <h2 class="text-muted text-left"><i class="icon-envelope"></i>Envie um e-mail</h2>
                     <div class="form-group">

@@ -36,7 +36,7 @@
 
                 <div class="nav_tabs_content">
                     <div id="parts">
-                        <form action="{{ route('admin.contracts.update',$contract->id) }}" method="post" class="app_form">
+                        <form action="{{ route('admin.contracts.update',$contract->id, false) }}" method="post" class="app_form">
                             @csrf
                             @method('put')
                             <input type="hidden" name="owner_spouse_persist" value="{{ old('owner_spouse')??$contract->owner_spouse }}">

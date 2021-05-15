@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-12 col-md-4 ml-3 ml-sm-0">
 
-                    <form action="{{ route('web.filter') }}"  class="w-100 p-3 bg-white mb-5" type="post">
+                    <form action="{{ route('web.filter', null, false) }}"  class="w-100 p-3 bg-white mb-5" type="post">
                         <div class="row">
                             <div class="form-group col-12">
                                 <label for="search" class="mb-2 text-front">Comprar ou Alugar?</label>

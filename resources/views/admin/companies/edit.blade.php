@@ -22,7 +22,7 @@
 
         <div class="dash_content_app_box">
             <div class="dash_content_app_box_stage">
-                <form class="app_form" action="{{ route('admin.companies.update',$item->id) }}" method="post">
+                <form class="app_form" action="{{ route('admin.companies.update',$item->id, false) }}" method="post">
                     @csrf
                     @method('put')
                     <label class="label"> <span class="legend">Usuário Responsável Legal:</span>
