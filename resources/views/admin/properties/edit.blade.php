@@ -37,7 +37,7 @@
                     </li>
                 </ul>
 
-                <form action="{{ route('admin.properties.update',['property'=>$property->id]) }}" method="post" class="app_form" enctype="multipart/form-data">
+                <form action="{{ route('admin.properties.update',['property'=>$property->id, false]) }}" method="post" class="app_form" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
