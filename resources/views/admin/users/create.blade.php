@@ -35,7 +35,7 @@
                     </li>
                 </ul>
 
-                <form class="app_form" action="{{ route('admin.users.store') }}" method="post" enctype="multipart/form-data">
+                <form class="app_form" action="{{ route('admin.users.store',null,false) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="nav_tabs_content">
                         <div id="data">
