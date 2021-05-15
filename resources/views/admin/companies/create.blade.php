@@ -23,7 +23,7 @@
         <div class="dash_content_app_box">
 
             <div class="dash_content_app_box_stage">
-                <form class="app_form" action="{{ route('admin.companies.store') }}" method="post">
+                <form class="app_form" action="{{ route('admin.companies.store', null, false) }}" method="post">
                     @csrf
                     <label class="label"> <span class="legend">Usuário Responsável Legal:</span>
                         <select name="user_id" class="select2">
