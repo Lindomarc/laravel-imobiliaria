@@ -82,3 +82,4 @@ use Illuminate\Support\Facades\Route;
         Route::get('logout', 'AuthController@logout')->name('logout');
 
     });
+
