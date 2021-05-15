@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
 
-    <link rel="stylesheet" href="{{ url(mix('backend/assets/css/reset.css')) }}"/>
-    <link rel="stylesheet" href="{{ url(mix('backend/assets/css/libs.css')) }}"/>
-    <link rel="stylesheet" href="{{ url(mix('backend/assets/css/boot.css')) }}"/>
-    <link rel="stylesheet" href="{{ url(mix('backend/assets/css/style.css')) }}"/>
-    <link rel="icon" type="image/png" href="{{ url(mix('backend/assets/images/favicon.png')) }}"/>
+    <link rel="stylesheet" href="{{ asset('backend/assets/css/reset.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('backend/assets/css/libs.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('backend/assets/css/boot.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('backend/assets/css/style.css') }}"/>
+    <link rel="icon" type="image/png" href="{{ asset('backend/assets/images/favicon.png') }}"/>
 
     @hasSection('css_block')
         @yield('css_block')
@@ -115,8 +115,8 @@
 
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/tinymce/tinymce.min.js') }}"></script>
-<script src="{{ url(mix('backend/assets/js/libs.js')) }}"></script>
-<script src="{{ url(mix('backend/assets/js/scripts.js')) }}"></script>
+<script src="{{ asset('backend/assets/js/libs.js') }}"></script>
+<script src="{{ asset('backend/assets/js/scripts.js') }}"></script>
 
 @hasSection('js_block')
     @yield('js_block')
