@@ -29,12 +29,12 @@
                 @csrf
                 <label>
                     <span class="field icon-envelope">E-mail:</span>
-                    <input type="email" name="email" placeholder="Informe seu e-mail" value="lindomar@mswi.com.br"/>
+                    <input type="email" name="email" placeholder="Informe seu e-mail"/>
                 </label>
 
                 <label>
                     <span class="field icon-unlock-alt">Senha:</span>
-                    <input type="password" name="password_check" placeholder="Informe sua senha" value="teste"/>
+                    <input type="password" name="password_check" placeholder="Informe sua senha"/>
                 </label>
 
                 <button class="gradient gradient-orange radius icon-sign-in">Entrar</button>
