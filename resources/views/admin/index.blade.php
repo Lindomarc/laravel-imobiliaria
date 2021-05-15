@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/css/reset.css') }}"/>
     <link rel="stylesheet" href="{{ asset('backend/assets/css/boot.css') }}"/>
     <link rel="stylesheet" href="{{ asset('backend/assets/css/login.css') }}"/>
-    <link rel="icon" type="image/png" href="{{ url(mix('backend/assets/images/favicon.png')) }}"/>
+    <link rel="icon" type="image/png" href="{{ asset('backend/assets/images/favicon.png') }}"/>
 
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
@@ -56,8 +56,8 @@
 
 </div>
 
-<script src="{{ url(mix('backend/assets/js/jquery.js')) }}"></script>
-<script src="{{ url(mix('backend/assets/js/login.js')) }}"></script>
+<script src="{{ asset('backend/assets/js/jquery.js') }}"></script>
+<script src="{{ asset('backend/assets/js/login.js') }}"></script>
 
 </body>
 </html>
