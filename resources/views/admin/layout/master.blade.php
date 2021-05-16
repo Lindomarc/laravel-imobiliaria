@@ -30,7 +30,7 @@
 
 @php
     $userName = auth()->user()->name;
-    if (!!auth()->user()->url_cover) {
+    if (!!auth()->user()->cover) {
         $cover = auth()->user()->url_cover;
     } else {
         $cover = '/backend/assets/images/avatar.jpg';
