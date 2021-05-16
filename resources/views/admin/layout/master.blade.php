@@ -29,9 +29,9 @@
 <div class="ajax_response"></div>
 
 @php
-    $userName = \Illuminate\Support\Facades\Auth::user()->name;
-    if (\Illuminate\Support\Facades\File::exists(public_path('/storage/'.\Illuminate\Support\Facades\Auth::user()->cover))) {
-        $cover = '/storage/'.\Illuminate\Support\Facades\Auth::user()->cover;
+    $userName = auth()->user()->name;
+    if (!!auth()->user()->url_cover) {
+        $cover = auth()->user()->url_cover;
     } else {
         $cover = '/backend/assets/images/avatar.jpg';
     }
