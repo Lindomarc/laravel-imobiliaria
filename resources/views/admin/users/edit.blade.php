@@ -428,7 +428,7 @@
                                     <div id="realties">
                                         <div class="realty_list">
                                             @if (!!$user->contractsAsAcquierer()->count())
-                                                
+
                                                 @foreach($user->contractsAsAcquierer()->get() as $contract)
 
                                                     @if ($property = $contract->property()->first())
