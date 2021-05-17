@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Mail\Web\Contact;
+use App\Models\Property;
 use App\Models\Property as PropertyModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -93,6 +94,8 @@ class WebController extends Controller
             $property->cover
         );
 
+        $this->countView($property);
+
         return view('web.property', [
             'property' => $property,
             'headSeo' => $headSeo
@@ -134,6 +137,7 @@ class WebController extends Controller
             $property->cover
         );
 
+        $this->countView($property);
 
         return view('web.property',[
             'property'=>$property,
@@ -219,5 +223,11 @@ class WebController extends Controller
             'properties' => $results,
             'headSeo' => $headSeo
         ]);
+    }
+
+    private function countView(Property $property)
+    {
+        $property->increment('views');
+        $property->save();
     }
 }

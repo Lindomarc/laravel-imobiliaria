@@ -292,6 +292,11 @@
             return Str::slug($this->experience);
         }
 
+        public function getViewsAttribute($value)
+        {
+            return $value;
+        }
+
         public function setSlug()
         {
             if (!!$this->title) {
