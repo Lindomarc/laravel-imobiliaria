@@ -113,6 +113,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Property::class,'user_id','id');
     }
 
+    public function contractsAsAcquierer()
+    {
+        return $this->hasMany(Contract::class,'acquirer_id','id');
+    }
+
     public function setLessorAttribute($value)
     {
         $this->attributes['lessor'] = ($value === true || $value === 'on' ) ? 1 : 0;

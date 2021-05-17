@@ -170,10 +170,22 @@
         {
             return $value;
         }
+
         public function setCategoryAttribute($value)
         {
             $this->attributes['category'] =  $value;
         }
+
+        public function getCategoryTextAttribute(){
+
+            foreach ($this->list_category as $key => $value) {
+                if ($this->category == $key) {
+                    return $value;
+                }
+            }
+            return  '';
+        }
+
         public function setSalePriceAttribute($value)
         {
             $this->attributes['sale_price'] = fixDouble($value);
@@ -315,4 +327,5 @@
             }
             return  '';
         }
+
     }
