@@ -392,16 +392,21 @@
 
                                                     </div>
 
-                                                    <div class="realty_list_item_actions">
-                                                        <ul>
-                                                            <li class="icon-eye">{{ $item->views }} Visualizações</li>
-                                                        </ul>
-                                                        <div>
-                                                            <a href="{{ route('admin.properties.show',['property'=> $item->id]) }}" class="btn btn-blue icon-eye">Visualizar Imóvel</a>
-                                                            <a href="{{ route('admin.properties.edit',['property'=> $item->id]) }}" class="btn btn-green icon-pencil-square-o">Editar Imóvel</a>
+                                                        <div class="realty_list_item_actions">
+                                                            <ul>
+                                                                <li class="icon-eye">{{ $item->views }} Visualizações</li>
+                                                            </ul>
+                                                            <div>
+                                                                @if ($item->sale)
+                                                                    <a href="{{ route('web.saleProperty',['slug'=> $item->slug], false) }}" class="btn btn-blue icon-eye" target="_blank">Visualizar Imóvel</a>
+                                                                @else
+                                                                    <a href="{{ route('web.rentProperty',['slug'=> $item->slug], false) }}" class="btn btn-blue icon-eye" target="_blank">Visualizar Imóvel</a>
+                                                                @endif
+
+                                                                <a href="{{ route('admin.properties.edit',['property'=> $item->id], false) }}" class="btn btn-green icon-pencil-square-o">Editar Imóvel</a>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
 
                                                 @endforeach
                                             @else
