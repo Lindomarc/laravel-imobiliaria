@@ -399,10 +399,10 @@
                                                             <div>
                                                                 @if ($item->sale)
                                                                     <a href="{{ route('web.saleProperty',['slug'=> $item->slug], false) }}" class="btn btn-blue icon-eye" target="_blank">Visualizar Imóvel</a>
-                                                                @else
+                                                                @endif
+                                                                @if ($item->rent)
                                                                     <a href="{{ route('web.rentProperty',['slug'=> $item->slug], false) }}" class="btn btn-blue icon-eye" target="_blank">Visualizar Imóvel</a>
                                                                 @endif
-
                                                                 <a href="{{ route('admin.properties.edit',['property'=> $item->id], false) }}" class="btn btn-green icon-pencil-square-o">Editar Imóvel</a>
                                                             </div>
                                                         </div>
