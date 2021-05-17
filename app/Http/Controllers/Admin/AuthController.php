@@ -87,7 +87,12 @@ class AuthController extends Controller
         ];
 
         if (!Auth::attempt($credentials)) {
-            $json['message'] = $this->message->error('Ops, usário e senha inválido')->render();
+            $json['message'] = $this->message->error('Ops, usuário e senha inválido')->render();
+            return  response()->json($json);
+        }
+
+        if (!$this->isAdmin()) {
+            $json['message'] = $this->message->error('Ops, usuário não tem permissões de acesso.')->render();
             return  response()->json($json);
         }
 
@@ -97,10 +102,16 @@ class AuthController extends Controller
 
     }
 
+
     public function logout()
     {
         Auth::logout();
         return redirect()->route('admin.login');
+    }
+
+    private function isAdmin()
+    {
+        return !!auth()->user()->admin;
     }
 
     private function authenticated(string $ip)
