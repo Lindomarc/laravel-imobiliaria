@@ -95,10 +95,15 @@
 
                                 <div class="realty_list_item_actions">
                                     <ul>
-                                        <li class="icon-eye">1234 Visualizações</li>
+                                        <li class="icon-eye">{{ $item->views }} Visualizações</li>
                                     </ul>
                                     <div>
-                                        <a href="{{ route('admin.properties.show',['property'=> $item->id]) }}" class="btn btn-blue icon-eye">Visualizar Imóvel</a>
+                                        @if ($item->sale)
+                                            <a href="{{ route('web.saleProperty',['slug'=> $item->slug], false) }}" class="btn btn-blue icon-eye" target="_blank">Visualizar Imóvel (Comprar)</a>
+                                        @endif
+                                        @if ($item->rent)
+                                            <a href="{{ route('web.rentProperty',['slug'=> $item->slug], false) }}" class="btn btn-blue icon-eye" target="_blank">Visualizar Imóvel (Alugar)</a>
+                                        @endif
                                         <a href="{{ route('admin.properties.edit',['property'=> $item->id]) }}" class="btn btn-green icon-pencil-square-o">Editar Imóvel</a>
                                     </div>
                                 </div>
