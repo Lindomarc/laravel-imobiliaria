@@ -283,6 +283,15 @@
             $this->attributes['edicule'] = (!!$value) ? 1 : 0;
         }
 
+        public function setZipcodeAttribute($value)
+        {
+            $this->attributes['zipcode'] = onlyNumber($value);
+        }
+        public function getZipcodeAttribute($value)
+        {
+            return mask($value,'#####-###');
+        }
+
         public function setStatusAttribute($value)
         {
             $this->attributes['status'] = !!$value;
