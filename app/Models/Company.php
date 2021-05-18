@@ -40,4 +40,13 @@
             return mask($value, '##.###.###/####-##');
         }
 
+        public function setZipcodeAttribute($value)
+        {
+            $this->attributes['zipcode'] = onlyNumber($value);
+        }
+        public function getZipcodeAttribute($value)
+        {
+            return mask($value,'#####-###');
+        }
+
     }
