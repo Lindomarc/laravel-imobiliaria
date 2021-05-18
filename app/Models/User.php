@@ -181,6 +181,11 @@ class User extends Authenticatable implements JWTSubject
         $this->attributes['zipcode'] = onlyNumber($value);
     }
 
+    public function getZipcodeAttribute($value)
+    {
+        return mask($value,'#####-###');
+    }
+
     public function setTelephoneAttribute($value)
     {
         $this->attributes['telephone'] = onlyNumber($value);
