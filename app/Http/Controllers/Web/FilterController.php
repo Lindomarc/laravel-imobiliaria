@@ -415,7 +415,7 @@
                 })
                 ->when($garage, function ($query, $garage) {
                     $garage = $garage !== 'no_garage' ? $garage : 0;
-                    return $query->whereRaw('garage + garage_covered = ? OR garage = ? OR garage_covered = ?', [
+                    return $query->whereRaw('(garage + garage_covered = ? OR garage = ? OR garage_covered = ?)', [
                         $garage, $garage, $garage
                     ]);
                 })
