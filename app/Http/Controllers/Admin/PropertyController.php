@@ -117,8 +117,17 @@
         public function update(PropertyRequest $request, $id)
         {
             $property = PropertyModel::where('id', $id)->first();
-            $property->setSaleAttribute($request->sale);
-            $property->setRentAttribute($request->rent);
+
+            if ($request->porpouse  == 'sale') {
+                $property->setSaleAttribute(true);
+                $property->setRentAttribute(false);
+
+            } elseif($request->porpouse  == 'rent') {
+
+                $property->setSaleAttribute(false);
+                $property->setRentAttribute(true);
+            }
+
             $property->setTypeAttribute($request->type);
             $property->setCategoryAttribute($request->category);
             $property->setAirConditioningAttribute($request->air_conditioning);

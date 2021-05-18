@@ -463,6 +463,35 @@ input:-webkit-autofill {
   filter: alpha(opacity=100);
   opacity: 1;
 }
+.app_form input[type=radio] {
+  visibility: hidden !important;
+  margin: 0 !important;
+  width: 0 !important;
+  display: inline-block;
+}
+.app_form input[type=radio] + label:before, .app_form input[type=radio] + span:before {
+  visibility: visible;
+  font-family: "upadmin" !important;
+  position: relative;
+  top: 4px;
+  padding-right: 8px;
+  content: "" !important;
+  font-size: 1.1em;
+}
+.app_form input[type=radio] + label:hover, .app_form input[type=radio] + span:hover {
+  cursor: pointer;
+}
+.app_form input[type=radio] + label:hover:before, .app_form input[type=radio] + span:before {
+  content: "";
+  opacity: 0.2;
+}
+.app_form input[type=radio]:checked + label:before, .app_form input[type=radio]:checked + span:before {
+  content: "" !important;
+}
+.app_form input[type=radio]:checked + label:hover:before, .app_form input[type=radio]:checked + span:hover:before, .app_form input[type=radio]:checked + label:before, .app_form input[type=radio]:checked + span:before {
+  filter: alpha(opacity=100);
+  opacity: 1;
+}
 
 /*SEARCH FORM*/
 .app_search_form {
