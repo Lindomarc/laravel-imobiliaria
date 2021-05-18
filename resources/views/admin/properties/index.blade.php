@@ -69,7 +69,7 @@
                                             <span class="icon-realty-bed"></span>
                                         </div>
                                         <div class="realty_list_item_card_content">
-                                            <span class="realty_list_item_description_title">Domitórios:</span>
+                                            <span class="realty_list_item_description_title">Dormitórios:</span>
                                             <span class="realty_list_item_description_content">{{ $item->bedrooms + $item->suites }} Quartos<br>
                                                                     @if (!!$item->suites)
                                                     <span>Sendo {{ $item->suites }} suítes</span></span>

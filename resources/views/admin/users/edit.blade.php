@@ -368,7 +368,7 @@
                                                                     <span class="icon-realty-bed"></span>
                                                                 </div>
                                                                 <div class="realty_list_item_card_content">
-                                                                    <span class="realty_list_item_description_title">Domitórios:</span>
+                                                                    <span class="realty_list_item_description_title">Dormitórios:</span>
                                                                     <span class="realty_list_item_description_content">{{ $property->bedrooms + $property->suites }} Quartos<br>
                                                                     @if (!!$property->suites)
                                                                             <span>Sendo {{ $property->suites }} suítes</span></span>
@@ -471,7 +471,7 @@
                                                                         <span class="icon-realty-bed"></span>
                                                                     </div>
                                                                     <div class="realty_list_item_card_content">
-                                                                        <span class="realty_list_item_description_title">Domitórios:</span>
+                                                                        <span class="realty_list_item_description_title">Dormitórios:</span>
                                                                         <span class="realty_list_item_description_content">{{ $property->bedrooms + $property->suites }} Quartos<br>
                                                                     @if (!!$property->suites)
                                                                                 <span>Sendo {{ $property->suites }} suítes</span></span>
