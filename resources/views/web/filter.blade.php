@@ -93,7 +93,8 @@
                 <div class="col-12 col-md-8">
 
                     <div class="row">
-                        @if ($properties->count())
+
+                        @if ($properties)
                             @foreach($properties as $property)
                                 <div class="mb-4 col-12 col-lg-6">
                                     <article>

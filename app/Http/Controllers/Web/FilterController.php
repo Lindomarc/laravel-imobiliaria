@@ -386,6 +386,7 @@
 
 
             return DB::table('properties')
+                ->where('status', '=', true)
                 ->when($sale, function ($query, $sale) {
                     return $query->where('sale', $sale);
                 })
