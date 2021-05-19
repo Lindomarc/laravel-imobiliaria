@@ -51,10 +51,14 @@
                             <input type="hidden" name="condominium_persist" value="{{ old('condominium')??$contract->condominium_price }}">
 
                             <div class="label_gc">
-                                <span class="legend">Finalidade:</span> <label class="label">
-                                    <input type="checkbox" name="sale" {{ (old('sale'))?'checked':($contract->sale?'checked':'') }}><span>Venda</span>
-                                </label> <label class="label">
-                                    <input type="checkbox" name="rent" {{ (old('rent'))?'checked':($contract->rent?'checked':'') }}><span>Locação</span>
+                                <span class="legend">Finalidade:</span>
+                                <label class="label">
+                                    <input type="radio" name="purpose" value="sale" {{ (old('purpose') == 'sale')?'checked':($contract->purpose == 'sale' ? 'checked':'') }}>
+                                    <span>Venda</span>
+                                </label>
+                                <label class="label">
+                                    <input type="radio" name="purpose" value="rent" {{ (old('purpose') == 'rent')?'checked': ($contract->purpose == 'rent'? 'checked':'') }}>
+                                    <span>Locação</span>
                                 </label>
                             </div>
 

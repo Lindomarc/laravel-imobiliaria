@@ -221,15 +221,15 @@ $(function () {
     }
 
     // ENABLE INPUT CHECKBOX RENT
-    if ($('input[type="radio"][name="porpouse"]').val() !== undefined) {
+    if ($('input[type="radio"][name="purpose"]').val() !== undefined) {
 
 
-        let radioPorpouse = $('input[name="porpouse"]')
+        let radioPorpouse = $('input[name="purpose"]')
 
 
         let testCheckboxRent = () => {
 
-            let radioCheced = $('input[name="porpouse"]:checked').val();
+            let radioCheced = $('input[name="purpose"]:checked').val();
             let sale = (radioCheced === 'sale');
 
             $('input[name="sale_price"]').prop('disabled', !sale)

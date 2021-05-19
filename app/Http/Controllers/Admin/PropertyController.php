@@ -118,13 +118,14 @@
         {
             $property = PropertyModel::where('id', $id)->first();
 
-            if ($request->porpouse  == 'sale') {
-                $property->setSaleAttribute(true);
-                $property->setRentAttribute(false);
+            if ($request->purpose  == 'sale') {
+                $property->setSaleAttribute(true);;
+            } else {
+                $property->setSaleAttribute(false);;
+            }
 
-            } elseif($request->porpouse  == 'rent') {
-
-                $property->setSaleAttribute(false);
+            if($request->purpose  == 'rent') {
+                $property->setRentAttribute(true);
                 $property->setRentAttribute(true);
             }
 

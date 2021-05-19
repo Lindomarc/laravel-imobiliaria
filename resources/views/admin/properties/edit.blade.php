@@ -46,11 +46,11 @@
                             <div class="label_gc">
                                 <span class="legend">Finalidade:</span>
                                 <label class="label">
-                                    <input type="radio" name="porpouse" value="sale" {{ (old('sale') == 'sale')?'checked':($property->sale == 'sale'?'checked':'') }}>
+                                    <input type="radio" name="purpose" value="sale" {{ (old('sale') == 'sale')?'checked':($property->sale == 'sale'?'checked':'') }}>
                                     <span>Venda</span>
                                 </label>
                                 <label class="label">
-                                    <input type="radio" name="porpouse" value="rent" {{ (old('rent') == 'rent')?'checked': ($property->rent == 'rent'?'checked':'') }}>
+                                    <input type="radio" name="purpose" value="rent" {{ (old('rent') == 'rent')?'checked': ($property->rent == 'rent'?'checked':'') }}>
                                     <span>Locação</span>
                                 </label>
 

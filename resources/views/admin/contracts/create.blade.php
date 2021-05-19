@@ -44,10 +44,14 @@
                             <input type="hidden" name="acquirer_company_id_persist" value="{{ old('acquirer_company_id') }}">
                             <input type="hidden" name="property_id_persist" value="{{ old('property_id') }}">
                             <div class="label_gc">
-                                <span class="legend">Finalidade:</span> <label class="label">
-                                    <input type="checkbox" name="sale" {{ (old('sale'))?'checked':'' }}><span>Venda</span>
-                                </label> <label class="label">
-                                    <input type="checkbox" name="rent" {{ (old('rent'))?'checked':'' }}><span>Locação</span>
+                                <span class="legend">Finalidade:</span>
+                                <label class="label">
+                                    <input type="radio" name="purpose" value="sale" {{ (old('purpose') == 'sale')?'checked':'' }}/>
+                                    <span>Venda</span>
+                                </label>
+                                <label class="label">
+                                    <input type="radio" name="purpose" value="rent" {{ (old('purpose') != 'sale')?'checked': '' }}/>
+                                    <span>Locação</span>
                                 </label>
                             </div>
                             <label class="label"> <span class="legend">Status do Contrato</span>
