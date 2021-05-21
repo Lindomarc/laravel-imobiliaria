@@ -534,6 +534,12 @@
                                     <input type="checkbox" name="client" {{ !!old('client')? 'checked' : (!!$user->client ? 'checked' : '') }}><span>Cliente</span>
                                 </label>
                             </div>
+                            @foreach($roles as $role)
+                                <label class="label">
+                                    <input type="checkbox" name="acl[{{ $role->id }}]" {{ ($role->can)? 'checked' : '' }}><span>{{ $role->name }}</span>
+                                </label>
+                            @endforeach
+
                         </div>
                     </div>
 

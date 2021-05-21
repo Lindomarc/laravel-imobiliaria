@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
-use App\Illuminate\Http\Response;
 use App\Models\User as UserModel;
 use App\Support\Cropper;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -117,12 +117,22 @@ class UserController extends Controller
                 $list_type_simple[$key] = $type;
             }
         }
+
+
+        $roles = Role::all();
+        if ($roles) {
+            foreach ($roles as  $role){
+                $role->can = $user->hasRole($role->name);
+            }
+        }
+
         return view('admin.users.edit', [
             'user' => $user,
             'list_type_of_communion' => $this->list_type_of_communion,
             'list_civil_status' => $this->list_civil_status,
             'list_category' => $propertyModel->list_category,
             'list_type_simple' => $list_type_simple,
+            'roles' => $roles
         ]);
     }
 
@@ -145,6 +155,15 @@ class UserController extends Controller
             $deleteCover = $user->cover;
         }
 
+        if (isset($request->all()['acl']) && !!$request->all()['acl']) {
+            $roles = [];
+            foreach ($request->all()['acl'] as $key => $value){
+                $roles[] = Role::findById($key);
+            }
+            $user->syncRoles($roles);
+        } else {
+            $user->syncRoles(null);
+        }
 
         $user->fill($request->all());
 
