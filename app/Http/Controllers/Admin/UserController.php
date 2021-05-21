@@ -76,7 +76,6 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $user = UserModel::create($request->all());
-        
         if ($user) {
             if (!!$request->file('cover')) {
                 $user->cover = $request->file('cover')->store('user');
