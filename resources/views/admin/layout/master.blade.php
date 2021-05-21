@@ -74,6 +74,13 @@
                     <li class="{{ isActive('admin.contracts.create') }}"><a href="{{ route('admin.contracts.create') }}">Criar Novo</a></li>
                 </ul>
             </li>
+            <li class="dash_sidebar_nav_item {{ isActive('admin.contracts') }}" >
+                <a class="icon-cogs" href="{{ route('admin.contracts.index') }}">Configurações</a>
+                <ul class="dash_sidebar_nav_submenu">
+                    <li class="{{ isActive('admin.permission.index') }}"><a href="{{ route('admin.permission.index') }}">Permissões</a></li>
+                    <li class="{{ isActive('admin.role.index') }}"><a href="{{ route('admin.role.index') }}">Perfis</a></li>
+                </ul>
+            </li>
             <li class="dash_sidebar_nav_item"><a class="icon-reply" href="{{ route('web.home') }}" target="_blank">Ver Site</a></li>
             <li class="dash_sidebar_nav_item"><a class="icon-sign-out on_mobile" href="{{ route('admin.logout') }}" target="_blank">Sair</a></li>
         </ul>
