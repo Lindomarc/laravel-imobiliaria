@@ -286,10 +286,11 @@
                                     <div class="companies_list">
                                         <div class="no-content mb-2">Não foram encontrados registros!</div>
                                     </div>
-
+                                    @can('Cadastrar Empresa')
                                     <p class="text-right">
                                         <a href="javascript:void(0)" class="btn btn-green btn-disabled icon-building-o">Cadastrar Nova Empresa</a>
                                     </p>
+                                    @endcan
                                 </div>
                             </div>
                         </div>

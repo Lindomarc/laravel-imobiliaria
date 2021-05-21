@@ -310,10 +310,11 @@
                                             <div class="no-content mb-2">Não foram encontrados registros!</div>
                                         @endif
                                     </div>
-
+                                    @can('Cadastrar Empresa')
                                     <p class="text-right">
                                         <a href="{{ route('admin.companies.create',['user'=>$user->id]) }}" class="btn btn-green icon-building-o">Cadastrar Nova Empresa</a>
                                     </p>
+                                    @endcan
                                 </div>
                             </div>
                         </div>

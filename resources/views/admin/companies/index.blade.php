@@ -17,8 +17,9 @@
                         <li><a href="" class="text-orange">Filtro</a></li>
                     </ul>
                 </nav>
-
+                @can('Cadastrar Empresa')
                 <a href="{{ route('admin.companies.create') }}" class="btn btn-orange icon-building-o ml-1">Criar Empresa</a>
+                @endcan
                 <button class="btn btn-green icon-search icon-notext ml-1 search_open"></button>
             </div>
         </header>
