@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+    use App\Http\Controllers\RoleController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,6 +62,15 @@ use Illuminate\Support\Facades\Route;
             //** usuários */
             Route::get('users/team', 'UserController@team')->name('users.team');
             Route::resource('users','UserController');
+
+            /** Permissões*/
+
+            Route::resource('permission', 'ACL\\PermissionController');
+
+            /** Perfis */
+            Route::get('role/{role}/permissions', 'ACL\RoleController@permissions')->name('role.permissions');
+            Route::put('role/{role}/permissions/sync', 'ACL\RoleController@permissionsSync')->name('role.permissionsSync');
+            Route::resource('role', 'ACL\RoleController');
 
             /** Empresas */
             Route::resource('companies','CompanyController');
