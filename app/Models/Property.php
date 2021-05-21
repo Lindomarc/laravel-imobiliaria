@@ -156,10 +156,19 @@
         {
             $this->attributes['sale'] = (!!$value) ? 1 : 0;
         }
+        public function getSaleAttribute($value)
+        {
+            return !!$value ? 'sale' : '';
+        }
 
         public function setRentAttribute($value)
         {
             $this->attributes['rent'] = (!!$value) ? 1 : 0;
+        }
+
+        public function getRentAttribute($value)
+        {
+            return !!$value ? 'rent' : '';
         }
 
         public function setTypeAttribute($value)

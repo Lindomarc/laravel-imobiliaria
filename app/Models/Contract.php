@@ -74,10 +74,7 @@ class Contract extends Model
 
     public function setSaleAttribute($value)
     {
-        if (!!$value) {
-            $this->attributes['sale'] = true;
-            $this->attributes['rent'] = false;
-        }
+        $this->attributes['sale'] = !!$value;
     }
 
     public function getSaleAttribute($value)
@@ -87,10 +84,7 @@ class Contract extends Model
 
     public function setRentAttribute($value)
     {
-         if (!!$value) {
-            $this->attributes['sale'] = false;
-            $this->attributes['rent'] = true;
-         }
+        $this->attributes['rent'] = !!$value;
     }
 
     public function getRentAttribute($value)
@@ -150,6 +144,39 @@ class Contract extends Model
     public function getStartAtAttribute($value)
     {
         return fixStringDate($value, 'br');
+    }
+
+    public function setPurposeAttribute()
+    {
+        if ($this->sale) {
+            $value = 'sale';
+        }else{
+            $value = 'rent';
+        }
+
+        $this->attributes['purpose'] = $value;
+    }
+
+    public function getPurposeAttribute($value)
+    {
+        if ($this->sale) {
+            $value = 'sale';
+        }else{
+            $value = 'rent';
+        }
+        return  $value;
+    }
+
+    public function setPurpose($value)
+    {
+        if ($value  == 'sale') {
+            $this->attributes['sale'] =  true;
+            $this->attributes['rent'] =  false;
+        } else {
+            $this->attributes['sale'] =  false;
+            $this->attributes['rent'] =  true;
+        }
+        $this->save();
     }
 
     public function getTermsAttribute()

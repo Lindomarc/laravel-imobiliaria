@@ -205,6 +205,41 @@ input:-webkit-autofill {
     }
   }
 
+    input[type="radio"] {
+        visibility: hidden !important;
+        margin: 0 !important;
+        width: 0 !important;
+        display: inline-block;
+
+        & + label:before, & + span:before {
+            visibility: visible;
+            font-family: "upadmin" !important;
+            position: relative;
+            top: 4px;
+            padding-right: 8px;
+            content: "\e022" !important;
+            font-size: 1.1em;
+        }
+
+        & + label:hover, & + span:hover {
+            cursor: pointer;
+        }
+
+        & + label:hover:before, & + span:before {
+            content: "\e022";
+            opacity: 0.2;
+        }
+
+        &:checked + label:before, &:checked + span:before {
+            content: "\e021" !important;
+        }
+
+        &:checked + label:hover:before, &:checked + span:hover:before, &:checked + label:before, &:checked + span:before {
+            filter: alpha(opacity=100);
+            opacity: 1;
+        }
+    }
+
   //input[type=checkbox], input[type=radio] {
   //  visibility: hidden !important;
   //  margin: 0 !important;

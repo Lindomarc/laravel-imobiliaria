@@ -91,6 +91,7 @@
         public function store(ContractRequest $request)
         {
             $contract = ContractModel::create($request->all());
+            $contract->setPurpose($request->purpose);
 
             return redirect()->route('admin.contracts.edit', [
                 'contract' => $contract->id
@@ -145,6 +146,7 @@
         public function update(ContractRequest $request,  $id)
         {
             $contract = ContractModel::where('id', $id)->first();
+            $contract->setPurpose($request->purpose);
             $contract->fill($request->all());
             if ($contract->save()) {
                 if (!!$contract->property_id) {

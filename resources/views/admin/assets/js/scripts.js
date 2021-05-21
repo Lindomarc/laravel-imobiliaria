@@ -210,29 +210,35 @@ $(function () {
 
         let testCheckboxSale = ()=>{
             inputSalePrice.prop('disabled',!checkboxSale[0].checked)
-            $('input[name="rent_price"]').prop('disabled',checkboxSale[0].checked)
-            checkboxRent.prop('checked',!checkboxSale[0].checked)
+            $('input[name="rent_price"]').prop('disabled', checkboxSale[0].checked)
+            checkboxRent.prop('checked', !checkboxSale[0].checked)
         }
 
-        checkboxSale.change(()=>{
+        checkboxSale.change(() => {
             testCheckboxSale()
         })
         testCheckboxSale()
     }
 
     // ENABLE INPUT CHECKBOX RENT
-    if ($('input[type="checkbox"][name="rent"]').val() !== undefined){
-        let inputRentPrice = $('input[name="rent_price"]')
-        let checkboxRent =$('input[type="checkbox"][name="rent"]')
-        let checkboxSale = $('input[type="checkbox"][name="sale"]')
+    if ($('input[type="radio"][name="purpose"]').val() !== undefined) {
 
-        let testCheckboxRent = ()=>{
-            inputRentPrice.prop('disabled',!checkboxRent[0].checked)
-            $('input[name="sale_price"]').prop('disabled',checkboxRent[0].checked)
 
-            checkboxSale.prop('checked',!checkboxRent[0].checked);
+        let radioPorpouse = $('input[name="purpose"]')
+
+
+        let testCheckboxRent = () => {
+
+            let radioCheced = $('input[name="purpose"]:checked').val();
+            let sale = (radioCheced === 'sale');
+
+            $('input[name="sale_price"]').prop('disabled', !sale)
+            $('input[name="rent_price"]').prop('disabled', sale)
+
+
         }
-        checkboxRent.change(()=>{
+
+        radioPorpouse.change(() => {
             testCheckboxRent()
         })
         testCheckboxRent()
