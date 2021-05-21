@@ -155,16 +155,6 @@ class UserController extends Controller
             $deleteCover = $user->cover;
         }
 
-        if (isset($request->all()['acl']) && !!$request->all()['acl']) {
-            $roles = [];
-            foreach ($request->all()['acl'] as $key => $value){
-                $roles[] = Role::findById($key);
-            }
-            $user->syncRoles($roles);
-        } else {
-            $user->syncRoles(null);
-        }
-
         $user->fill($request->all());
 
         if (!!$request->file('cover')) {
@@ -179,6 +169,16 @@ class UserController extends Controller
             Cropper::flush($deleteCover);
         }
 
+        if (isset($request->all()['acl']) && !!$request->all()['acl']) {
+            $roles = [];
+            foreach ($request->all()['acl'] as $key => $value){
+                $roles[] = Role::findById($key);
+            }
+            $user->syncRoles($roles);
+        } else {
+            $user->syncRoles(null);
+        }
+        
         return redirect()->route('admin.users.edit', [
             'user' => $user->id
         ])->with([
