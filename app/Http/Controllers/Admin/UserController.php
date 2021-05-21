@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
+use App\Models\User;
 use App\Models\User as UserModel;
 use App\Support\Cropper;
 use Illuminate\Support\Facades\Storage;
@@ -61,7 +62,8 @@ class UserController extends Controller
     {
         return view('admin.users.create', [
             'list_type_of_communion' => $this->list_type_of_communion,
-            'list_civil_status' => $this->list_civil_status
+            'list_civil_status' => $this->list_civil_status,
+            'roles' => Role::all()
         ]);
     }
 
@@ -74,10 +76,13 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $user = UserModel::create($request->all());
+        
         if ($user) {
             if (!!$request->file('cover')) {
                 $user->cover = $request->file('cover')->store('user');
-                $user->save();
+                if ($user->save()) {
+                    $this->syncRoles($request, $user);
+                }
             }
         }
 
@@ -169,16 +174,8 @@ class UserController extends Controller
             Cropper::flush($deleteCover);
         }
 
-        if (isset($request->all()['acl']) && !!$request->all()['acl']) {
-            $roles = [];
-            foreach ($request->all()['acl'] as $key => $value){
-                $roles[] = Role::findById($key);
-            }
-            $user->syncRoles($roles);
-        } else {
-            $user->syncRoles(null);
-        }
-        
+        $this->syncRoles($request, $user);
+
         return redirect()->route('admin.users.edit', [
             'user' => $user->id
         ])->with([
@@ -188,10 +185,21 @@ class UserController extends Controller
 
     }
 
+    public function syncRoles(UserRequest $request, UserModel $user)
+    {
+        $roles = [];
+        if (isset($request->all()['acl']) && !!$request->all()['acl']) {
+            foreach ($request->all()['acl'] as $key => $value) {
+                $roles[] = Role::findById($key);
+            }
+        }
+        return $user->syncRoles($roles);;
+    }
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
