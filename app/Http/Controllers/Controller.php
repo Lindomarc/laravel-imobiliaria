@@ -9,6 +9,8 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\App;
 use App\Support\Message;
 use App\Support\Seo;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Spatie\Permission\Exceptions\UnauthorizedException;
 
 class Controller extends BaseController
 {
@@ -22,5 +24,12 @@ class Controller extends BaseController
         $this->message = new Message();
         $this->seo = new Seo();
 
+    }
+
+    public function hasPermition(string $permition)
+    {
+        if (!auth()->user()->hasPermissionTo($permition)) {
+            throw new UnauthorizedException('403', 'Custom Message');
+        }
     }
 }

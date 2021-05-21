@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company as CompanyModel;
-use http\Client\Curl\User;
 use \App\Models\User as UserModel;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\CompanyRequest ;
@@ -18,12 +17,15 @@ class CompanyController extends Controller
      */
     public function index()
     {
+        $this->hasPermition('Listar Empresas');
+
         $results = CompanyModel::all();
 
         return view('admin.companies.index',[
             'results' => $results
         ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -32,6 +34,8 @@ class CompanyController extends Controller
      */
     public function create(Request $request)
     {
+        $this->hasPermition( 'Cadastrar Empresa');
+
         $users = UserModel::orderBy('name')->get();
         return view('admin.companies.create', [
             'users' => $users,
@@ -47,6 +51,8 @@ class CompanyController extends Controller
      */
     public function store(CompanyRequest $request)
     {
+        $this->hasPermition( 'Cadastrar Empresa');
+
         $company =  CompanyModel::create($request->all());
 
         return redirect()->route('admin.companies.index', [
@@ -77,6 +83,8 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
+        $this->hasPermition( 'Editar Empresa');
+
         $item = CompanyModel::where('id',$id)->first();
         $users = UserModel::orderBy('name')->get();
 
@@ -95,6 +103,8 @@ class CompanyController extends Controller
      */
     public function update(CompanyRequest $request, $id)
     {
+        $this->hasPermition( 'Editar Empresa');
+
         $company =  CompanyModel::where('id',$id)->first();
         $company->fill($request->all());
         $company->save();

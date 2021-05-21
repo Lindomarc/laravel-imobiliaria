@@ -51,6 +51,7 @@
             <li class="dash_sidebar_nav_item {{ isActive('admin.home') }}">
                 <a class="icon-tachometer" href="{{ route('admin.home') }}">Dashboard</a>
             </li>
+            @can('Listar Empresas')
             <li class="dash_sidebar_nav_item {{ isActive('admin.users') }}{{ isActive('admin.companies') }}">
                 <a class="icon-users" href="{{ route('admin.users.index') }}">Clientes</a>
                 <ul class="dash_sidebar_nav_submenu">
@@ -60,6 +61,7 @@
                     <li class="{{ isActive('admin.users.create') }}"><a href="{{ route('admin.users.create') }}">Criar Novo</a></li>
                 </ul>
             </li>
+            @endcan
             <li class="dash_sidebar_nav_item {{ isActive('admin.properties') }}" >
                 <a class="icon-home" href="{{ route('admin.properties.index') }}">Imóveis</a>
                 <ul class="dash_sidebar_nav_submenu">
